@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\Анастасия\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Анастасия\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_TaskManager.63506815.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Анастасия\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_TaskManager.-1675446229.00" t="ExcludeRecursive" />
     <e p="C:\Users\Анастасия\AppData\Roaming\JetBrains\Rider2020.1\consoles\db" t="IncludeRecursive" />
     <e p="C:\Users\Анастасия\AppData\Roaming\JetBrains\Rider2020.1\extensions" t="IncludeRecursive" />
-    <e p="G:\CodeSolutions\TestGanttControl\TaskManager" t="IncludeFlat">
+    <e p="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="TaskManager.GanttControl" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="Views" t="Include">
-              <e p="GanttControl.g.cs" t="Include" />
+              <e p="TMGanttControl.g.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -22,11 +22,11 @@
         </e>
         <e p="TaskManager.GanttControl.csproj" t="IncludeRecursive" />
         <e p="ViewModels" t="Include">
-          <e p="GanttControlViewModel.cs" t="Include" />
+          <e p="TaskManagerGanttControlViewModel.cs" t="Include" />
         </e>
         <e p="Views" t="Include">
-          <e p="GanttControl.xaml" t="Include" />
-          <e p="GanttControl.xaml.cs" t="Include" />
+          <e p="TaskManagerGanttControl.xaml" t="Include" />
+          <e p="TaskManagerGanttControl.xaml.cs" t="Include" />
         </e>
       </e>
       <e p="TaskManager.ProjectsLibrary" t="IncludeRecursive">
@@ -45,6 +45,7 @@
           <e p="DbInitializedEvent.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
+          <e p="BindBase.cs" t="Include" />
           <e p="TaskModel.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive" />

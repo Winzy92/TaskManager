@@ -1,8 +1,9 @@
 ﻿using Prism.Commands;
+using TaskManager.Sdk.Models;
 
 namespace TaskManager.ToolBar.ViewModels
 {
-    public class TaskManagerToolBarViewModel
+    public class TaskManagerToolBarViewModel : BindBase
     {
         public TaskManagerToolBarViewModel()
         {

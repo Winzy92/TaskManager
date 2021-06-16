@@ -15,13 +15,13 @@
         <dxdo:LayoutGroup Orientation="Horizontal" ItemHeight="0.2*">
             <dxdo:LayoutPanel ShowCloseButton="False" ShowPinButton="False" AllowMove="False" VerticalAlignment="Top" ItemHeight="*"
                               ShowCaption="False">
-                <ContentControl prism:RegionManager.RegionName="TaskManagerToolBar" prism:RegionManager.RegionManager = "{Binding RegionManager}"/>
+                <ContentControl prism:RegionManager.RegionName="TaskManagerToolBar"/>
             </dxdo:LayoutPanel>
         </dxdo:LayoutGroup>
                         
-        <dxdo:LayoutPanel  ShowCloseButton="False" ShowPinButton="False" 
-                          AllowMove="False">
-            <ContentControl prism:RegionManager.RegionName="GanttControl" prism:RegionManager.RegionManager = "{Binding RegionManager}"/>
+        <dxdo:LayoutPanel  ShowCloseButton="False" ShowPinButton="False"
+                           AllowMove="False">
+            <ContentControl prism:RegionManager.RegionName="TaskManagerGanttControl"/>
         </dxdo:LayoutPanel>
     </dxdo:LayoutGroup>
 </Window>

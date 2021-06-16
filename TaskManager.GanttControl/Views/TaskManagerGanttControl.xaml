@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="TaskManager.GanttControl.Views.TaskManagerGanttControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+             Background="{x:Static SystemColors.ControlBrush}"
+             mc:Ignorable="d"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <dxgn:GanttControl ItemsSource="{Binding Tasks}">
+        <dxgn:GanttControl.Columns>
+            <dxgn:GanttColumn BindTo="Name" />
+            <dxgn:GanttColumn BindTo="StartDate" />
+            <dxgn:GanttColumn BindTo="FinishDate" />
+        </dxgn:GanttControl.Columns>
+        <dxgn:GanttControl.View>
+            <dxgn:GanttView AutoExpandAllNodes="True" AllowEditing="True" AllowSorting="True"/>
+        </dxgn:GanttControl.View>
+    </dxgn:GanttControl>
+    
+</UserControl>

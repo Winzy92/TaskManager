@@ -4,11 +4,11 @@ using DevExpress.Mvvm.Gantt;
 
 namespace TaskManager.GanttControl.ViewModels
 {
-    public class GanttControlViewModel
+    public class TaskManagerGanttControlViewModel
     {
         public ObservableCollection<GanttTask> Tasks { get; set; }
         
-        public GanttControlViewModel()
+        public TaskManagerGanttControlViewModel()
         {
             Tasks = new ObservableCollection<GanttTask> {
                 new GanttTask() {
@@ -57,7 +57,5 @@ namespace TaskManager.GanttControl.ViewModels
                 }
             };
         }
-        
-        
     }
 }

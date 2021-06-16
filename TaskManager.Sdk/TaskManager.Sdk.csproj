@@ -48,6 +48,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Events\DbInitializedEvent.cs" />
+        <Compile Include="Models\BindBase.cs" />
         <Compile Include="Models\TaskModel.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>

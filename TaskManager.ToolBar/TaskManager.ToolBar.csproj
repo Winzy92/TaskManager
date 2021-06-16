@@ -80,8 +80,14 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="Multimedia\books_16x16.png" />
-      <Content Include="Multimedia\books_32x32.png" />
+      <Resource Include="Multimedia\books_16x16.png" />
+      <Resource Include="Multimedia\books_32x32.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\TaskManager.Sdk\TaskManager.Sdk.csproj">
+        <Project>{631e9ee3-eefe-4fcd-a314-6e13ce9374e4}</Project>
+        <Name>TaskManager.Sdk</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

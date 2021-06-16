@@ -80,16 +80,22 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="ViewModels\GanttControlViewModel.cs" />
-        <Compile Include="Views\GanttControl.xaml.cs">
-          <DependentUpon>GanttControl.xaml</DependentUpon>
+        <Compile Include="ViewModels\TaskManagerGanttControlViewModel.cs" />
+        <Compile Include="Views\TaskManagerGanttControl.xaml.cs">
+          <DependentUpon>TaskManagerGanttControl.xaml</DependentUpon>
         </Compile>
     </ItemGroup>
     <ItemGroup>
-      <Page Include="Views\GanttControl.xaml" />
+      <Page Include="Views\TaskManagerGanttControl.xaml" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\TaskManager.Sdk\TaskManager.Sdk.csproj">
+        <Project>{631e9ee3-eefe-4fcd-a314-6e13ce9374e4}</Project>
+        <Name>TaskManager.Sdk</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

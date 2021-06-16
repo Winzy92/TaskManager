@@ -12,10 +12,10 @@
     <dxb:BarManager>
         <dxb:BarManager.Bars>
             <dxb:Bar AllowCustomizationMenu="False" AllowQuickCustomization="False" ShowDragWidget="False">
-                <dxb:BarButtonItem Content="Миграция данных" Margin="5,5,5,5"
+                <dxb:BarButtonItem Content="Библиотека проектов" Margin="5,5,5,5"
                                    Glyph="../Multimedia/books_32x32.png"
                                    Command="{Binding OpenLibrary}"
-                                   ToolTip="Выполнить миграцию" />
+                                   ToolTip="Библиотека проектов" />
             </dxb:Bar>
         </dxb:BarManager.Bars>
     </dxb:BarManager>
