@@ -53,7 +53,19 @@
         <Reference Include="DevExpress.Xpf.LayoutControl.v20.1, Version=20.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
           <HintPath>C:\Program Files (x86)\DevExpress 20.1\Components\Bin\Framework\DevExpress.Xpf.LayoutControl.v20.1.dll</HintPath>
         </Reference>
+        <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="mscorlib" />
+        <Reference Include="Npgsql, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7">
+          <HintPath>..\packages\Npgsql.6.0.0-preview4\lib\netstandard2.0\Npgsql.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59">
           <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
           <Private>True</Private>
@@ -67,15 +79,40 @@
           <Private>True</Private>
         </Reference>
         <Reference Include="System" />
+        <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="System.Configuration" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
-        <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-          <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-          <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+        <Reference Include="System.Numerics" />
+        <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.Text.Encodings.Web.5.0.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.Text.Json.5.0.2\lib\net461\System.Text.Json.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System.Threading.Channels, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.Threading.Channels.5.0.0\lib\net461\System.Threading.Channels.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
@@ -111,6 +148,14 @@
             <DependentUpon>App.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Compile Include="Dialogs\DBConnectionDialog\ViewModels\DBConnectionDialogViewModel.cs" />
+        <Compile Include="Dialogs\DBConnectionDialog\Views\DBConnectionDialog.xaml.cs">
+          <DependentUpon>DBConnectionDialog.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Dialogs\UserAuthorizationDialog\ViewModels\UserAuthorizationDialogViewModel.cs" />
+        <Compile Include="Dialogs\UserAuthorizationDialog\Views\UserAuthorizationDialog.xaml.cs">
+          <DependentUpon>UserAuthorizationDialog.xaml</DependentUpon>
+        </Compile>
         <Compile Include="ViewModels\TaskManagerViewModel.cs" />
         <Compile Include="Views\TaskManager.xaml.cs">
           <DependentUpon>TaskManager.xaml</DependentUpon>
@@ -135,6 +180,8 @@
         <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
+      <Page Include="Dialogs\DBConnectionDialog\Views\DBConnectionDialog.xaml" />
+      <Page Include="Dialogs\UserAuthorizationDialog\Views\UserAuthorizationDialog.xaml" />
       <Page Include="Views\TaskManager.xaml" />
     </ItemGroup>
     <ItemGroup>
@@ -142,10 +189,42 @@
         <Project>{39c7d8a6-db36-47bc-b030-03cd193cea3c}</Project>
         <Name>TaskManager.GanttControl</Name>
       </ProjectReference>
+      <ProjectReference Include="..\TaskManager.ProjectsLibrary\TaskManager.ProjectsLibrary.csproj">
+        <Project>{19e74c1d-7f3c-4a53-bff1-d42e4490b088}</Project>
+        <Name>TaskManager.ProjectsLibrary</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\TaskManager.Sdk\TaskManager.Sdk.csproj">
+        <Project>{631e9ee3-eefe-4fcd-a314-6e13ce9374e4}</Project>
+        <Name>TaskManager.Sdk</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\TaskManager.SpecialGanttControl\TaskManager.SpecialGanttControl.csproj">
+        <Project>{b2e02da6-7fdc-4d15-80d8-5b8dfa9a61fd}</Project>
+        <Name>TaskManager.SpecialGanttControl</Name>
+      </ProjectReference>
       <ProjectReference Include="..\TaskManager.ToolBar\TaskManager.ToolBar.csproj">
         <Project>{2a4f350c-4f08-4b01-87fb-4e18a1f12728}</Project>
         <Name>TaskManager.ToolBar</Name>
       </ProjectReference>
+      <ProjectReference Include="..\TaskManager.UserGanttControl\TaskManager.UserGanttControl.csproj">
+        <Project>{b678aaaa-0b79-4536-8478-09723dde15ad}</Project>
+        <Name>TaskManager.UserGanttControl</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\TaskManager.UsersLibrary\TaskManager.UsersLibrary.csproj">
+        <Project>{97f1d3af-0e9c-423e-83dd-d30bb23012ee}</Project>
+        <Name>TaskManager.UsersLibrary</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="Multimedia\db_icon.png" />
+      <Resource Include="Multimedia\user_icon.png" />
+      <Resource Include="Multimedia\diagram.png" />
+      <Resource Include="Multimedia\users_note.png" />
+      <Resource Include="Multimedia\all_notes.png" />
+      <Content Include="Properties\Settings.settings" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Dialogs\MessageDialog\ViewModels" />
+      <Folder Include="Dialogs\MessageDialog\Views" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace TaskManager.Sdk.Models
+namespace TaskManager.Sdk.Core.Models
 {
     public class BindBase : INotifyPropertyChanged
     {

@@ -4,24 +4,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
         mc:Ignorable="d"
         Background="{x:Static SystemColors.ControlBrush}"
         prism:ViewModelLocator.AutoWireViewModel="True"
         d:DesignHeight="450" d:DesignWidth="800"
+        Icon="../Multimedia/diagram.png"
         Title="TaskManager">
     
-    <dxdo:LayoutGroup Orientation="Vertical">
-        <dxdo:LayoutGroup Orientation="Horizontal" ItemHeight="0.2*">
-            <dxdo:LayoutPanel ShowCloseButton="False" ShowPinButton="False" AllowMove="False" VerticalAlignment="Top" ItemHeight="*"
-                              ShowCaption="False">
-                <ContentControl prism:RegionManager.RegionName="TaskManagerToolBar"/>
-            </dxdo:LayoutPanel>
-        </dxdo:LayoutGroup>
-                        
-        <dxdo:LayoutPanel  ShowCloseButton="False" ShowPinButton="False"
-                           AllowMove="False">
-            <ContentControl prism:RegionManager.RegionName="TaskManagerGanttControl"/>
-        </dxdo:LayoutPanel>
-    </dxdo:LayoutGroup>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction
+                Command="{Binding CommandStartupDialog}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="TaskManagerToolBar"/>
+        
+        <dx:DXTabControl Grid.Row="1">
+            <dx:DXTabItem Header="Текущие проекты и задачи">
+                <dx:DXTabItem.GlyphTemplate>
+                    <DataTemplate>
+                        <Image Source="../Multimedia/all_notes.png" Width="20" Height="20" Margin="5"/>
+                    </DataTemplate>
+                </dx:DXTabItem.GlyphTemplate>
+                <ContentControl prism:RegionManager.RegionName="TaskManagerGanttControl"/> 
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Мои задачи">
+                <dx:DXTabItem.GlyphTemplate>
+                    <DataTemplate>
+                        <Image Source="../Multimedia/users_note.png" Width="20" Height="20" Margin="5"/>
+                    </DataTemplate>
+                </dx:DXTabItem.GlyphTemplate>
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    
+                    <dxdo:LayoutGroup Orientation="Vertical">
+                        <dxdo:LayoutPanel Caption="{Binding UserTasks}" ShowCloseButton="False" ShowExpandButton="False" ShowHideButton="False">
+                            <ContentControl prism:RegionManager.RegionName="UserGanttControl"/> 
+                        </dxdo:LayoutPanel>
+                    
+                        <dxdo:LayoutPanel Caption="{Binding SpecialUserTasks}" ShowCloseButton="False" ShowExpandButton="False" ShowHideButton="False">
+                            <ContentControl prism:RegionManager.RegionName="SpecialUsersGanttControl"/>
+                        </dxdo:LayoutPanel>
+                    </dxdo:LayoutGroup>
+                    
+                    <StackPanel Grid.Row="1" Margin="5,5,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <dx:SimpleButton HorizontalAlignment="Right" Margin="5" IsDefault="True" Content="Слияние задач" Command="{Binding MigrateCommand}" />
+                    </StackPanel>
+                </Grid>
+            </dx:DXTabItem>     
+        </dx:DXTabControl>
+       
+    </Grid>
 </Window>

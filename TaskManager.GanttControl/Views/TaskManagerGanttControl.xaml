@@ -2,21 +2,71 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:behaviors="clr-namespace:TaskManager.GanttControl.Utils.Behaviors"
+             xmlns:converters="clr-namespace:TaskManager.GanttControl.Utils.Converters"
              Background="{x:Static SystemColors.ControlBrush}"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
-
-    <dxgn:GanttControl ItemsSource="{Binding Tasks}">
+    
+    <UserControl.Resources>
+        <converters:ProgressConverter x:Key="ProgressConverter" />
+        <converters:InversCanModifyProperty x:Key="InversCanModify" />
+    </UserControl.Resources>
+    
+    <dxgn:GanttControl ItemsSource="{Binding Tasks}" CurrentItem="{Binding SelectedItem}">
+        
+        <i:Interaction.Behaviors>
+            <behaviors:MainGanttControlBehavior />
+        </i:Interaction.Behaviors>
+        
         <dxgn:GanttControl.Columns>
-            <dxgn:GanttColumn BindTo="Name" />
-            <dxgn:GanttColumn BindTo="StartDate" />
-            <dxgn:GanttColumn BindTo="FinishDate" />
+            <dxgn:GanttColumn Width="Auto" BindTo="Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn BindTo="ResourceLinks" AllowEditing="{Binding CanModify}" HorizontalHeaderContentAlignment="Center"/>
+            <dxgn:GanttColumn BindTo="BaselineStartDate" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn BindTo="BaselineFinishDate" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn BindTo="Progress" HorizontalHeaderContentAlignment="Center">
+                <dxgn:GanttColumn.CellTemplate>
+                    <DataTemplate>
+                        <dxe:TextEdit EditValue="{Binding RowData.Row.Progress, Converter={StaticResource ProgressConverter}}" 
+                                      ShowBorder="False" Mask="\d+\%" MaskType="RegEx" MaskUseAsDisplayFormat="True" 
+                                      IsPrintingMode="{Binding DataContext.CanModify, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Converter={StaticResource InversCanModify}}">
+                        </dxe:TextEdit>
+                    </DataTemplate>
+                </dxgn:GanttColumn.CellTemplate>
+            </dxgn:GanttColumn>   
+            <dxgn:GanttColumn BindTo="StartDate" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" IsSmart="True" Visible="False"/>
+            <dxgn:GanttColumn BindTo="FinishDate" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" IsSmart="True" Visible="False"/>
+            <dxgn:GanttColumn FieldName="NumOfContract" Header="Номер договора" Width="Auto" HorizontalHeaderContentAlignment="Center"/>
+            <dxgn:GanttColumn FieldName="ListUsers" Header="Исполнитель" Width="Auto" HorizontalHeaderContentAlignment="Center">
+                <dxgn:GanttColumn.CellTemplate>
+                    <DataTemplate>
+                        <dxe:ComboBoxEdit ShowBorder="False" ItemsSource="{Binding RowData.Row.ResourceUsers}"
+                                          IsPrintingMode="{Binding DataContext.CanModify, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Converter={StaticResource InversCanModify}}" 
+                                          DisplayMember="Name" EditValue="{Binding RowData.Row.ListUsers}">
+                            <dxe:ComboBoxEdit.StyleSettings>
+                                <dxe:CheckedTokenComboBoxStyleSettings NewTokenText="" />
+                            </dxe:ComboBoxEdit.StyleSettings>
+                        </dxe:ComboBoxEdit>
+                    </DataTemplate>
+                </dxgn:GanttColumn.CellTemplate>
+            </dxgn:GanttColumn>
         </dxgn:GanttControl.Columns>
         <dxgn:GanttControl.View>
-            <dxgn:GanttView AutoExpandAllNodes="True" AllowEditing="True" AllowSorting="True"/>
+            <dxgn:GanttView AutoExpandAllNodes="True" AllowEditing="{Binding CanModify}" AllowSorting="False" HorizontalScrollbarVisibility="Visible"
+                            ShowBaseline="True" ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False"
+                            ResourceLinksPath="ResourceIds" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15">
+                <dxgn:GanttView.ResourceMappings>
+                    <dxgn:GanttResourceMappings  Name="Name" Key="Id"/>
+                </dxgn:GanttView.ResourceMappings>
+                <dxgn:GanttView.ResourceLinkMappings>
+                    <dxgn:GanttResourceLinkMappings Resource="."/>
+                </dxgn:GanttView.ResourceLinkMappings>
+            </dxgn:GanttView>
         </dxgn:GanttControl.View>
     </dxgn:GanttControl>
     

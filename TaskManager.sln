@@ -10,6 +10,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.ProjectsLibrary
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Shell", "TaskManager.Shell\TaskManager.Shell.csproj", "{07398BF3-E0AF-4063-ABB1-5A81AE699BF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.UsersLibrary", "TaskManager.UsersLibrary\TaskManager.UsersLibrary.csproj", "{97F1D3AF-0E9C-423E-83DD-D30BB23012EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.UserGanttControl", "TaskManager.UserGanttControl\TaskManager.UserGanttControl.csproj", "{B678AAAA-0B79-4536-8478-09723DDE15AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.SpecialGanttControl", "TaskManager.SpecialGanttControl\TaskManager.SpecialGanttControl.csproj", "{3D0B2388-883C-41E5-AF51-48DE13A2B29D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +42,17 @@ Global
 		{07398BF3-E0AF-4063-ABB1-5A81AE699BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07398BF3-E0AF-4063-ABB1-5A81AE699BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07398BF3-E0AF-4063-ABB1-5A81AE699BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F1D3AF-0E9C-423E-83DD-D30BB23012EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F1D3AF-0E9C-423E-83DD-D30BB23012EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F1D3AF-0E9C-423E-83DD-D30BB23012EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F1D3AF-0E9C-423E-83DD-D30BB23012EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B678AAAA-0B79-4536-8478-09723DDE15AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B678AAAA-0B79-4536-8478-09723DDE15AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B678AAAA-0B79-4536-8478-09723DDE15AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B678AAAA-0B79-4536-8478-09723DDE15AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0B2388-883C-41E5-AF51-48DE13A2B29D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0B2388-883C-41E5-AF51-48DE13A2B29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0B2388-883C-41E5-AF51-48DE13A2B29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0B2388-883C-41E5-AF51-48DE13A2B29D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

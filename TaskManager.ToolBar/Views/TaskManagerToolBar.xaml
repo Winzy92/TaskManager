@@ -13,9 +13,25 @@
         <dxb:BarManager.Bars>
             <dxb:Bar AllowCustomizationMenu="False" AllowQuickCustomization="False" ShowDragWidget="False">
                 <dxb:BarButtonItem Content="Библиотека проектов" Margin="5,5,5,5"
-                                   Glyph="../Multimedia/books_32x32.png"
+                                   Glyph="../Multimedia/task_library_32x32.png"
                                    Command="{Binding OpenLibrary}"
-                                   ToolTip="Библиотека проектов" />
+                                   BarItemDisplayMode="ContentAndGlyph"
+                                   ToolTip="Библиотека проектов">
+                </dxb:BarButtonItem>
+            </dxb:Bar>
+             <dxb:Bar AllowCustomizationMenu="False" AllowQuickCustomization="False" ShowDragWidget="False">
+                 <dxb:BarButtonItem Content="Библиотека пользователей" Margin="5,5,5,5"
+                                    Glyph="../Multimedia/user32х32.png"
+                                    Command="{Binding OpenUsersLibrary}"
+                                    BarItemDisplayMode="ContentAndGlyph"
+                                    ToolTip="Библиотека пользователей" />
+             </dxb:Bar>
+            <dxb:Bar AllowCustomizationMenu="False" AllowQuickCustomization="False" ShowDragWidget="False">
+                <dxb:BarButtonItem Content="Изменить пользователя" Margin="5,5,5,5"
+                                   Glyph="../Multimedia/changeuser_32x32.png"
+                                   Command="{Binding OpenChangeActiveUserDialog}"
+                                   BarItemDisplayMode="ContentAndGlyph"
+                                   ToolTip="Изменить пользователя" />
             </dxb:Bar>
         </dxb:BarManager.Bars>
     </dxb:BarManager>

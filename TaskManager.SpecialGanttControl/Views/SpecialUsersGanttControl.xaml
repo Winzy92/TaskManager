@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="TaskManager.SpecialGanttControl.Views.SpecialUsersGanttControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:converters="clr-namespace:TaskManager.GanttControl.Utils.Converters;assembly=TaskManager.GanttControl"
+             Background="{x:Static SystemColors.ControlBrush}"
+             mc:Ignorable="d"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    
+    <UserControl.Resources>
+        <ContextMenu x:Key="SpecialMenu">
+            <MenuItem Header="Добавить задачу" Command="{Binding OpenAddSpecialGanttItemDialog}">
+                <MenuItem.Icon>
+                    <Image Source="../Multimedia/Add.png" Height="16" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Удалить задачу" Command="{Binding RemoveSpecialGanttItem}">
+                <MenuItem.Icon>
+                    <Image Source="../Multimedia/Trash.png" Height="16" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+        <converters:ProgressConverter x:Key="ProgressConverter" />
+    </UserControl.Resources>
+    
+    <dxgn:GanttControl ItemsSource="{Binding SpecialUserTasks}" ContextMenu="{StaticResource SpecialMenu}" CurrentItem="{Binding SelectedItem}">
+        <dxgn:GanttControl.Columns>
+            <dxgn:GanttColumn BindTo="Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn BindTo="StartDate" HorizontalHeaderContentAlignment="Center" AllowEditing="True" />
+            <dxgn:GanttColumn BindTo="FinishDate" HorizontalHeaderContentAlignment="Center" AllowEditing="True" />
+            <dxgn:GanttColumn BindTo="Duration" HorizontalHeaderContentAlignment="Center" AllowEditing="True" />
+            <dxgn:GanttColumn BindTo="Progress" HorizontalHeaderContentAlignment="Center">
+                <dxgn:GanttColumn.CellTemplate>
+                    <DataTemplate>
+                        <dxe:TextEdit EditValue="{Binding RowData.Row.Progress, Converter={StaticResource ProgressConverter}}"
+                                      ShowBorder="False" Mask="\d+\%" MaskType="RegEx" MaskUseAsDisplayFormat="True">
+                        </dxe:TextEdit>
+                    </DataTemplate>
+                </dxgn:GanttColumn.CellTemplate>
+            </dxgn:GanttColumn>
+        </dxgn:GanttControl.Columns>
+        <dxgn:GanttControl.View>
+            <dxgn:GanttView  AutoExpandAllNodes="True" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15" ShowIndicator="False">
+            </dxgn:GanttView>
+        </dxgn:GanttControl.View>
+    </dxgn:GanttControl>
+</UserControl>

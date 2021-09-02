@@ -3,4 +3,5 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CProgram_0020Files_0020_0028x86_0029_005CDevExpress_002020_002E1_005CComponents_005CBin_005CFramework_005CDevExpress_002EXpf_002ECore_002Ev20_002E1_002EExtensions_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="G:\CodeSolutions\TestGanttControl\TaskManager\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll" /&gt;&#xD;
+  &lt;Assembly Path="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\packages\Prism.Wpf.7.2.0.1422\lib\net45\Prism.Wpf.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

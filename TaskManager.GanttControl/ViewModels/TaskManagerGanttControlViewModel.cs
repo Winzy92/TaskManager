@@ -1,61 +1,100 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Media.Imaging;
 using DevExpress.Mvvm.Gantt;
+using Prism.Commands;
+using TaskManager.Sdk.Core.Models;
+using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.GanttControl.ViewModels
 {
-    public class TaskManagerGanttControlViewModel
+    public class TaskManagerGanttControlViewModel : BindBase
     {
-        public ObservableCollection<GanttTask> Tasks { get; set; }
+        private readonly ISettingsService _settingsService;
         
+        private readonly IDatabaseConnectionService _connectionService;
+        
+        public ObservableCollection<GanttItemInfo> Tasks { get; set; }
+        
+        public Boolean CanModify { get; set; }
+
+        public UsersInfo CurrentUser { get; set; }
+
+        public ObservableCollection<GanttResourceItemInfo> GanttResourceItems { get; set; }
+        
+        public ObservableCollection<TaskResourceInfo> TaskResources { get; set; }
+
+        private GanttItemInfo _selectedItem;
+
+        public GanttItemInfo SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                if (SelectedItem != null && SelectedItem is GanttItemInfo ganttItemInfo)
+                {
+                    ganttItemInfo.PropertyChanged -= GanttItemInfoOnPropertyChanged;
+                    ganttItemInfo.ResourceIds.CollectionChanged -= ResourceIdsCollectionChanged;
+                }
+                
+                base.SetProperty(ref _selectedItem, value);
+                
+                if (SelectedItem != null && value is GanttItemInfo ganttItemInfoItem)
+                {
+                    ganttItemInfoItem.PropertyChanged += GanttItemInfoOnPropertyChanged;
+                    ganttItemInfoItem.ResourceIds.CollectionChanged += ResourceIdsCollectionChanged;
+                }
+            }
+        }
+
+        private void ResourceIdsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (SelectedItem is GanttItemInfo ganttItemInfo)
+            {
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        _connectionService.AddResourceLink(e.NewItems, ganttItemInfo);
+                        _connectionService.UpdateResourceLinks(ganttItemInfo);
+                        break;
+                    
+                    case NotifyCollectionChangedAction.Remove:
+                        _connectionService.RemoveResourceLink(e.OldItems, ganttItemInfo);
+                        _connectionService.UpdateResourceLinks(ganttItemInfo);
+                        break;
+                }
+            }
+        }
+
+        private void GanttItemInfoOnPropertyChanged(Object sender, PropertyChangedEventArgs e)
+        {
+            if (SelectedItem is GanttItemInfo ganttItemInfo)
+            {
+                _connectionService.UpdateGanttObject(ganttItemInfo, e.PropertyName);
+            }
+        }
+
         public TaskManagerGanttControlViewModel()
         {
-            Tasks = new ObservableCollection<GanttTask> {
-                new GanttTask() {
-                    Id = 0,
-                    Name = "ТЭЦ-22, КНОУ, КН ЭБ1",
-                    StartDate = DateTime.Now.AddDays(60),
-                    FinishDate = DateTime.Now.AddDays(100),
-                    //NumberOfContract = "№15/21/ТИ-1 от 02.02.2021",
-                },
-                new GanttTask() {
-                    Id =1, 
-                    ParentId = 0,
-                    Name = "Сбор, анализ и выдача замечаний к ИД",
-                    StartDate = DateTime.Now.AddDays(-1),
-                    FinishDate = DateTime.Now.AddDays(2),
-                    //Department = "ОРВ АСУ ТП",
-                    //Unit = "Куксов С.В."
-                },
-                new GanttTask() {
-                    Id = 2,
-                    ParentId = 0,
-                    Name = "Разработка ТЗ на создание АСУ ТП",
-                    StartDate = DateTime.Now.AddDays(2),
-                    FinishDate = DateTime.Now.AddDays(5),
-                    //Department = "ОРВ АСУ ТП",
-                    //Unit = "Шарабакин А.С."
-                },
-                new GanttTask() {
-                    Id = 3,
-                    ParentId = 0,
-                    Name = "Разработка ОТР, ПЗ, презентации",
-                    StartDate = DateTime.Now.AddDays(2),
-                    FinishDate = DateTime.Now.AddDays(5),
-                    //Department = "ОРВ АСУ ТП",
-                    //Unit = "Тычков В.В."
-                        
-                },
-                new GanttTask() {
-                    Id = 4,
-                    ParentId = 0,
-                    Name = "ПИР ПТК",
-                    StartDate = DateTime.Now.AddDays(5),
-                    FinishDate = DateTime.Now.AddDays(6),
-                    //Department = "ОРВ АСУ ТП",
-                    //Unit = "Куксов С.В."
-                }
-            };
+            _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();
+            
+            _connectionService = TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>();
+
+            Tasks = _settingsService.Settings.ActiveTasks;
+
+            GanttResourceItems = _settingsService.Settings.GanttResourceItems;
+
+            TaskResources = _settingsService.Settings.TaskResources;
+            
+            CurrentUser = _settingsService.Settings.CurrentUser;
+
+            CanModify = _settingsService.Settings.PositionsInfoItems.
+                FirstOrDefault(t => t.Id == CurrentUser.PositionId).CanModify;
         }
     }
 }
