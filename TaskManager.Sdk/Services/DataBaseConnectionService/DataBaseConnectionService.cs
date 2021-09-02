@@ -497,7 +497,8 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
 
                 foreach (var element in collection)
                 {
-                    _settingsService.Settings.ActiveTasks.Remove(element);
+                    if(_settingsService.Settings.ActiveTasks.Any(t=>(Int32)t.Id == (Int32)element.Id))
+                        _settingsService.Settings.ActiveTasks.Remove(element);
                 }
                 
                 _settingsService.Settings.ActiveTasks.Remove(obj);
@@ -514,11 +515,13 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 
                 foreach (var element in collection)
                 {
-                    _settingsService.Settings.ActiveTasks.Add(element);
-                    UpdateResourceLinks(element);
+                    if(_settingsService.Settings.ActiveTasks.FirstOrDefault(t=>(Int32)t.Id == (Int32)element.Id) == null)
+                        _settingsService.Settings.ActiveTasks.Add(element);
+                    /*UpdateResourceLinks(element);*/
                 }
                 
-                _settingsService.Settings.ActiveTasks.Add(obj);
+                if(_settingsService.Settings.ActiveTasks.FirstOrDefault(t=>(Int32)t.Id == (Int32)obj.Id) == null)
+                    _settingsService.Settings.ActiveTasks.Add(obj);
             }
         }
 

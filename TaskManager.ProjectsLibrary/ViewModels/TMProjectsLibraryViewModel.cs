@@ -24,7 +24,6 @@ namespace TaskManager.ProjectsLibrary.ViewModels
         public DelegateCommand CopyProject { get; }
         public DelegateCommand AddChild { get; }
         public DelegateCommand RemoveChild { get; }
-        
         public DelegateCommand CopyChild { get; }
 
         private GanttItemInfo _selectedRootItem;
