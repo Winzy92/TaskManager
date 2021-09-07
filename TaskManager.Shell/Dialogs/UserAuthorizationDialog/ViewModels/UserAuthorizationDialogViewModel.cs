@@ -5,6 +5,8 @@ using Prism.Commands;
 using Prism.Services.Dialogs;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.ProjectsLibrary;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
@@ -17,7 +19,7 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
         
         public DelegateCommand CommandCancel { get; }
         
-        private readonly ISettingsService _settingsService;
+        private readonly IUsersLibraryService _usersLibraryService;
 
         private readonly IDialogService _dialogService;
         
@@ -75,22 +77,36 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
             {
                 if (KeyValue == 0)
                 {
-                    _settingsService.Settings.CurrentUser = SelectedUser;
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadGanttObjects();
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadUsersAdditionalGanttItems();
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadGanttResourceItems();
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadTasksResourceItems();
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadUsersPositions();
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadTasksUnits();
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadUsersGanttItems();
+                    _usersLibraryService.UsersLibrary.CurrentUser = SelectedUser;
+                    TaskManagerServices.Instance.GetInstance<IUsersLibraryService>().LoadUsersPositions();
+                    TaskManagerServices.Instance.GetInstance<IUsersLibraryService>().LoadGanttResourceItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadGanttObjects();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksResourceItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksUnits();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadUsersAdditionalGanttItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadRootProjectsLibraryItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadChildProjectsLibraryItems();
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+                }
+                
+                if (KeyValue == 1 && _usersLibraryService.UsersLibrary.CurrentUser != null)
+                {
+                    _usersLibraryService.UsersLibrary.CurrentUser = SelectedUser;
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadUsersAdditionalGanttItems();
                     RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 }
 
-                if (KeyValue == 1)
+                if (KeyValue == 1 && _usersLibraryService.UsersLibrary.CurrentUser == null)
                 {
-                    _settingsService.Settings.CurrentUser = SelectedUser;
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadUsersAdditionalGanttItems();
-                    TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadUsersGanttItems();
+                    _usersLibraryService.UsersLibrary.CurrentUser = SelectedUser;
+                    TaskManagerServices.Instance.GetInstance<IUsersLibraryService>().LoadUsersPositions();
+                    TaskManagerServices.Instance.GetInstance<IUsersLibraryService>().LoadGanttResourceItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadGanttObjects();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksResourceItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksUnits();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadUsersAdditionalGanttItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadRootProjectsLibraryItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadChildProjectsLibraryItems();
                     RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 }
 
@@ -120,7 +136,7 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
         
         protected virtual void CloseDialog()
         {
-            RaiseRequestClose(new DialogResult(ButtonResult.Cancel));
+            
         }
         
         public virtual void RaiseRequestClose(IDialogResult dialogResult)
@@ -132,9 +148,9 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
 
         public UserAuthorizationDialogViewModel()
         {
-            _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();
+            _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();
             
-            Users = _settingsService.Settings.Users;
+            Users = _usersLibraryService.UsersLibrary.Users;
 
             ShowMessage = false;
 
@@ -144,7 +160,15 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
             
             CommandOk = new DelegateCommand(UserAuthorization);
             
-            CommandCancel = new DelegateCommand(CloseDialog);
+            CommandCancel = new DelegateCommand(CloseDialogCommand);
+        }
+
+        private void CloseDialogCommand()
+        {
+            if (_usersLibraryService.UsersLibrary.CurrentUser == null)
+            {
+                RaiseRequestClose(new DialogResult(ButtonResult.Cancel));
+            }
         }
     }
 }

@@ -7,9 +7,13 @@ using TaskManager.GanttControl.Views;
 using TaskManager.ProjectsLibrary.ViewModels;
 using TaskManager.ProjectsLibrary.Views;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.ProjectsLibrary;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services;
 using TaskManager.Shell.Dialogs.DBConnectionDialog.ViewModels;
 using TaskManager.Shell.Dialogs.DBConnectionDialog.Views;
+using TaskManager.Shell.Dialogs.MessageDialog.ViewModels;
+using TaskManager.Shell.Dialogs.MessageDialog.Views;
 using TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels;
 using TaskManager.Shell.Dialogs.UserAuthorizationDialog.Views;
 using TaskManager.SpecialGanttControl.Dialogs.AddSpecialGanttItemDialog.ViewModels;
@@ -35,6 +39,7 @@ namespace TaskManager.Shell
             containerRegistry.RegisterDialog<TMProjectsLibrary, TMProjectsLibraryViewModel>("TMProjectsLibrary");
             containerRegistry.RegisterDialog<UsersLibraryControl, UsersLibraryControlViewModel>("UsersLibraryControl");
             containerRegistry.RegisterDialog<SpecialGanttItemDialog, SpecialGanttItemDialogViewModel>("SpecialGanttItemDialog");
+            containerRegistry.RegisterDialog<MessageDialog, MessageDialogViewModel>("MessageDialog");
         }
         
         /// <summary>Contains actions that should occur last.</summary>

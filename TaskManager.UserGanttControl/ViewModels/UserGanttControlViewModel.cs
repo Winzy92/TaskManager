@@ -4,15 +4,17 @@ using System.ComponentModel;
 using System.Linq;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.ProjectsLibrary;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.UserGanttControll.ViewModels
 {
     public class UserGanttControlViewModel : BindBase 
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IUsersLibraryService _usersLibraryService;
         
-        private readonly IDatabaseConnectionService _connectionService;
+        private readonly IProjectsLibraryService _projectsLibraryService;
         
         public ObservableCollection<GanttItemInfo> UserTasks { get; set; }
         
@@ -43,19 +45,19 @@ namespace TaskManager.UserGanttControll.ViewModels
         {
             if (SelectedItem is GanttItemInfo ganttItemInfo)
             {
-                _connectionService.UpdateTaskUnits(ganttItemInfo, e.PropertyName);
+                _projectsLibraryService.UpdateTaskUnits(ganttItemInfo, e.PropertyName);
             }
         }
 
         public UserGanttControlViewModel()
         {
-            _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();
+            _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();
             
-            _connectionService = TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>();
+            _projectsLibraryService = TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>();
             
-            GanttResourceItems = _settingsService.Settings.GanttResourceItems;
+            GanttResourceItems = _usersLibraryService.UsersLibrary.GanttResourceItems;
 
-            UserTasks = _settingsService.Settings.CurrentUserGanttItems;
+            UserTasks = _projectsLibraryService.ProjectsLibrary.CurrentUserGanttItems;
         }
     }
 }

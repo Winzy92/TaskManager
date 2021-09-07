@@ -10,15 +10,17 @@ using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
 using TaskManager.Sdk.Services.TaskManagerService;
 using Prism.Commands;
+using TaskManager.Sdk.Interfaces.ProjectsLibrary;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.UsersLibrary.Models;
 
 namespace TaskManager.UsersLibrary.ViewModels
 {
     public class UsersLibraryControlViewModel  : BindBase, IDialogAware
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IUsersLibraryService _usersLibraryService;
         
-        private readonly IDatabaseConnectionService _connectionService;
+        private readonly IProjectsLibraryService _projectsLibraryService;
         
         public ObservableCollection<UsersInfo> UsersInfos { get; set; }
         
@@ -96,7 +98,7 @@ namespace TaskManager.UsersLibrary.ViewModels
                 var item = TreeListItems.FirstOrDefault(t => t.Entity == usersInfo);
                 if (item != null)
                 {
-                    _connectionService.UpdatePropertiesSelectedItemUserLibrary(item.Entity, e.PropertyName);
+                    _usersLibraryService.UpdatePropertiesSelectedItemUserLibrary(item.Entity, e.PropertyName);
                 }
             }
 
@@ -105,7 +107,7 @@ namespace TaskManager.UsersLibrary.ViewModels
                 var item = TreeListItems.FirstOrDefault(t => t.Entity == ganttResource);
                 if (item != null)
                 {
-                    _connectionService.UpdatePropertiesSelectedItemUserLibrary(item.Entity, e.PropertyName);
+                    _usersLibraryService.UpdatePropertiesSelectedItemUserLibrary(item.Entity, e.PropertyName);
                 }
             }
         }
@@ -202,7 +204,7 @@ namespace TaskManager.UsersLibrary.ViewModels
             {
                 Name = "Новый отдел"
             };
-            _connectionService.AddGanttSourceItem(item);
+            _usersLibraryService.AddGanttSourceItem(item);
             
             TreeListItemInfoUsersLibrary elem = new TreeListItemInfoUsersLibrary
             {
@@ -217,7 +219,7 @@ namespace TaskManager.UsersLibrary.ViewModels
         {
             if (SelectedItem.Entity is GanttResourceItemInfo ganttResourceItemInfo)
             {
-                var ganttsource = _settingsService.Settings.
+                var ganttsource = _usersLibraryService.UsersLibrary.
                     GanttResourceItems.FirstOrDefault(t => t.Id == ganttResourceItemInfo.Id);
                 
                 if (ganttsource != null)
@@ -229,7 +231,7 @@ namespace TaskManager.UsersLibrary.ViewModels
                         PositionId = 1,
                         Password = ""
                     };
-                    _connectionService.AddUser(user);
+                    _usersLibraryService.AddUser(user);
                     
                     TreeListItemInfoUsersLibrary elem = new TreeListItemInfoUsersLibrary
                     {
@@ -243,7 +245,7 @@ namespace TaskManager.UsersLibrary.ViewModels
 
             if (SelectedItem.Entity is UsersInfo usersInfo)
             {
-                var ganttsource = _settingsService.Settings.
+                var ganttsource = _usersLibraryService.UsersLibrary.
                     Users.FirstOrDefault(t => t.Id == usersInfo.Id);
                 
                 if (ganttsource != null)
@@ -255,7 +257,7 @@ namespace TaskManager.UsersLibrary.ViewModels
                         PositionId = 1,
                         Password = ""
                     };
-                    _connectionService.AddUser(user);
+                    _usersLibraryService.AddUser(user);
                     
                     TreeListItemInfoUsersLibrary elem = new TreeListItemInfoUsersLibrary
                     {
@@ -288,7 +290,7 @@ namespace TaskManager.UsersLibrary.ViewModels
                     Id = ganttResource.Id,
                     Name = ganttResource.Name
                 };
-                _connectionService.RemoveSelectedItemUserLibrary(item);
+                _usersLibraryService.RemoveSelectedItemUserLibrary(item);
             }
             if (SelectedItem.Entity is UsersInfo usersInfo)
             {
@@ -300,7 +302,7 @@ namespace TaskManager.UsersLibrary.ViewModels
                     PositionId = usersInfo.PositionId,
                     GanttSourceItemId = usersInfo.GanttSourceItemId
                 };
-                _connectionService.RemoveSelectedItemUserLibrary(user);
+                _usersLibraryService.RemoveSelectedItemUserLibrary(user);
             }
         }
 
@@ -362,19 +364,19 @@ namespace TaskManager.UsersLibrary.ViewModels
 
         public UsersLibraryControlViewModel()
         {
-            _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();
+            _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();
             
-            _connectionService = TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>();
+            _projectsLibraryService = TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>();
             
-            GanttResourceItems = _settingsService.Settings.GanttResourceItems;
+            GanttResourceItems = _usersLibraryService.UsersLibrary.GanttResourceItems;
             
             TreeListItems = new ObservableCollection<TreeListItemInfoUsersLibrary>();
             
             TreeListItems.CollectionChanged += TreeListItemsCollectionChanged;
 
-            UsersInfos = _settingsService.Settings.Users;
+            UsersInfos = _usersLibraryService.UsersLibrary.Users;
 
-            PositionsInfos = _settingsService.Settings.PositionsInfoItems;
+            PositionsInfos = _usersLibraryService.UsersLibrary.PositionsInfoItems;
 
             CreateTreeListCollection();
 

@@ -9,17 +9,18 @@ using DevExpress.Mvvm.Gantt;
 using Prism.Commands;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.ProjectsLibrary;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.GanttControl.ViewModels
 {
     public class TaskManagerGanttControlViewModel : BindBase
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IUsersLibraryService _usersLibraryService;
         
-        private readonly IDatabaseConnectionService _connectionService;
-        
-        public ObservableCollection<GanttItemInfo> Tasks { get; set; }
+        private readonly IProjectsLibraryService _projectsLibraryService;
+        public ObservableCollection<GanttTreeViewItemInfo> Tasks { get; set; }
         
         public Boolean CanModify { get; set; }
 
@@ -29,72 +30,75 @@ namespace TaskManager.GanttControl.ViewModels
         
         public ObservableCollection<TaskResourceInfo> TaskResources { get; set; }
 
-        private GanttItemInfo _selectedItem;
+        private GanttResourceItemInfo _selectedItem;
 
-        public GanttItemInfo SelectedItem
+        public GanttResourceItemInfo SelectedItem
         {
             get => _selectedItem;
             set
             {
-                if (SelectedItem != null && SelectedItem is GanttItemInfo ganttItemInfo)
+                if (SelectedItem != null && SelectedItem is GanttResourceItemInfo ganttItemInfo)
                 {
-                    ganttItemInfo.PropertyChanged -= GanttItemInfoOnPropertyChanged;
-                    ganttItemInfo.ResourceIds.CollectionChanged -= ResourceIdsCollectionChanged;
+                    /*ganttItemInfo.Id.PropertyChanged -= GanttItemInfoOnPropertyChanged;
+                    ganttItemInfo.ResourceIds.CollectionChanged -= ResourceIdsCollectionChanged;*/
                 }
                 
                 base.SetProperty(ref _selectedItem, value);
                 
-                if (SelectedItem != null && value is GanttItemInfo ganttItemInfoItem)
+                if (SelectedItem != null && value is GanttResourceItemInfo ganttItemInfoItem)
                 {
-                    ganttItemInfoItem.PropertyChanged += GanttItemInfoOnPropertyChanged;
-                    ganttItemInfoItem.ResourceIds.CollectionChanged += ResourceIdsCollectionChanged;
+                    /*ganttItemInfoItem.PropertyChanged += GanttItemInfoOnPropertyChanged;
+                    ganttItemInfoItem.ResourceIds.CollectionChanged += ResourceIdsCollectionChanged;*/
                 }
             }
         }
 
         private void ResourceIdsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (SelectedItem is GanttItemInfo ganttItemInfo)
+            if (SelectedItem is GanttResourceItemInfo ganttItemInfo)
             {
                 switch (e.Action)
                 {
-                    case NotifyCollectionChangedAction.Add:
-                        _connectionService.AddResourceLink(e.NewItems, ganttItemInfo);
-                        _connectionService.UpdateResourceLinks(ganttItemInfo);
+                    /*case NotifyCollectionChangedAction.Add:
+                        _projectsLibraryService.AddResourceLink(e.NewItems, ganttItemInfo);
+                        _projectsLibraryService.UpdateResourceLinks(ganttItemInfo);
                         break;
                     
                     case NotifyCollectionChangedAction.Remove:
-                        _connectionService.RemoveResourceLink(e.OldItems, ganttItemInfo);
-                        _connectionService.UpdateResourceLinks(ganttItemInfo);
-                        break;
+                        _projectsLibraryService.RemoveResourceLink(e.OldItems, ganttItemInfo);
+                        _projectsLibraryService.UpdateResourceLinks(ganttItemInfo);
+                        break;*/
                 }
             }
         }
 
         private void GanttItemInfoOnPropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
-            if (SelectedItem is GanttItemInfo ganttItemInfo)
+            if (SelectedItem is GanttResourceItemInfo ganttItemInfo)
             {
-                _connectionService.UpdateGanttObject(ganttItemInfo, e.PropertyName);
+                /*_projectsLibraryService.UpdateGanttObject(ganttItemInfo, e.PropertyName);*/
             }
         }
 
         public TaskManagerGanttControlViewModel()
         {
-            _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();
+            _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();
             
-            _connectionService = TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>();
+            _projectsLibraryService = TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>();
 
-            Tasks = _settingsService.Settings.ActiveTasks;
+            Tasks = _projectsLibraryService.ProjectsLibrary.GanttItems;
 
-            GanttResourceItems = _settingsService.Settings.GanttResourceItems;
+            GanttResourceItems = _usersLibraryService.UsersLibrary.GanttResourceItems;
 
-            TaskResources = _settingsService.Settings.TaskResources;
+            TaskResources = _projectsLibraryService.ProjectsLibrary.TaskResources;
             
-            CurrentUser = _settingsService.Settings.CurrentUser;
+            CurrentUser = _usersLibraryService.UsersLibrary.CurrentUser;
 
-            CanModify = _settingsService.Settings.PositionsInfoItems.
-                FirstOrDefault(t => t.Id == CurrentUser.PositionId).CanModify;
+            if (CurrentUser != null)
+            {
+                CanModify = _usersLibraryService.UsersLibrary.PositionsInfoItems.
+                    FirstOrDefault(t => t.Id == CurrentUser.PositionId).CanModify;
+            }
         }
     }
 }

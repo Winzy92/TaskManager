@@ -5,13 +5,14 @@ using System.Linq;
 using System.Windows.Data;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.UsersLibrary.Utils.Converters
 {
     public class IdToObjConverter : IValueConverter
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IUsersLibraryService _usersLibraryService;
         
         public ObservableCollection<PositionsInfo> PositionsInfos { get; set; }
         
@@ -47,8 +48,8 @@ namespace TaskManager.UsersLibrary.Utils.Converters
 
         public IdToObjConverter()
         {
-            _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();
-            PositionsInfos = _settingsService.Settings.PositionsInfoItems;
+            _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();
+            PositionsInfos = _usersLibraryService.UsersLibrary.PositionsInfoItems;
         }
     }
 }

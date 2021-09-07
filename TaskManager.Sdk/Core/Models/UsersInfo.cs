@@ -7,7 +7,6 @@ namespace TaskManager.Sdk.Core.Models
 {
     public class UsersInfo : BindableBase, IBaseUsersInfo
     {
-
         public Int32 Id { get; set; }
         
         private String _name;

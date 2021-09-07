@@ -25,29 +25,29 @@
         </i:Interaction.Behaviors>
         
         <dxgn:GanttControl.Columns>
-            <dxgn:GanttColumn Width="Auto" BindTo="Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn Width="Auto" FieldName="Id.Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
             <dxgn:GanttColumn BindTo="ResourceLinks" AllowEditing="{Binding CanModify}" HorizontalHeaderContentAlignment="Center"/>
-            <dxgn:GanttColumn BindTo="BaselineStartDate" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn BindTo="BaselineFinishDate" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn BindTo="Progress" HorizontalHeaderContentAlignment="Center">
+            <dxgn:GanttColumn FieldName="Id.BaselineStartDate" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn FieldName="Id.BaselineFinishDate" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn FieldName="Id.Progress" HorizontalHeaderContentAlignment="Center">
                 <dxgn:GanttColumn.CellTemplate>
                     <DataTemplate>
-                        <dxe:TextEdit EditValue="{Binding RowData.Row.Progress, Converter={StaticResource ProgressConverter}}" 
+                        <dxe:TextEdit EditValue="{Binding RowData.Row.Id.Progress, Converter={StaticResource ProgressConverter}}" 
                                       ShowBorder="False" Mask="\d+\%" MaskType="RegEx" MaskUseAsDisplayFormat="True" 
                                       IsPrintingMode="{Binding DataContext.CanModify, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Converter={StaticResource InversCanModify}}">
                         </dxe:TextEdit>
                     </DataTemplate>
                 </dxgn:GanttColumn.CellTemplate>
             </dxgn:GanttColumn>   
-            <dxgn:GanttColumn BindTo="StartDate" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" IsSmart="True" Visible="False"/>
-            <dxgn:GanttColumn BindTo="FinishDate" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" IsSmart="True" Visible="False"/>
-            <dxgn:GanttColumn FieldName="NumOfContract" Header="Номер договора" Width="Auto" HorizontalHeaderContentAlignment="Center"/>
-            <dxgn:GanttColumn FieldName="ListUsers" Header="Исполнитель" Width="Auto" HorizontalHeaderContentAlignment="Center">
+            <dxgn:GanttColumn FieldName="Id.StartDate" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" IsSmart="True" Visible="False"/>
+            <dxgn:GanttColumn FieldName="Id.FinishDate" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" IsSmart="True" Visible="False"/>
+            <dxgn:GanttColumn FieldName="Id.NumOfContract" Header="Номер договора" Width="Auto" HorizontalHeaderContentAlignment="Center"/>
+            <dxgn:GanttColumn FieldName="Id.ListUsers" Header="Исполнитель" Width="Auto" HorizontalHeaderContentAlignment="Center">
                 <dxgn:GanttColumn.CellTemplate>
                     <DataTemplate>
-                        <dxe:ComboBoxEdit ShowBorder="False" ItemsSource="{Binding RowData.Row.ResourceUsers}"
+                        <dxe:ComboBoxEdit ShowBorder="False" ItemsSource="{Binding RowData.Row.Id.ResourceUsers}"
                                           IsPrintingMode="{Binding DataContext.CanModify, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Converter={StaticResource InversCanModify}}" 
-                                          DisplayMember="Name" EditValue="{Binding RowData.Row.ListUsers}">
+                                          DisplayMember="Name" EditValue="{Binding RowData.Row.Id.ListUsers}">
                             <dxe:ComboBoxEdit.StyleSettings>
                                 <dxe:CheckedTokenComboBoxStyleSettings NewTokenText="" />
                             </dxe:ComboBoxEdit.StyleSettings>
@@ -58,8 +58,8 @@
         </dxgn:GanttControl.Columns>
         <dxgn:GanttControl.View>
             <dxgn:GanttView AutoExpandAllNodes="True" AllowEditing="{Binding CanModify}" AllowSorting="False" HorizontalScrollbarVisibility="Visible"
-                            ShowBaseline="True" ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False"
-                            ResourceLinksPath="ResourceIds" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15">
+                            ShowBaseline="True" KeyFieldName="Id" ParentFieldName="ParentId" ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False"
+                            ResourceLinksSource="{Binding Id.ResourceIds}" ShowNodeImages="True" ImageFieldName="Id.Image" NodeImageSize="13,15">
                 <dxgn:GanttView.ResourceMappings>
                     <dxgn:GanttResourceMappings  Name="Name" Key="Id"/>
                 </dxgn:GanttView.ResourceMappings>

@@ -6,15 +6,17 @@ using Prism.Commands;
 using Prism.Services.Dialogs;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.ProjectsLibrary;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.SpecialGanttControl.ViewModels
 {
     public class SpecialUsersGanttControlViewModel : BindBase 
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IUsersLibraryService _usersLibraryService;
         
-        private readonly IDatabaseConnectionService _connectionService;
+        private readonly IProjectsLibraryService _projectsLibraryService;
         
         private readonly IDialogService _dialogService;
         
@@ -47,19 +49,19 @@ namespace TaskManager.SpecialGanttControl.ViewModels
         {
             if (SelectedItem is GanttItemInfo ganttItemInfo)
             {
-                _connectionService.UpdateTaskUnits(ganttItemInfo, e.PropertyName);
+                _projectsLibraryService.UpdateTaskUnits(ganttItemInfo, e.PropertyName);
             }
         }
 
-        private void CreateSpecialUserTasksCollection(ObservableCollection<GanttItemInfo> selectedItems)
+        /*private void CreateSpecialUserTasksCollection(ObservableCollection<GanttItemInfo> selectedItems)
         {
             foreach (var item in selectedItems)
             {
-                /*Добавляем корневой элемент*/
+                /*Добавляем корневой элемент#1#
                 if (item.ParentId is Int32 parentId && parentId != 0)
                 {
                     var rootElement =
-                        _settingsService.Settings.GanttItems.FirstOrDefault(t => (Int32)t.Id == parentId);
+                        _projectsLibraryService.ProjectsLibrary.GanttItems.FirstOrDefault(t => (Int32)t.Id == parentId);
                     if (rootElement != null)
                     {
                         var rootGanttItem = new GanttItemInfo()
@@ -82,7 +84,7 @@ namespace TaskManager.SpecialGanttControl.ViewModels
                     }
                 }
 
-                /*Добавлеяем дочерний элемент*/
+                /*Добавлеяем дочерний элемент#1#
                 var ganttItem = new GanttItemInfo()
                 {
                     Id = item.Id,
@@ -109,7 +111,7 @@ namespace TaskManager.SpecialGanttControl.ViewModels
                     SpecialUserTasks.Add(ganttItem);
                 }
             }
-        }
+        }*/
 
         private DelegateCommand<string> _removeSpecialGanttItem;
         
@@ -125,11 +127,11 @@ namespace TaskManager.SpecialGanttControl.ViewModels
         {
             _dialogService = TaskManagerServices.Instance.GetInstance<IDialogService>();
             
-            _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();
+            _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();
             
-            _connectionService = TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>();
+            _projectsLibraryService = TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>();
 
-            SpecialUserTasks = _settingsService.Settings.CurrentUserAdditionalGanttItems;
+            SpecialUserTasks = _projectsLibraryService.ProjectsLibrary.CurrentUserAdditionalGanttItems;
             
             OpenAddSpecialGanttItemDialog = new DelegateCommand(()=> 
                 _dialogService.Show("SpecialGanttItemDialog", new DialogParameters(), result =>
@@ -138,7 +140,7 @@ namespace TaskManager.SpecialGanttControl.ViewModels
                     {
                         var SelectedItems =
                             result.Parameters.GetValue<ObservableCollection<GanttItemInfo>>("SelectedItems");
-                        CreateSpecialUserTasksCollection(SelectedItems);
+                        //CreateSpecialUserTasksCollection(SelectedItems);
                     }
                 }));
         }

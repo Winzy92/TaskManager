@@ -152,6 +152,10 @@
         <Compile Include="Dialogs\DBConnectionDialog\Views\DBConnectionDialog.xaml.cs">
           <DependentUpon>DBConnectionDialog.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Dialogs\MessageDialog\ViewModels\MessageDialogViewModel.cs" />
+        <Compile Include="Dialogs\MessageDialog\Views\MessageDialog.xaml.cs">
+          <DependentUpon>MessageDialog.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Dialogs\UserAuthorizationDialog\ViewModels\UserAuthorizationDialogViewModel.cs" />
         <Compile Include="Dialogs\UserAuthorizationDialog\Views\UserAuthorizationDialog.xaml.cs">
           <DependentUpon>UserAuthorizationDialog.xaml</DependentUpon>
@@ -181,6 +185,7 @@
     </ItemGroup>
     <ItemGroup>
       <Page Include="Dialogs\DBConnectionDialog\Views\DBConnectionDialog.xaml" />
+      <Page Include="Dialogs\MessageDialog\Views\MessageDialog.xaml" />
       <Page Include="Dialogs\UserAuthorizationDialog\Views\UserAuthorizationDialog.xaml" />
       <Page Include="Views\TaskManager.xaml" />
     </ItemGroup>
@@ -221,10 +226,6 @@
       <Resource Include="Multimedia\users_note.png" />
       <Resource Include="Multimedia\all_notes.png" />
       <Content Include="Properties\Settings.settings" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Dialogs\MessageDialog\ViewModels" />
-      <Folder Include="Dialogs\MessageDialog\Views" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -118,7 +118,5 @@ namespace TaskManager.Sdk.Core.Models
             UsersInfos = new ObservableCollection<UsersInfo>();
             ListUsers = new List<Object>();
         }
-
-        public ObservableCollection<GanttItemInfo> ChildrenItems { get; set; } = new ObservableCollection<GanttItemInfo>();
     }
 }

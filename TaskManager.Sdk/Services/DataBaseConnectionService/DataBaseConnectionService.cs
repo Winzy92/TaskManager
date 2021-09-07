@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media.Imaging;
-using CommonServiceLocator;
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.DataAnnotations;
 using Npgsql;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Events;
@@ -18,20 +13,6 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
 {
     public class DataBaseConnectionService : BindBase, IDatabaseConnectionService
     {
-        private UsersInfo _currentUser;
-
-        public UsersInfo CurrentUser
-        {
-            get => _currentUser;
-            set
-            {
-                base.SetProperty(ref _currentUser, value);
-            }
-        }
-
-        private NpgsqlConnection _connection;
-
-        private Boolean _isConnected;
         
         private readonly ISettingsService _settingsService;
 
@@ -64,37 +45,38 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
         
         private void OpenConnection()
         {
-            _connection = new NpgsqlConnection(BuildConnectionString(_settingsService.Settings.DbConnectionInfo));
+            Connection = new NpgsqlConnection(BuildConnectionString(_settingsService.Settings.DbConnectionInfo));
 
             try
             {
-                _connection.Open();
-                _isConnected = true;
-                _settingsService.Settings.IsConnected = true;
+                Connection.Open();
+                IsConnected = true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                _isConnected = false;
-                _settingsService.Settings.IsConnected = false;
+                IsConnected = false;
             }
         }
         
-        private void CheckDbConnection()
+        public void CheckDbConnection()
         {
-            if (!_isConnected)
+            if (!IsConnected)
             {
                 OpenConnection();
             }
         }
         
-        private void CloseConnection()
+        public void CloseConnection()
         {
-            _connection.Close();
-            _isConnected = false;
+            Connection.Close();
+            IsConnected = false;
         }
-        
-        public void LoadGanttObjects()
+
+        public bool IsConnected { get; set; }
+        public NpgsqlConnection Connection { get; set; }
+
+        /*public void LoadGanttObjects()
         {
             CheckDbConnection();
 
@@ -133,21 +115,21 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                         UriKind.Relative));
                 }
 
-                var elem = _settingsService.Settings.GanttItems.FirstOrDefault(t => t.Id.Equals(ganttItemInfo.Id));
+                var elem = GanttItems.FirstOrDefault(t => t.Id.Equals(ganttItemInfo.Id));
                 Int32? check = (data[12] == System.DBNull.Value) ? (Int32?)null : data.GetInt32(12);
                     
                 if(elem != null && check !=null)
                 {
-                    elem.UsersInfos.Add(_settingsService.Settings.Users.FirstOrDefault(t=>t.Id == check));
-                    elem.ListUsers.Add(_settingsService.Settings.Users.FirstOrDefault(t=>t.Id == check));
+                    elem.UsersInfos.Add(Users.FirstOrDefault(t=>t.Id == check));
+                    elem.ListUsers.Add(Users.FirstOrDefault(t=>t.Id == check));
                     
                 }
                 else
                 {
                     if (check != null)
                     {
-                        ganttItemInfo.UsersInfos.Add(_settingsService.Settings.Users.FirstOrDefault(t=>t.Id == check));
-                        ganttItemInfo.ListUsers.Add(_settingsService.Settings.Users.FirstOrDefault(t=>t.Id == check));
+                        ganttItemInfo.UsersInfos.Add(Users.FirstOrDefault(t=>t.Id == check));
+                        ganttItemInfo.ListUsers.Add(Users.FirstOrDefault(t=>t.Id == check));
                         ganttItemInfo.StartDate = (data[15] == System.DBNull.Value)
                             ? (DateTime?) null : Convert.ToDateTime(data.GetDateTime(15));
                         ganttItemInfo.FinishDate = (data[16] == System.DBNull.Value)
@@ -157,7 +139,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     }
                     
                     if(ganttItemInfo.IsArchive == false)
-                        _settingsService.Settings.GanttItems.Add(ganttItemInfo);
+                        GanttItems.Add(ganttItemInfo);
                 }
             }
             
@@ -168,11 +150,11 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
         
         public void LoadUsersAdditionalGanttItems()
         {
-            _settingsService.Settings.CurrentUserAdditionalGanttItems.Clear();
+            CurrentUserAdditionalGanttItems.Clear();
             
             var collection =
-                _settingsService.Settings.GanttItems.Where(t =>
-                    t.UsersInfos.Any(z=>z.Id == _settingsService.Settings.CurrentUser.Id));
+                GanttItems.Where(t =>
+                    t.UsersInfos.Any(z=>z.Id == CurrentUser.Id));
 
             if (collection != null)
             {
@@ -182,46 +164,47 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 {
                     foreach (var item in items)
                     {
-                        var element = _settingsService.Settings.GanttItems.FirstOrDefault(t =>
+                        var element = GanttItems.FirstOrDefault(t =>
                             (Int32) t.Id == (Int32) item.ParentId);
                         
                         if (element != null)
                         {
                             element.IsAdditional = true;
-                            if (_settingsService.Settings.CurrentUserAdditionalGanttItems.FirstOrDefault(t =>
+                            if (CurrentUserAdditionalGanttItems.FirstOrDefault(t =>
                                 (Int32) t.Id == (Int32) element.Id) == null)
-                                _settingsService.Settings.CurrentUserAdditionalGanttItems.Add(element);
+                                CurrentUserAdditionalGanttItems.Add(element);
                         }
                         
-                        if (_settingsService.Settings.CurrentUserAdditionalGanttItems.FirstOrDefault(t =>
+                        if (CurrentUserAdditionalGanttItems.FirstOrDefault(t =>
                             (Int32) t.Id == (Int32) item.Id) == null)
-                            _settingsService.Settings.CurrentUserAdditionalGanttItems.Add(item);
+                            CurrentUserAdditionalGanttItems.Add(item);
                     }
                 }
             }
         }
+        */
 
-        public void CreateActualTaskCollection()
+        /*public void CreateActualTaskCollection()
         {
-            _settingsService.Settings.ActiveTasks.Clear();
+            ActiveTasks.Clear();
             
-            var collection = _settingsService.Settings.GanttItems.Where(t => t.IsActive && (Int32)t.ParentId == 0 && t.GlobalTask == false);
+            var collection = GanttItems.Where(t => t.IsActive && (Int32)t.ParentId == 0 && t.GlobalTask == false);
             
             foreach (var item in collection)
             {
-                var elements = _settingsService.Settings.GanttItems.Where(t => (Int32)t.ParentId == (Int32)item.Id);
+                var elements = GanttItems.Where(t => (Int32)t.ParentId == (Int32)item.Id);
 
                 foreach (var elem in elements)
                 {
                     elem.IsActive = true;
-                    _settingsService.Settings.ActiveTasks.Add(elem);
+                    ActiveTasks.Add(elem);
                 }
                 
-                _settingsService.Settings.ActiveTasks.Add(item);
+                ActiveTasks.Add(item);
             }
-        }
+        }*/
 
-        public void LoadUsersPositions()
+        /*public void LoadUsersPositions()
         {
             CheckDbConnection();
 
@@ -239,13 +222,13 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     CanModify = data.GetBoolean(2)
                 };
                 
-                _settingsService.Settings.PositionsInfoItems.Add(positionItemInfo);
+                PositionsInfoItems.Add(positionItemInfo);
             }
 
             CloseConnection();
-        }
+        }*/
 
-        public void AddGanttObject(String name)
+        /*public void AddGanttObject(String name)
         {
             CheckDbConnection();
 
@@ -264,11 +247,11 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 obj.Id = inData;
             }
             
-            _settingsService.Settings.GanttItems.Add(obj);
+            GanttItems.Add(obj);
 
-        }
+        }*/
         
-        public void CopyGanttObject(ObservableCollection<GanttItemInfo> selectedGanttItems)
+        /*public void CopyGanttObject(ObservableCollection<GanttItemInfo> selectedGanttItems)
         {
             CheckDbConnection();
 
@@ -294,7 +277,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                             obj.Id = inData;
                         }
             
-                        _settingsService.Settings.GanttItems.Add(obj);
+                        GanttItems.Add(obj);
                         NewGanttProjects.Add(obj);
                     }
                 }
@@ -303,7 +286,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 {
                     foreach (var p in selectedGanttItems)
                     {
-                        foreach (var member in _settingsService.Settings.GanttItems.ToList())
+                        foreach (var member in GanttItems.ToList())
                         {
                             if ((p.ParentId is Int32 parentId) && (member.Id is Int32 mId) && (parentId == mId))
                             {
@@ -322,7 +305,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                                     obj.Id = inData;
                                 }
             
-                                _settingsService.Settings.GanttItems.Add(obj);
+                                GanttItems.Add(obj);
                             }
                         }
                     }
@@ -333,7 +316,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     {
                         var element = NewGanttProjects.FirstOrDefault();
                         
-                        foreach (var member in _settingsService.Settings.GanttItems.ToList())
+                        foreach (var member in GanttItems.ToList())
                         {
                             if ((p.Id is Int32 pId) && (member.ParentId is Int32 mPId) && (pId == mPId))
                             {
@@ -352,7 +335,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                                     obj.Id = inData;
                                 }
             
-                                _settingsService.Settings.GanttItems.Add(obj);
+                                GanttItems.Add(obj);
                             }
                         }
                         NewGanttProjects.Remove(element);
@@ -360,9 +343,9 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 }
             }
             NewGanttProjects.Clear();
-        }
+        }*/
 
-        public void AddGanttChildObject(GanttItemInfo selectedGanttItem, string name)
+        /*public void AddGanttChildObject(GanttItemInfo selectedGanttItem, string name)
         {
             CheckDbConnection();
             
@@ -375,10 +358,10 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
             NpgsqlCommand command = new NpgsqlCommand(queryText, _connection);
             command.ExecuteNonQuery();
             
-            _settingsService.Settings.GanttItems.Add(obj);
-        }
+            GanttItems.Add(obj);
+        }*/
         
-        public void UpdateGanttObject(GanttItemInfo selectedGanttItem, String prop)
+        /*public void UpdateGanttObject(GanttItemInfo selectedGanttItem, String prop)
         {
             CheckDbConnection();
             
@@ -489,43 +472,44 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
 
         public void FindAndRemoveItem(GanttItemInfo selectedGanttItem)
         {
-            var obj = _settingsService.Settings.ActiveTasks.FirstOrDefault(t => (Int32)t.Id == (Int32)selectedGanttItem.Id);
+            var obj = ActiveTasks.FirstOrDefault(t => (Int32)t.Id == (Int32)selectedGanttItem.Id);
 
             if (obj != null)
             {
-                var collection = _settingsService.Settings.ActiveTasks.ToList().Where(t => (Int32) t.ParentId == (Int32) obj.Id);
+                var collection = ActiveTasks.ToList().Where(t => (Int32) t.ParentId == (Int32) obj.Id);
 
                 foreach (var element in collection)
                 {
-                    if(_settingsService.Settings.ActiveTasks.Any(t=>(Int32)t.Id == (Int32)element.Id))
-                        _settingsService.Settings.ActiveTasks.Remove(element);
+                    if(ActiveTasks.Any(t=>(Int32)t.Id == (Int32)element.Id))
+                        ActiveTasks.Remove(element);
                 }
                 
-                _settingsService.Settings.ActiveTasks.Remove(obj);
+                ActiveTasks.Remove(obj);
             }
         }
 
         public void FindAndAddItems(GanttItemInfo selectedGanttItem)
         {
-            var obj = _settingsService.Settings.GanttItems.FirstOrDefault(t => (Int32)t.Id == (Int32)selectedGanttItem.Id);
+            var obj = GanttItems.FirstOrDefault(t => (Int32)t.Id == (Int32)selectedGanttItem.Id);
 
             if (obj != null)
             {
-                var collection = _settingsService.Settings.GanttItems.Where(t => (Int32) t.ParentId == (Int32) obj.Id);
+                var collection = GanttItems.Where(t => (Int32) t.ParentId == (Int32) obj.Id);
                 
                 foreach (var element in collection)
                 {
-                    if(_settingsService.Settings.ActiveTasks.FirstOrDefault(t=>(Int32)t.Id == (Int32)element.Id) == null)
-                        _settingsService.Settings.ActiveTasks.Add(element);
-                    /*UpdateResourceLinks(element);*/
+                    if(ActiveTasks.FirstOrDefault(t=>(Int32)t.Id == (Int32)element.Id) == null)
+                        ActiveTasks.Add(element);
+                    /*UpdateResourceLinks(element);#1#
                 }
                 
-                if(_settingsService.Settings.ActiveTasks.FirstOrDefault(t=>(Int32)t.Id == (Int32)obj.Id) == null)
-                    _settingsService.Settings.ActiveTasks.Add(obj);
+                if(ActiveTasks.FirstOrDefault(t=>(Int32)t.Id == (Int32)obj.Id) == null)
+                    ActiveTasks.Add(obj);
             }
         }
+        */
 
-        public void UpdateTaskUnits(GanttItemInfo selectedGanttItem, String prop)
+        /*public void UpdateTaskUnits(GanttItemInfo selectedGanttItem, String prop)
         {
             CheckDbConnection();
             
@@ -559,7 +543,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                             NpgsqlCommand command = new NpgsqlCommand(queryText, _connection);
                             command.ExecuteNonQuery();
 
-                            _settingsService.Settings.GanttTasksUnits.Add(taskUnitInfo);
+                            GanttTasksUnits.Add(taskUnitInfo);
                         }
                         else
                         {
@@ -591,13 +575,14 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                         break;
                 }
                 
-                queryText += $" WHERE ganttitemid='{selectedGanttItem.Id}' AND unitid='{_settingsService.Settings.CurrentUser.Id}';";
+                queryText += $" WHERE ganttitemid='{selectedGanttItem.Id}' AND unitid='{CurrentUser.Id}';";
                 NpgsqlCommand command = new NpgsqlCommand(queryText, _connection);
                 command.ExecuteNonQuery();
             }
         }
+        */
 
-        public void RemoveGanttObject(ObservableCollection<GanttItemInfo> selectedGanttItems)
+        /*public void RemoveGanttObject(ObservableCollection<GanttItemInfo> selectedGanttItems)
         {
             CheckDbConnection();
 
@@ -607,7 +592,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 {
                     if ((num.ParentId is Int32 pId) && (pId == 0))
                     {
-                        foreach (var cell in _settingsService.Settings.GanttItems.ToList())
+                        foreach (var cell in GanttItems.ToList())
                         {
                             if (cell.ParentId == num.Id)
                             {
@@ -619,7 +604,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     
                                     command.ExecuteNonQuery();
                     
-                                    _settingsService.Settings.GanttItems.Remove(cell);
+                                    GanttItems.Remove(cell);
                                 }
                                 catch (Exception e)
                                 {
@@ -635,7 +620,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     
                             command.ExecuteNonQuery();
                     
-                            _settingsService.Settings.GanttItems.Remove(num);
+                            GanttItems.Remove(num);
                         }
                         catch (Exception e)
                         {
@@ -653,17 +638,17 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     
                             command.ExecuteNonQuery();
                     
-                            _settingsService.Settings.GanttItems.Remove(num);
+                            GanttItems.Remove(num);
 
-                            foreach (var elem in  _settingsService.Settings.TaskResources.ToList())
+                            foreach (var elem in  TaskResources.ToList())
                             {
                                 if (num.Id is Int32 numId && elem.TaskId is Int32 elemTaskId)
                                 {
-                                    TaskResourceInfo item = _settingsService.Settings.TaskResources.FirstOrDefault(t => t.TaskId == numId);
+                                    TaskResourceInfo item = TaskResources.FirstOrDefault(t => t.TaskId == numId);
 
                                     if (item != null)
                                     {
-                                        _settingsService.Settings.TaskResources.Remove(item);
+                                        TaskResources.Remove(item);
                                     }
                                 }
                             }
@@ -676,9 +661,9 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     }
                 }
             }
-        }
+        }*/
         
-        public void LoadGanttResourceItems()
+        /*public void LoadGanttResourceItems()
         {
             CheckDbConnection();
 
@@ -695,13 +680,13 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     Name = data.GetString(1)
                 };
                 
-                _settingsService.Settings.GanttResourceItems.Add(ganttResource);
+                GanttResourceItems.Add(ganttResource);
             }
 
             CloseConnection();
-        }
+        }*/
         
-        public void LoadTasksResourceItems()
+        /*public void LoadTasksResourceItems()
         {
             CheckDbConnection();
 
@@ -719,15 +704,15 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     GanttSourceId = data.GetInt32(2)
                 };
                 
-                _settingsService.Settings.TaskResources.Add(taskResourceInfo);
+                TaskResources.Add(taskResourceInfo);
             }
 
             CreateTaskResourcesList();
 
             CloseConnection();
-        }
+        }*/
 
-        public void LoadUsers()
+        /*public void LoadUsers()
         {
             CheckDbConnection();
 
@@ -747,39 +732,16 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     PositionId = data.GetInt32(4)
                 };
                 
-                _settingsService.Settings.Users.Add(userInfo);
+                Users.Add(userInfo);
             }
 
             CloseConnection();
-        }
+        }*/
         
 
-        public void CreateTaskResourcesList()
-        {
-            foreach (var element in _settingsService.Settings.GanttItems)
-            {
-                foreach (var item in _settingsService.Settings.TaskResources)
-                {
-                    if (element.Id is Int32 parentId && parentId == item.TaskId)
-                    {
-                        element.ResourceIds.Add(item.GanttSourceId);
-                        var collection = _settingsService.Settings.Users.Where(t => t.GanttSourceItemId == item.GanttSourceId);
-                        if (collection != null)
-                        {
-                            foreach (var elem in collection)
-                            {
-                                if (!element.ResourceUsers.Contains(elem))
-                                {
-                                    element.ResourceUsers.Add(elem);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
 
-        public void LoadTasksUnits()
+        /*public void LoadTasksUnits()
         {
             CheckDbConnection();
 
@@ -803,19 +765,19 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     IsAdditional = data.GetBoolean(8)
                 };
                 
-                _settingsService.Settings.GanttTasksUnits.Add(taskUnitInfo);
+                GanttTasksUnits.Add(taskUnitInfo);
             }
 
             CloseConnection();
-        }
+        }*/
 
-        public void LoadUsersGanttItems()
+        /*public void LoadUsersGanttItems()
         {
             CheckDbConnection();
 
-            if (_settingsService.Settings.CurrentUserGanttItems != null)
+            if (CurrentUserGanttItems != null)
             {
-                _settingsService.Settings.CurrentUserGanttItems.Clear();
+                CurrentUserGanttItems.Clear();
             }
 
             var queryText = $@"SELECT t.id, t.parentid, t.baselinestartdate, t.baselinefinishdate,
@@ -823,7 +785,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                                     FROM tasktable_items t
                                     LEFT JOIN tasks_units tf on t.id = tf.ganttitemid 
                                     LEFT JOIN tasktable_items tg on t.parentid = tg.id    
-                                    WHERE tf.unitid = '{_settingsService.Settings.CurrentUser.Id}';";
+                                    WHERE tf.unitid = '{CurrentUser.Id}';";
 
             var command = new NpgsqlCommand(queryText, _connection);
             var data = command.ExecuteReader();
@@ -868,23 +830,23 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 
                 if (ganttItem.IsAdditional == false)
                 {
-                    _settingsService.Settings.CurrentUserGanttItems.Add(ganttItem);
+                    CurrentUserGanttItems.Add(ganttItem);
                 }
                 else
                 {
                     parentGanttItem.IsAdditional = true;
                 }
                 
-                if (!_settingsService.Settings.CurrentUserGanttItems.Any(t=>(Int32)t.Id == (Int32)parentGanttItem.Id) && parentGanttItem.IsAdditional == false)
+                if (!CurrentUserGanttItems.Any(t=>(Int32)t.Id == (Int32)parentGanttItem.Id) && parentGanttItem.IsAdditional == false)
                 {
-                    _settingsService.Settings.CurrentUserGanttItems.Add(parentGanttItem);
+                    CurrentUserGanttItems.Add(parentGanttItem);
                 }
             }
 
             CloseConnection();
-        }
+        }*/
 
-        public void RemoveAllUnits(GanttItemInfo ganttItemInfo)
+        /*public void RemoveAllUnits(GanttItemInfo ganttItemInfo)
           {
               CheckDbConnection();
               
@@ -896,9 +858,9 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                   command.ExecuteNonQuery();
 
               }
-          }
+          }*/
 
-          public void AddResourceLink(IList ResourceLinks, GanttItemInfo ganttItemInfo)
+          /*public void AddResourceLink(IList ResourceLinks, GanttItemInfo ganttItemInfo)
         {
             CheckDbConnection();
 
@@ -927,12 +889,12 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     NpgsqlCommand command = new NpgsqlCommand(queryText, _connection);
                     command.ExecuteNonQuery();
 
-                    _settingsService.Settings.TaskResources.Add(taskResourceInfo);
+                    TaskResources.Add(taskResourceInfo);
                 }
             }
-        }
+        }*/
         
-        public void RemoveResourceLink(IList ResourceLinks, GanttItemInfo ganttItemInfo)
+        /*public void RemoveResourceLink(IList ResourceLinks, GanttItemInfo ganttItemInfo)
         {
             CheckDbConnection();
 
@@ -944,7 +906,7 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
 
                     if (taskResourceInfo.TaskId is Int32 TId && ganttItemInfo.Id is Int32 gInt && element is Int32 elemId && taskResourceInfo.GanttSourceId is Int32 gsId)
                     {
-                        TaskResourceInfo source = _settingsService.Settings.TaskResources.FirstOrDefault(t =>
+                        TaskResourceInfo source = TaskResources.FirstOrDefault(t =>
                             t.TaskId == gInt && t.GanttSourceId == elemId);
 
                         if (source != null)
@@ -955,21 +917,21 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     
                             command.ExecuteNonQuery();
                     
-                            _settingsService.Settings.TaskResources.Remove(source);
-                            /*ganttItemInfo.ResourceIds.Remove(source.Id);*/
+                            TaskResources.Remove(source);
+                            /*ganttItemInfo.ResourceIds.Remove(source.Id);#1#
                         }
                     }
                 }
             }
-        }
+        }*/
 
-        public void UpdateResourceLinks(GanttItemInfo ganttItemInfo)
+        /*public void UpdateResourceLinks(GanttItemInfo ganttItemInfo)
         {
             if (ganttItemInfo.ResourceIds.Count != 0)
             {
                 foreach (var element in ganttItemInfo.ResourceIds)
                 {
-                    var collection = _settingsService.Settings.Users.Where(t => t.GanttSourceItemId == element);
+                    var collection = Users.Where(t => t.GanttSourceItemId == element);
 
                     foreach (var elem in collection)
                     {
@@ -984,9 +946,9 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
             {
                 ganttItemInfo.ResourceUsers.Clear();
             }
-        }
+        }*/
 
-        public void AddUser(UsersInfo usersInfo)
+        /*public void AddUser(UsersInfo usersInfo)
         {
             CheckDbConnection();
             
@@ -1002,11 +964,11 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     usersInfo.Id = id;
                 }
 
-                _settingsService.Settings.Users.Add(usersInfo);
+                Users.Add(usersInfo);
             }
-        }
+        }*/
         
-        public void AddGanttSourceItem(GanttResourceItemInfo ganttResourceItemInfo)
+        /*public void AddGanttSourceItem(GanttResourceItemInfo ganttResourceItemInfo)
         {
             CheckDbConnection();
             
@@ -1022,11 +984,11 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                     ganttResourceItemInfo.Id = id;
                 }
 
-                _settingsService.Settings.GanttResourceItems.Add(ganttResourceItemInfo);
+                GanttResourceItems.Add(ganttResourceItemInfo);
             }
-        }
+        }*/
         
-        public void RemoveSelectedItemUserLibrary(Object selectedItem)
+        /*public void RemoveSelectedItemUserLibrary(Object selectedItem)
         {
             CheckDbConnection();
             
@@ -1037,11 +999,11 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 command.ExecuteNonQuery();
 
                 var element =
-                    _settingsService.Settings.GanttResourceItems.FirstOrDefault(t =>
+                    GanttResourceItems.FirstOrDefault(t =>
                         t.Name == ganttResourceItemInfo.Name);
                 if (element != null)
                 {
-                    _settingsService.Settings.GanttResourceItems.Remove(element);
+                    GanttResourceItems.Remove(element);
                 }
             }
 
@@ -1052,22 +1014,22 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 command.ExecuteNonQuery();
                 
                 var element =
-                    _settingsService.Settings.Users.FirstOrDefault(t =>
+                    Users.FirstOrDefault(t =>
                         t.Id == usersInfo.Id);
                 if (element != null)
                 {
-                    _settingsService.Settings.Users.Remove(element);
+                    Users.Remove(element);
                 }
             }
-        }
+        }*/
         
-        public void UpdatePropertiesSelectedItemUserLibrary(Object selectedItem, String property)
+        /*public void UpdatePropertiesSelectedItemUserLibrary(Object selectedItem, String property)
         {
             CheckDbConnection();
 
             if (selectedItem is UsersInfo usersInfo)
             {
-                var elem = _settingsService.Settings.Users.FirstOrDefault(t=>t.Id == usersInfo.Id);
+                var elem = Users.FirstOrDefault(t=>t.Id == usersInfo.Id);
                 
                 var queryText =  $@"UPDATE users SET ";
 
@@ -1100,6 +1062,6 @@ namespace TaskManager.Sdk.Services.DataBaseConnectionService
                 NpgsqlCommand command = new NpgsqlCommand(queryText, _connection);
                 command.ExecuteNonQuery();
             }
-        }
+        }*/
     }
 }

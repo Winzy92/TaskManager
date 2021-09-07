@@ -7,6 +7,7 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.ProjectsLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.Shell.ViewModels
@@ -44,7 +45,7 @@ namespace TaskManager.Shell.ViewModels
         {
             if (SelectedItem.Id is GanttItemInfo ganttItemInfo)
             {
-                TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().UpdateGanttObject(ganttItemInfo, e.PropertyName);
+                TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().UpdateGanttObject(ganttItemInfo, e.PropertyName);
             }
         }
         

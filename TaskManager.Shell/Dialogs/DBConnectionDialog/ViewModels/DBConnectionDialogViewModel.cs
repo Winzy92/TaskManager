@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using CommonServiceLocator;
 using Prism.Commands;
 using Prism.Services.Dialogs;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.Shell.Dialogs.DBConnectionDialog.ViewModels
@@ -18,6 +20,10 @@ namespace TaskManager.Shell.Dialogs.DBConnectionDialog.ViewModels
         public DelegateCommand CommandCancel { get; }
         
         private readonly IDialogService _dialogService;
+        
+        private readonly IUsersLibraryService _usersLibraryService;
+        
+        private readonly IDatabaseConnectionService _connectionService;
         
         private readonly ISettingsService _settingsService;
         
@@ -49,13 +55,12 @@ namespace TaskManager.Shell.Dialogs.DBConnectionDialog.ViewModels
         {
             TaskManagerServices.Instance.GetInstance<ISettingsService>().SaveSettings();
             TaskManagerServices.Instance.GetInstance<ISettingsService>().LoadSettings();
-            TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>().LoadUsers();
-
-            if (_settingsService.Settings.IsConnected)
+            try
             {
+                TaskManagerServices.Instance.GetInstance<IUsersLibraryService>().LoadUsers();
                 RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
             }
-            else
+            catch (Exception e)
             {
                 ShowMessage = true;
             }
@@ -63,11 +68,9 @@ namespace TaskManager.Shell.Dialogs.DBConnectionDialog.ViewModels
 
         public event Action<IDialogResult> RequestClose;
         
-        //сделать в отдельной команде а не в стандартной
         protected virtual void CloseDialog()
         {
-            Application.Current.Shutdown();
-            RaiseRequestClose(new DialogResult(ButtonResult.Cancel));
+            
         }
         
         public virtual void RaiseRequestClose(IDialogResult dialogResult)
@@ -82,11 +85,17 @@ namespace TaskManager.Shell.Dialogs.DBConnectionDialog.ViewModels
 
         public virtual void OnDialogClosed()
         {
-            if (_settingsService.Settings.IsConnected)
+            if (_usersLibraryService.UsersLibrary.Users.Any())
             {
                 var keyvalue = new DialogParameters();
                 keyvalue.Add("key", 0);
                 _dialogService.ShowDialog("UserAuthorizationDialog", keyvalue,  result => { });
+            }
+            else
+            {
+                var text = new DialogParameters();
+                text.Add("message", "Ошибка подключения к базе данных."+"\n"+"Завершить работу с программой?");
+                _dialogService.ShowDialog("MessageDialog", text,  result => { });
             }
         }
 
@@ -105,7 +114,16 @@ namespace TaskManager.Shell.Dialogs.DBConnectionDialog.ViewModels
 
             CommandOk = new DelegateCommand(ConnectToDb);
             
-            CommandCancel = new DelegateCommand(CloseDialog);
+            CommandCancel = new DelegateCommand(CloseDialogCommand);
+            
+            _connectionService = TaskManagerServices.Instance.GetInstance<IDatabaseConnectionService>();
+            
+            _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();
+        }
+
+        private void CloseDialogCommand()
+        {
+            RaiseRequestClose(new DialogResult(ButtonResult.Cancel));
         }
     }
 }

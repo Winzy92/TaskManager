@@ -5,17 +5,18 @@ using Prism.Commands;
 using Prism.Services.Dialogs;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Interfaces.ProjectsLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.SpecialGanttControl.Dialogs.AddSpecialGanttItemDialog.ViewModels
 {
     public class SpecialGanttItemDialogViewModel : BindBase, IDialogAware
     {
-        private readonly ISettingsService _settingsService;
+        private readonly IProjectsLibraryService _projectsLibraryService;
         
         public DelegateCommand CommandOk { get; }
 
-        public ObservableCollection<GanttItemInfo> LibraryTasks { get; set; }
+        public ObservableCollection<GanttTreeViewItemInfo> LibraryTasks { get; set; }
 
         private ObservableCollection<GanttItemInfo> _selectedItems;
         
@@ -64,9 +65,9 @@ namespace TaskManager.SpecialGanttControl.Dialogs.AddSpecialGanttItemDialog.View
 
         public SpecialGanttItemDialogViewModel()
         {
-            _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();
+            _projectsLibraryService = TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>();
 
-            LibraryTasks = new ObservableCollection<GanttItemInfo>(_settingsService.Settings.GanttItems);
+            LibraryTasks = new ObservableCollection<GanttTreeViewItemInfo>(_projectsLibraryService.ProjectsLibrary.GanttItems);
             
             SelectedItems = new ObservableCollection<GanttItemInfo>();
 
