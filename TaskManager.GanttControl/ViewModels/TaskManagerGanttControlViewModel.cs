@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Media.Imaging;
-using DevExpress.Mvvm.Gantt;
-using Prism.Commands;
+using DevExpress.Xpf.Gantt;
 using TaskManager.Sdk.Core.Models;
-using TaskManager.Sdk.Interfaces;
+using TaskManager.Sdk.Events;
 using TaskManager.Sdk.Interfaces.ProjectsLibrary;
 using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
@@ -30,56 +27,57 @@ namespace TaskManager.GanttControl.ViewModels
         
         public ObservableCollection<TaskResourceInfo> TaskResources { get; set; }
 
-        private GanttResourceItemInfo _selectedItem;
+        private GanttTreeViewItemInfo _selectedItem;
 
-        public GanttResourceItemInfo SelectedItem
+        public GanttTreeViewItemInfo SelectedItem
         {
             get => _selectedItem;
             set
             {
-                if (SelectedItem != null && SelectedItem is GanttResourceItemInfo ganttItemInfo)
+                if (SelectedItem != null && SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
                 {
                     /*ganttItemInfo.Id.PropertyChanged -= GanttItemInfoOnPropertyChanged;
-                    ganttItemInfo.ResourceIds.CollectionChanged -= ResourceIdsCollectionChanged;*/
+                    ganttItemInfo.Id.ResourceIds.CollectionChanged -= ResourceIdsCollectionChanged;*/
+                    //TaskManagerServices.Instance.EventAggregator.GetEvent<UpdateMainGanttEvent>().Publish();
                 }
                 
                 base.SetProperty(ref _selectedItem, value);
                 
-                if (SelectedItem != null && value is GanttResourceItemInfo ganttItemInfoItem)
+                if (SelectedItem != null && value is GanttTreeViewItemInfo ganttItemInfoItem)
                 {
-                    /*ganttItemInfoItem.PropertyChanged += GanttItemInfoOnPropertyChanged;
-                    ganttItemInfoItem.ResourceIds.CollectionChanged += ResourceIdsCollectionChanged;*/
+                    /*ganttItemInfoItem.Id.PropertyChanged += GanttItemInfoOnPropertyChanged;
+                    ganttItemInfoItem.Id.ResourceIds.CollectionChanged += ResourceIdsCollectionChanged;*/
                 }
             }
         }
 
         private void ResourceIdsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (SelectedItem is GanttResourceItemInfo ganttItemInfo)
+            if (SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
             {
                 switch (e.Action)
                 {
                     /*case NotifyCollectionChangedAction.Add:
-                        _projectsLibraryService.AddResourceLink(e.NewItems, ganttItemInfo);
-                        _projectsLibraryService.UpdateResourceLinks(ganttItemInfo);
+                        _projectsLibraryService.AddResourceLink(e.NewItems, ganttItemInfo.Id);
+                        _projectsLibraryService.UpdateResourceLinks(ganttItemInfo.Id);
                         break;
                     
                     case NotifyCollectionChangedAction.Remove:
-                        _projectsLibraryService.RemoveResourceLink(e.OldItems, ganttItemInfo);
-                        _projectsLibraryService.UpdateResourceLinks(ganttItemInfo);
+                        _projectsLibraryService.RemoveResourceLink(e.OldItems, ganttItemInfo.Id);
+                        _projectsLibraryService.UpdateResourceLinks(ganttItemInfo.Id);
                         break;*/
                 }
             }
         }
-
+        
         private void GanttItemInfoOnPropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
-            if (SelectedItem is GanttResourceItemInfo ganttItemInfo)
+            if (SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
             {
-                /*_projectsLibraryService.UpdateGanttObject(ganttItemInfo, e.PropertyName);*/
+                /*_projectsLibraryService.UpdateGanttObject(ganttItemInfo.Id, e.PropertyName);*/
             }
         }
-
+        
         public TaskManagerGanttControlViewModel()
         {
             _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();

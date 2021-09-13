@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows.Media;
 using DevExpress.Mvvm;
+using DevExpress.Mvvm.Gantt;
 
 namespace TaskManager.Sdk.Core.Models
 {
@@ -10,8 +12,8 @@ namespace TaskManager.Sdk.Core.Models
 
         public GanttItemInfo ParentId { get; set; }
         
-        private ObservableCollection<Int32> _resourceIds;
-        public ObservableCollection<Int32> ResourceIds
+        private ObservableCollection<TaskResourceInfo> _resourceIds;
+        public ObservableCollection<TaskResourceInfo> ResourceIds
         {
             get => _resourceIds;
             set
@@ -20,11 +22,13 @@ namespace TaskManager.Sdk.Core.Models
                 RaisePropertiesChanged(nameof(ResourceIds));
             }
         }
+        
+        public ImageSource Image { get; set; }
 
         public GanttTreeViewItemInfo(GanttItemInfo ganttItemInfo)
         {
             Id = ganttItemInfo;
-            ResourceIds = new ObservableCollection<int>();
+            ResourceIds = new ObservableCollection<TaskResourceInfo>();
         }
     }
 }

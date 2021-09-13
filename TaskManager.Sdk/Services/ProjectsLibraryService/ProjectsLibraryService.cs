@@ -45,8 +45,8 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     IsActive = Convert.ToBoolean(data["isactive"]),
                     IsArchive = Convert.ToBoolean(data["isarchive"]),
                     NumOfContract = (data["numberofcontract"] == System.DBNull.Value) ? null : Convert.ToString(data["numberofcontract"]),
-                    Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
-                        UriKind.Relative))
+                    /*Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
+                        UriKind.Relative))*/
                 };
                 
                 ProjectsLibrary.RootItemsProjectsLibrary.Add(ganttItemInfo);
@@ -74,8 +74,8 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     Tag = (data["tag"] == System.DBNull.Value) ? null : Convert.ToString(data["tag"]),
                     BaselineFinishDate = (data["baselinefinishdate"] == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data["baselinefinishdate"]),
                     BaselineStartDate = (data["baselinestartdate"] == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data["baselinestartdate"]),
-                    Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/List.png",
-                        UriKind.Relative))
+                    /*Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/List.png",
+                        UriKind.Relative))*/
                 };
 
                 var item = ProjectsLibrary.RootItemsProjectsLibrary.FirstOrDefault(t =>
@@ -122,9 +122,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     GlobalTask = Convert.ToBoolean(data["globaltask"]),
                     IsActive = Convert.ToBoolean(data["isactive"]),
                     IsArchive = Convert.ToBoolean(data["isarchive"]),
-                    NumOfContract = (data["numberofcontract"] == System.DBNull.Value) ? null : Convert.ToString(data["numberofcontract"]),
-                    Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
-                        UriKind.Relative))
+                    NumOfContract = (data["numberofcontract"] == System.DBNull.Value) ? null : Convert.ToString(data["numberofcontract"])
                 };
                 
                 //Дочерний элемент
@@ -138,9 +136,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     BaselineStartDate = (data["baselinestartdate"] == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data["baselinestartdate"]),
                     GlobalTask = rootganttItemInfo.GlobalTask,
                     IsActive = rootganttItemInfo.IsActive,
-                    IsArchive = rootganttItemInfo.IsArchive,
-                    Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/List.png",
-                        UriKind.Relative))
+                    IsArchive = rootganttItemInfo.IsArchive
                 };
 
                 var elem = ProjectsLibrary.GanttItems.FirstOrDefault(t => t.Id.Equals(childganttItemInfo.Id));
@@ -167,8 +163,12 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 };
                 
                 var treeItem1 = new GanttTreeViewItemInfo(rootganttItemInfo);
+                treeItem1.Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
+                    UriKind.Relative));
                 
                 var treeItem2 = new GanttTreeViewItemInfo(childganttItemInfo);
+                treeItem2.Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/List.png",
+                    UriKind.Relative));
 
                 var element = ProjectsLibrary.GanttItems.FirstOrDefault(t =>
                     (Int32) t.Id.Id == (Int32) rootganttItemInfo.Id);
@@ -227,8 +227,8 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     IsActive = Convert.ToBoolean(data["isactive"]),
                     IsArchive = Convert.ToBoolean(data["isarchive"]),
                     NumOfContract = (data["numberofcontract"] == System.DBNull.Value) ? null : Convert.ToString(data["numberofcontract"]),
-                    Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
-                        UriKind.Relative))
+                    /*Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
+                        UriKind.Relative))*/
                 };
                 
                 //Дочерний элемент
@@ -247,8 +247,8 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     IsActive = rootganttItemInfo.IsActive,
                     IsArchive = rootganttItemInfo.IsArchive,
                     IsAdditional = Convert.ToBoolean(data["isadditional"]),
-                    Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/List.png",
-                        UriKind.Relative))
+                    /*Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/List.png",
+                        UriKind.Relative))*/
                 };
 
                 if (childganttItemInfo.IsAdditional)
@@ -279,7 +279,8 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 {
                     Id = data.GetInt32(0),
                     TaskId = data.GetInt32(1),
-                    GanttSourceId = data.GetInt32(2)
+                    GanttSourceId = data.GetInt32(2),
+                    Percent = data.GetDouble(3)
                 };
                 
                 ProjectsLibrary.TaskResources.Add(taskResourceInfo);
@@ -298,7 +299,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 {
                     if (element.Id.Id is Int32 parentId && parentId == item.TaskId)
                     {
-                        element.ResourceIds.Add(item.GanttSourceId);
+                        element.ResourceIds.Add(item);
                         var collection = _usersLibraryService.UsersLibrary.Users.Where(t => t.GanttSourceItemId == item.GanttSourceId);
                         if (collection != null)
                         {
@@ -346,9 +347,9 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
 
         public void UpdateResourceLinks(GanttItemInfo ganttItemInfo)
         {
-            if (ganttItemInfo.ResourceIds.Count != 0)
+            /*if (ganttItemInfo.ResourceIds.Count != 0)
             {
-                foreach (var element in ganttItemInfo.ResourceIds)
+                /*foreach (var element in ganttItemInfo.ResourceIds)
                 {
                     var collection = _usersLibraryService.UsersLibrary.Users.Where(t => t.GanttSourceItemId == element);
 
@@ -359,12 +360,12 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                             ganttItemInfo.ResourceUsers.Add(elem);
                         }
                     }
-                }
+                }#1#
             }
             else
             {
                 ganttItemInfo.ResourceUsers.Clear();
-            }
+            }*/
         }
 
         public void RemoveAllUnits(GanttItemInfo ganttItemInfo)

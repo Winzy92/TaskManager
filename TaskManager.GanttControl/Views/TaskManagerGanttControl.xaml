@@ -9,6 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:behaviors="clr-namespace:TaskManager.GanttControl.Utils.Behaviors"
              xmlns:converters="clr-namespace:TaskManager.GanttControl.Utils.Converters"
+             xmlns:utils="clr-namespace:TaskManager.GanttControl.Utils"
              Background="{x:Static SystemColors.ControlBrush}"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
@@ -26,7 +27,7 @@
         
         <dxgn:GanttControl.Columns>
             <dxgn:GanttColumn Width="Auto" FieldName="Id.Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn BindTo="ResourceLinks" AllowEditing="{Binding CanModify}" HorizontalHeaderContentAlignment="Center"/>
+            <dxgn:GanttColumn BindTo="ResourceLinks" AllowEditing="{Binding CanModify}" HorizontalHeaderContentAlignment="Center" />
             <dxgn:GanttColumn FieldName="Id.BaselineStartDate" HorizontalHeaderContentAlignment="Center" />
             <dxgn:GanttColumn FieldName="Id.BaselineFinishDate" HorizontalHeaderContentAlignment="Center" />
             <dxgn:GanttColumn FieldName="Id.Progress" HorizontalHeaderContentAlignment="Center">
@@ -58,13 +59,15 @@
         </dxgn:GanttControl.Columns>
         <dxgn:GanttControl.View>
             <dxgn:GanttView AutoExpandAllNodes="True" AllowEditing="{Binding CanModify}" AllowSorting="False" HorizontalScrollbarVisibility="Visible"
-                            ShowBaseline="True" KeyFieldName="Id" ParentFieldName="ParentId" ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False"
-                            ResourceLinksSource="{Binding Id.ResourceIds}" ShowNodeImages="True" ImageFieldName="Id.Image" NodeImageSize="13,15">
+                            ShowBaseline="True" KeyFieldName="Id" TreeDerivationMode="Selfreference" ParentFieldName="ParentId" ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False" 
+                            ResourceLinksPath="ResourceIds" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15">
                 <dxgn:GanttView.ResourceMappings>
                     <dxgn:GanttResourceMappings  Name="Name" Key="Id"/>
                 </dxgn:GanttView.ResourceMappings>
                 <dxgn:GanttView.ResourceLinkMappings>
-                    <dxgn:GanttResourceLinkMappings Resource="."/>
+                    <dxgn:GanttResourceLinkMappings Resource="GanttSourceId" 
+                                                    Task="TaskId" 
+                                                    AllocationPercentage="Percent"/>
                 </dxgn:GanttView.ResourceLinkMappings>
             </dxgn:GanttView>
         </dxgn:GanttControl.View>

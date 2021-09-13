@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections;
+using System.Windows;
 using System.Windows.Interactivity;
+using DevExpress.Xpf.Gantt;
 using TaskManager.Sdk.Events;
 using TaskManager.Sdk.Services.TaskManagerService;
 
@@ -10,6 +12,7 @@ namespace TaskManager.GanttControl.Utils.Behaviors
         protected override void OnAttached()
         {
             AssociatedObject.Loaded += AssociatedObjectOnLoaded;
+           
         }
 
         private void AssociatedObjectOnLoaded(object sender, RoutedEventArgs e)
@@ -20,9 +23,10 @@ namespace TaskManager.GanttControl.Utils.Behaviors
         private void UpdateViewGanttControl()
         {
             AssociatedObject.View.ResourceLinksPath = "";
-            AssociatedObject.View.ResourceLinksPath = "ResourceIds";
+            AssociatedObject.View.ResourceLinksPath = "Id.ResourceIds";
             AssociatedObject.View.AutoExpandAllNodes = false;
             AssociatedObject.View.AutoExpandAllNodes = true;
+            
         }
     }
 }

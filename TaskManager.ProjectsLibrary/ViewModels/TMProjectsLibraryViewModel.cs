@@ -267,11 +267,11 @@ namespace TaskManager.ProjectsLibrary.ViewModels
             var collection = new ObservableCollection<GanttItemInfo>(_projectsLibraryService.ProjectsLibrary.ChildItemsProjectsLibrary.Where(t =>
                 t.ParentId is Int32 intParentId && selectedRootItem.Id is Int32 intSelectedItemId &&
                 intParentId == intSelectedItemId));
-            foreach (var item in collection)
+            /*foreach (var item in collection)
             {
                 item.Image = new BitmapImage(new Uri(@"/TaskManager.ProjectsLibrary;component/Multimedia/List.png",
                     UriKind.Relative));
-            }
+            }*/
 
             ChildGanttItems = collection;
         }

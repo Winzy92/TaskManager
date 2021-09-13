@@ -9,7 +9,7 @@ namespace TaskManager.Sdk.Core.Models
 {
     public class GanttItemInfo : GanttTask
     {
-        public ImageSource Image { get; set; }
+      
     
         private String _numOfContract;
         public String NumOfContract
@@ -55,17 +55,6 @@ namespace TaskManager.Sdk.Core.Models
             }
         }
 
-        private ObservableCollection<Int32> _resourceIds;
-        public ObservableCollection<Int32> ResourceIds
-        {
-            get => _resourceIds;
-            set
-            {
-                _resourceIds = value;
-                RaisePropertiesChanged(nameof(ResourceIds));
-            }
-        }
-        
         private Boolean _globalTask;
         public Boolean GlobalTask
         {
@@ -113,7 +102,6 @@ namespace TaskManager.Sdk.Core.Models
         public GanttItemInfo()
         {
             Tag = null;
-            ResourceIds = new ObservableCollection<int>();
             ResourceUsers = new ObservableCollection<UsersInfo>();
             UsersInfos = new ObservableCollection<UsersInfo>();
             ListUsers = new List<Object>();
