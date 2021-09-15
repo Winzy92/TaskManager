@@ -5,9 +5,9 @@ namespace TaskManager.Sdk.Core.Containers
 {
     public class ProjectsLibraryInfo
     {
-        public ObservableCollection<GanttItemInfo> CurrentUserGanttItems { get; set; } = new ObservableCollection<GanttItemInfo>();
+        public ObservableCollection<GanttTreeViewItemInfo> CurrentUserGanttItems { get; set; } = new ObservableCollection<GanttTreeViewItemInfo>();
         
-        public ObservableCollection<GanttItemInfo> CurrentUserAdditionalGanttItems { get; set; } = new ObservableCollection<GanttItemInfo>();
+        public ObservableCollection<GanttTreeViewItemInfo> CurrentUserAdditionalGanttItems { get; set; } = new ObservableCollection<GanttTreeViewItemInfo>();
         
         public ObservableCollection<GanttTreeViewItemInfo> GanttItems { get; set; } = new ObservableCollection<GanttTreeViewItemInfo>();
         

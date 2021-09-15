@@ -17,14 +17,14 @@
    
     <dxgn:GanttControl ItemsSource="{Binding UserTasks}" CurrentItem="{Binding SelectedItem}">
         <dxgn:GanttControl.Columns>
-            <dxgn:GanttColumn BindTo="Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn BindTo="StartDate" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn BindTo="FinishDate" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn Width="Auto" FieldName="Id.Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
+            <dxgn:GanttColumn FieldName="Id.StartDate" Header="Фактическая дата начала" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" />
+            <dxgn:GanttColumn FieldName="Id.FinishDate" Header="Фактическая дата окончания" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" />
             <dxgn:GanttColumn BindTo="Duration" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn BindTo="Progress" HorizontalHeaderContentAlignment="Center">
+            <dxgn:GanttColumn FieldName="Id.Progress" Header="Прогресс" HorizontalHeaderContentAlignment="Center">
                 <dxgn:GanttColumn.CellTemplate>
                     <DataTemplate>
-                        <dxe:TextEdit EditValue="{Binding RowData.Row.Progress, Converter={StaticResource ProgressConverter}}"
+                        <dxe:TextEdit EditValue="{Binding RowData.Row.Id.Progress, Converter={StaticResource ProgressConverter}}"
                                       ShowBorder="False" Mask="\d+\%" MaskType="RegEx" MaskUseAsDisplayFormat="True">
                         </dxe:TextEdit>
                     </DataTemplate>
@@ -32,7 +32,9 @@
             </dxgn:GanttColumn>
         </dxgn:GanttControl.Columns>
         <dxgn:GanttControl.View>
-            <dxgn:GanttView  AutoExpandAllNodes="True" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15" ShowIndicator="False">
+            <dxgn:GanttView  AutoExpandAllNodes="True" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15" ShowIndicator="False"
+                             KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference"
+                             StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate" ProgressMapping="Id.Progress">
             </dxgn:GanttView>
         </dxgn:GanttControl.View>
     </dxgn:GanttControl>

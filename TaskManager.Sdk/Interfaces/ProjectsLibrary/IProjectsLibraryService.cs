@@ -23,7 +23,7 @@ namespace TaskManager.Sdk.Interfaces.ProjectsLibrary
         
         void LoadTasksUnits();
         
-        void UpdateResourceLinks(GanttItemInfo ganttItemInfo);
+        void UpdateResourceLinks(GanttTreeViewItemInfo ganttItemInfo);
         
         void RemoveAllUnits(GanttItemInfo ganttItemInfo);
         
@@ -37,9 +37,9 @@ namespace TaskManager.Sdk.Interfaces.ProjectsLibrary
         
         void CopyGanttObject(ObservableCollection<GanttItemInfo> selectedGanttItems);
         
-        void AddResourceLink(IList ResourceLinks, GanttItemInfo ganttItemInfo);
+        void AddResourceLink(IList ResourceLinks, GanttTreeViewItemInfo ganttItemInfo);
         
-        void RemoveResourceLink(IList ResourceLinks, GanttItemInfo ganttItemInfo);
+        void RemoveResourceLink(IList ResourceLinks, GanttTreeViewItemInfo ganttItemInfo);
         
         void UpdateTaskUnits(GanttItemInfo selectedGanttItem, String prop);
         

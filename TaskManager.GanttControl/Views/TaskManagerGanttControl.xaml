@@ -17,6 +17,10 @@
     <UserControl.Resources>
         <converters:ProgressConverter x:Key="ProgressConverter" />
         <converters:InversCanModifyProperty x:Key="InversCanModify" />
+        
+        <DataTemplate x:Key="ColumnHeaderTemplate">
+            <dxe:TextEdit Text="{Binding .}" TextWrapping="WrapWithOverflow" ShowBorder="False" HorizontalAlignment="Center"/>
+        </DataTemplate>
     </UserControl.Resources>
     
     <dxgn:GanttControl ItemsSource="{Binding Tasks}" CurrentItem="{Binding SelectedItem}">
@@ -28,9 +32,11 @@
         <dxgn:GanttControl.Columns>
             <dxgn:GanttColumn Width="Auto" FieldName="Id.Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
             <dxgn:GanttColumn BindTo="ResourceLinks" AllowEditing="{Binding CanModify}" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn FieldName="Id.BaselineStartDate" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn FieldName="Id.BaselineFinishDate" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn FieldName="Id.Progress" HorizontalHeaderContentAlignment="Center">
+            <dxgn:GanttColumn FieldName="Id.BaselineStartDate" Header="Дата планового начала" HorizontalHeaderContentAlignment="Center" 
+                              HeaderTemplate="{StaticResource ColumnHeaderTemplate}" />
+            <dxgn:GanttColumn FieldName="Id.BaselineFinishDate" Header="Дата планового окончания" HorizontalHeaderContentAlignment="Center" 
+                              HeaderTemplate="{StaticResource ColumnHeaderTemplate}" />
+            <dxgn:GanttColumn FieldName="Id.Progress" Header="Прогресс" HorizontalHeaderContentAlignment="Center">
                 <dxgn:GanttColumn.CellTemplate>
                     <DataTemplate>
                         <dxe:TextEdit EditValue="{Binding RowData.Row.Id.Progress, Converter={StaticResource ProgressConverter}}" 
@@ -40,9 +46,12 @@
                     </DataTemplate>
                 </dxgn:GanttColumn.CellTemplate>
             </dxgn:GanttColumn>   
-            <dxgn:GanttColumn FieldName="Id.StartDate" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" IsSmart="True" Visible="False"/>
-            <dxgn:GanttColumn FieldName="Id.FinishDate" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" IsSmart="True" Visible="False"/>
-            <dxgn:GanttColumn FieldName="Id.NumOfContract" Header="Номер договора" Width="Auto" HorizontalHeaderContentAlignment="Center"/>
+            <dxgn:GanttColumn FieldName="Id.StartDate" Header="Фактическая дата начала" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" 
+                              IsSmart="True" Visible="False" HeaderTemplate="{StaticResource ColumnHeaderTemplate}" />
+            <dxgn:GanttColumn FieldName="Id.FinishDate" Header="Фактическая дата окончания" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" 
+                              IsSmart="True" Visible="False" HeaderTemplate="{StaticResource ColumnHeaderTemplate}" />
+            <dxgn:GanttColumn FieldName="Id.NumOfContract" Header="Номер договора" Width="Auto" HorizontalHeaderContentAlignment="Center" AllowEditing="False" 
+                              HeaderTemplate="{StaticResource ColumnHeaderTemplate}" />
             <dxgn:GanttColumn FieldName="Id.ListUsers" Header="Исполнитель" Width="Auto" HorizontalHeaderContentAlignment="Center">
                 <dxgn:GanttColumn.CellTemplate>
                     <DataTemplate>
@@ -59,8 +68,10 @@
         </dxgn:GanttControl.Columns>
         <dxgn:GanttControl.View>
             <dxgn:GanttView AutoExpandAllNodes="True" AllowEditing="{Binding CanModify}" AllowSorting="False" HorizontalScrollbarVisibility="Visible"
-                            ShowBaseline="True" KeyFieldName="Id" TreeDerivationMode="Selfreference" ParentFieldName="ParentId" ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False" 
-                            ResourceLinksPath="ResourceIds" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15">
+                            ShowBaseline="True" KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference"
+                            ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False" ResourceLinksPath="ResourceIds" ShowNodeImages="True"
+                            ImageFieldName="Image" NodeImageSize="13,15" BaselineStartDateMapping="Id.BaselineStartDate" BaselineFinishDateMapping="Id.BaselineFinishDate"
+                            ProgressMapping="Id.Progress" StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate">
                 <dxgn:GanttView.ResourceMappings>
                     <dxgn:GanttResourceMappings  Name="Name" Key="Id"/>
                 </dxgn:GanttView.ResourceMappings>
@@ -72,5 +83,4 @@
             </dxgn:GanttView>
         </dxgn:GanttControl.View>
     </dxgn:GanttControl>
-    
 </UserControl>

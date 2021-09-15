@@ -18,6 +18,5 @@ namespace TaskManager.Sdk.Core.Models
             }
         }
         public Int32 Id { get; set; }
-        
     }
 }

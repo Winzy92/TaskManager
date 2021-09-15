@@ -16,36 +16,36 @@ namespace TaskManager.UserGanttControll.ViewModels
         
         private readonly IProjectsLibraryService _projectsLibraryService;
         
-        public ObservableCollection<GanttItemInfo> UserTasks { get; set; }
+        public ObservableCollection<GanttTreeViewItemInfo> UserTasks { get; set; }
         
         public ObservableCollection<GanttResourceItemInfo> GanttResourceItems { get; set; }
         
-        private GanttItemInfo _selectedItem;
+        private GanttTreeViewItemInfo _selectedItem;
 
-        public GanttItemInfo SelectedItem
+        public GanttTreeViewItemInfo SelectedItem
         {
             get => _selectedItem;
             set
             {
-                if (SelectedItem != null && SelectedItem is GanttItemInfo ganttItemInfo)
+                if (SelectedItem != null && SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
                 {
-                    ganttItemInfo.PropertyChanged -= GanttItemInfoOnPropertyChanged;
+                    ganttItemInfo.Id.PropertyChanged -= GanttItemInfoOnPropertyChanged;
                 }
                 
                 base.SetProperty(ref _selectedItem, value);
                 
-                if (SelectedItem != null && value is GanttItemInfo ganttItemInfoItem)
+                if (SelectedItem != null && value is GanttTreeViewItemInfo ganttItemInfoItem)
                 {
-                    ganttItemInfoItem.PropertyChanged += GanttItemInfoOnPropertyChanged;
+                    ganttItemInfoItem.Id.PropertyChanged += GanttItemInfoOnPropertyChanged;
                 }
             }
         }
         
         private void GanttItemInfoOnPropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
-            if (SelectedItem is GanttItemInfo ganttItemInfo)
+            if (SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
             {
-                _projectsLibraryService.UpdateTaskUnits(ganttItemInfo, e.PropertyName);
+                _projectsLibraryService.UpdateTaskUnits(ganttItemInfo.Id, e.PropertyName);
             }
         }
 

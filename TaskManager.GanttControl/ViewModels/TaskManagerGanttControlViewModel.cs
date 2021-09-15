@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
+using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Gantt;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Events;
@@ -36,8 +38,8 @@ namespace TaskManager.GanttControl.ViewModels
             {
                 if (SelectedItem != null && SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
                 {
-                    /*ganttItemInfo.Id.PropertyChanged -= GanttItemInfoOnPropertyChanged;
-                    ganttItemInfo.Id.ResourceIds.CollectionChanged -= ResourceIdsCollectionChanged;*/
+                    ganttItemInfo.Id.PropertyChanged -= GanttItemInfoOnPropertyChanged;
+                    ganttItemInfo.ResourceIds.CollectionChanged -= ResourceIdsCollectionChanged;
                     //TaskManagerServices.Instance.EventAggregator.GetEvent<UpdateMainGanttEvent>().Publish();
                 }
                 
@@ -45,27 +47,34 @@ namespace TaskManager.GanttControl.ViewModels
                 
                 if (SelectedItem != null && value is GanttTreeViewItemInfo ganttItemInfoItem)
                 {
-                    /*ganttItemInfoItem.Id.PropertyChanged += GanttItemInfoOnPropertyChanged;
-                    ganttItemInfoItem.Id.ResourceIds.CollectionChanged += ResourceIdsCollectionChanged;*/
+                    ganttItemInfoItem.Id.PropertyChanged += GanttItemInfoOnPropertyChanged;
+                    ganttItemInfoItem.ResourceIds.CollectionChanged += ResourceIdsCollectionChanged;
                 }
             }
         }
 
         private void ResourceIdsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
+            foreach (var element in e.NewItems)
             {
-                switch (e.Action)
+                if (SelectedItem is GanttTreeViewItemInfo ganttItemInfo && element is TaskResourceInfo taskResourceInfo)
                 {
-                    /*case NotifyCollectionChangedAction.Add:
-                        _projectsLibraryService.AddResourceLink(e.NewItems, ganttItemInfo.Id);
-                        _projectsLibraryService.UpdateResourceLinks(ganttItemInfo.Id);
-                        break;
+                    if (!(taskResourceInfo.Id == 0 && taskResourceInfo.TaskId == 0 && taskResourceInfo.GanttSourceId == 0))
+                    {
+                        switch (e.Action)
+                        {
+                            case NotifyCollectionChangedAction.Add:
+                                _projectsLibraryService.AddResourceLink(e.NewItems, ganttItemInfo);
+                                _projectsLibraryService.UpdateResourceLinks(ganttItemInfo);
+                                break;
                     
-                    case NotifyCollectionChangedAction.Remove:
-                        _projectsLibraryService.RemoveResourceLink(e.OldItems, ganttItemInfo.Id);
-                        _projectsLibraryService.UpdateResourceLinks(ganttItemInfo.Id);
-                        break;*/
+                            case NotifyCollectionChangedAction.Remove:
+                                _projectsLibraryService.RemoveResourceLink(e.OldItems, ganttItemInfo);
+                                _projectsLibraryService.UpdateResourceLinks(ganttItemInfo);
+                                break;
+                        }
+                    }
+                    
                 }
             }
         }
@@ -74,10 +83,10 @@ namespace TaskManager.GanttControl.ViewModels
         {
             if (SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
             {
-                /*_projectsLibraryService.UpdateGanttObject(ganttItemInfo.Id, e.PropertyName);*/
+                _projectsLibraryService.UpdateGanttObject(ganttItemInfo.Id, e.PropertyName);
             }
         }
-        
+
         public TaskManagerGanttControlViewModel()
         {
             _usersLibraryService = TaskManagerServices.Instance.GetInstance<IUsersLibraryService>();

@@ -2,15 +2,15 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Media;
+using DevExpress.Mvvm;
 using DevExpress.Mvvm.Gantt;
 
 namespace TaskManager.Sdk.Core.Models
 {
     public class GanttItemInfo : GanttTask
     {
-      
-    
         private String _numOfContract;
         public String NumOfContract
         {

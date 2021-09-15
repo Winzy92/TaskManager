@@ -22,23 +22,23 @@ namespace TaskManager.SpecialGanttControl.ViewModels
         
         public DelegateCommand OpenAddSpecialGanttItemDialog { get; }
         
-        public ObservableCollection<GanttItemInfo> SpecialUserTasks { get; set; }
+        public ObservableCollection<GanttTreeViewItemInfo> SpecialUserTasks { get; set; }
 
-        private GanttItemInfo _selectedItem;
+        private GanttTreeViewItemInfo _selectedItem;
 
-        public GanttItemInfo SelectedItem
+        public GanttTreeViewItemInfo SelectedItem
         {
             get => _selectedItem;
             set
             {
-                if (SelectedItem != null && SelectedItem is GanttItemInfo ganttItemInfo)
+                if (SelectedItem != null && SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
                 {
-                    ganttItemInfo.PropertyChanged -= GanttItemInfoOnPropertyChanged;
+                    ganttItemInfo.Id.PropertyChanged -= GanttItemInfoOnPropertyChanged;
                 }
                 
-                if (SelectedItem != null && value is GanttItemInfo ganttItemInfoItem)
+                if (SelectedItem != null && value is GanttTreeViewItemInfo ganttItemInfoItem)
                 {
-                    ganttItemInfoItem.PropertyChanged += GanttItemInfoOnPropertyChanged;
+                    ganttItemInfoItem.Id.PropertyChanged += GanttItemInfoOnPropertyChanged;
                 }
                 
                 base.SetProperty(ref _selectedItem, value);
@@ -47,72 +47,12 @@ namespace TaskManager.SpecialGanttControl.ViewModels
         
         private void GanttItemInfoOnPropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
-            if (SelectedItem is GanttItemInfo ganttItemInfo)
+            if (SelectedItem is GanttTreeViewItemInfo ganttItemInfo)
             {
-                _projectsLibraryService.UpdateTaskUnits(ganttItemInfo, e.PropertyName);
+                _projectsLibraryService.UpdateTaskUnits(ganttItemInfo.Id, e.PropertyName);
             }
         }
-
-        /*private void CreateSpecialUserTasksCollection(ObservableCollection<GanttItemInfo> selectedItems)
-        {
-            foreach (var item in selectedItems)
-            {
-                /*Добавляем корневой элемент#1#
-                if (item.ParentId is Int32 parentId && parentId != 0)
-                {
-                    var rootElement =
-                        _projectsLibraryService.ProjectsLibrary.GanttItems.FirstOrDefault(t => (Int32)t.Id == parentId);
-                    if (rootElement != null)
-                    {
-                        var rootGanttItem = new GanttItemInfo()
-                        {
-                            Id = rootElement.Id,
-                            ParentId = rootElement.ParentId,
-                            Progress = rootElement.Progress,
-                            BaselineStartDate = rootElement.BaselineStartDate,
-                            BaselineFinishDate = rootElement.BaselineFinishDate,
-                            Name = rootElement.Name,
-                            NumOfContract = rootElement.NumOfContract,
-                            Tag = rootElement.Tag,
-                            StartDate = rootElement.StartDate,
-                            FinishDate = rootElement.FinishDate,
-                            IsAdditional = true
-                        };
-                        
-                        if (!SpecialUserTasks.Any(t=>(Int32)t.Id == (Int32)rootGanttItem.Id))
-                            SpecialUserTasks.Add(rootGanttItem);
-                    }
-                }
-
-                /*Добавлеяем дочерний элемент#1#
-                var ganttItem = new GanttItemInfo()
-                {
-                    Id = item.Id,
-                    ParentId = item.ParentId,
-                    Progress = item.Progress,
-                    BaselineStartDate = item.BaselineStartDate,
-                    BaselineFinishDate = item.BaselineFinishDate,
-                    Name = item.Name,
-                    NumOfContract = item.NumOfContract,
-                    Tag = item.Tag,
-                    StartDate = item.StartDate,
-                    FinishDate = item.FinishDate,
-                    IsAdditional = true
-                };
-
-                if (!SpecialUserTasks.Any(t=>(Int32)t.Id == (Int32)ganttItem.Id))
-                {
-                    ganttItem.ResourceUsers.Add(_settingsService.Settings.CurrentUser);
-                    ganttItem.ResourceIds.Add(_settingsService.Settings.CurrentUser.Id);
-                    ganttItem.UsersInfos.Add(_settingsService.Settings.CurrentUser);
-                    ganttItem.ListUsers.Add(_settingsService.Settings.CurrentUser);
-                    _connectionService.UpdateGanttObject(ganttItem, "ListUsers");
-                
-                    SpecialUserTasks.Add(ganttItem);
-                }
-            }
-        }*/
-
+        
         private DelegateCommand<string> _removeSpecialGanttItem;
         
         public DelegateCommand<string> RemoveSpecialGanttItem =>

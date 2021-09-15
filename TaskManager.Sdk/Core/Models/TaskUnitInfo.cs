@@ -11,7 +11,7 @@ namespace TaskManager.Sdk.Core.Models
 
         public Int32 UnitId { get; set; }
 
-        public String UnitName { get; set; }
+        //public String UnitName { get; set; }
 
         public Int32 SourceId { get; set; }
         
