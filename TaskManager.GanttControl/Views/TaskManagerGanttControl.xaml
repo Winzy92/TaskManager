@@ -68,7 +68,7 @@
         </dxgn:GanttControl.Columns>
         <dxgn:GanttControl.View>
             <dxgn:GanttView AutoExpandAllNodes="True" AllowEditing="{Binding CanModify}" AllowSorting="False" HorizontalScrollbarVisibility="Visible"
-                            ShowBaseline="True" KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference"
+                            ShowBaseline="True" KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference" ScheduleMode="Forward"
                             ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False" ResourceLinksPath="ResourceIds" ShowNodeImages="True"
                             ImageFieldName="Image" NodeImageSize="13,15" BaselineStartDateMapping="Id.BaselineStartDate" BaselineFinishDateMapping="Id.BaselineFinishDate"
                             ProgressMapping="Id.Progress" StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate">

@@ -173,23 +173,45 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
 
                 var element = ProjectsLibrary.GanttItems.FirstOrDefault(t =>
                     (Int32) t.Id.Id == (Int32) rootganttItemInfo.Id);
-                if (element == null)
-                {
-                    ProjectsLibrary.GanttItems.Add(treeItem1);
-                }
-                
+
                 if (ProjectsLibrary.GanttItems.FirstOrDefault(t =>
                     (Int32)t.Id.Id == (Int32) childganttItemInfo.Id) == null)
                 {
                     if (element == null)
                     {
                         treeItem2.ParentId = rootganttItemInfo;
+
+                        if (treeItem1.Id.BaselineStartDate == null ||
+                            treeItem1.Id.BaselineStartDate >= treeItem2.Id.BaselineStartDate)
+                        {
+                            treeItem1.Id.BaselineStartDate = treeItem2.Id.BaselineStartDate;
+                        }
+                        
+                        if (treeItem1.Id.BaselineFinishDate == null ||
+                            treeItem1.Id.BaselineFinishDate <= treeItem2.Id.BaselineFinishDate)
+                        {
+                            treeItem1.Id.BaselineFinishDate = treeItem2.Id.BaselineFinishDate;
+                        }
+                        
+                        ProjectsLibrary.GanttItems.Add(treeItem1);
                     }
                     else
                     {
                         treeItem2.ParentId = element.Id;
+                        
+                        if (element.Id.BaselineStartDate == null ||
+                            element.Id.BaselineStartDate >= treeItem2.Id.BaselineStartDate)
+                        {
+                            element.Id.BaselineStartDate = treeItem2.Id.BaselineStartDate;
+                        }
+                        
+                        if (element.Id.BaselineFinishDate == null ||
+                            element.Id.BaselineFinishDate <= treeItem2.Id.BaselineFinishDate)
+                        {
+                            element.Id.BaselineFinishDate = treeItem2.Id.BaselineFinishDate;
+                        }
                     }
-
+                    
                     ProjectsLibrary.GanttItems.Add(treeItem2);
                 }
             }
@@ -545,10 +567,33 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 
                 case "BaselineFinishDate":
                     queryText += $"baselinefinishdate='{ganttItemInfo.BaselineFinishDate}'";
+                    var element = ProjectsLibrary.GanttItems.FirstOrDefault(t => t.Id.Id == ganttItemInfo.Id);
+                    if (element != null)
+                    {
+                        var rootitem = ProjectsLibrary.GanttItems.FirstOrDefault(t => t.Id.Id == element.ParentId.Id);
+
+                        if (rootitem != null)
+                        {
+                            if (rootitem.Id.BaselineFinishDate <= ganttItemInfo.BaselineFinishDate)
+                                rootitem.Id.BaselineFinishDate = ganttItemInfo.BaselineFinishDate;
+                        }
+                    }
+
                     break;
                 
                 case "BaselineStartDate":
                     queryText += $"baselinestartdate='{ganttItemInfo.BaselineStartDate}'";
+                    var item = ProjectsLibrary.GanttItems.FirstOrDefault(t => t.Id.Id == ganttItemInfo.Id);
+                    if (item != null)
+                    {
+                        var rootitem = ProjectsLibrary.GanttItems.FirstOrDefault(t => t.Id.Id == item.ParentId.Id);
+
+                        if (rootitem != null)
+                        {
+                            if (rootitem.Id.BaselineStartDate >= ganttItemInfo.BaselineStartDate)
+                                rootitem.Id.BaselineStartDate = ganttItemInfo.BaselineStartDate;
+                        }
+                    }
                     break;
 
                 case "GlobalTask":

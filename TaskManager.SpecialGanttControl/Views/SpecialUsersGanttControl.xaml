@@ -37,7 +37,7 @@
                 <dxgn:GanttColumn.CellTemplate>
                     <DataTemplate>
                         <dxe:TextEdit EditValue="{Binding RowData.Row.Id.Progress, Converter={StaticResource ProgressConverter}}"
-                                      ShowBorder="False" Mask="\d+\%" MaskType="RegEx" MaskUseAsDisplayFormat="True">
+                                      ShowBorder="False" Mask="\d+\%" MaskType="RegEx" MaskUseAsDisplayFormat="True" >
                         </dxe:TextEdit>
                     </DataTemplate>
                 </dxgn:GanttColumn.CellTemplate>
@@ -45,7 +45,7 @@
         </dxgn:GanttControl.Columns>
         <dxgn:GanttControl.View>
             <dxgn:GanttView  AutoExpandAllNodes="True" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15" ShowIndicator="False"
-                             KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference"
+                             KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference" ScheduleMode="Forward"
                              StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate" ProgressMapping="Id.Progress">
             </dxgn:GanttView>
         </dxgn:GanttControl.View>
