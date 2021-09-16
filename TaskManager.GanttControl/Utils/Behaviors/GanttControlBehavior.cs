@@ -28,20 +28,6 @@ namespace TaskManager.GanttControl.Utils.Behaviors
         {
             TaskManagerServices.Instance.EventAggregator.GetEvent<UpdateMainGanttEvent>().Subscribe(UpdateViewGanttControl);
             AssociatedObject.View.AddingNewResourceLink += GanttView_AddingNewResourceLink;
-            /*AssociatedObject.View.NodeUpdated += CellChanged;*/
-        }
-
-        private void CellChanged(object sender, TreeListNodeEventArgs e)
-        {
-            switch (e.RoutedEvent.Name)
-            {
-                case "AddingNewResourceLinkEventArgs":
-                    break;
-                
-                case "NodeUpdated":
-                    break;
-            }
-            
         }
 
         void GanttView_AddingNewResourceLink(object sender, AddingNewResourceLinkEventArgs e) 

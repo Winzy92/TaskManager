@@ -45,7 +45,7 @@
         </dxgn:GanttControl.Columns>
         <dxgn:GanttControl.View>
             <dxgn:GanttView  AutoExpandAllNodes="True" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15" ShowIndicator="False"
-                             KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference" ScheduleMode="Forward"
+                             KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference" ScheduleMode="Forward" ScrollMode="Content"
                              StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate" ProgressMapping="Id.Progress">
             </dxgn:GanttView>
         </dxgn:GanttControl.View>

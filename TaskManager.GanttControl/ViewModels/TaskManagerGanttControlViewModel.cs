@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Gantt;
+using DevExpress.Xpf.Grid.TreeList;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Events;
 using TaskManager.Sdk.Interfaces.ProjectsLibrary;
@@ -49,8 +50,14 @@ namespace TaskManager.GanttControl.ViewModels
                 {
                     ganttItemInfoItem.Id.PropertyChanged += GanttItemInfoOnPropertyChanged;
                     ganttItemInfoItem.ResourceIds.CollectionChanged += ResourceIdsCollectionChanged;
+                    TaskManagerServices.Instance.EventAggregator.GetEvent<TaskResourceInfoUpdateEvent>().Subscribe(UpdateTaskResource);
                 }
             }
+        }
+
+        private void UpdateTaskResource(TaskResourceInfo taskResourceInfo)
+        {
+            _projectsLibraryService.UpdateTaskResources(taskResourceInfo);
         }
 
         private void ResourceIdsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

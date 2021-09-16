@@ -802,7 +802,19 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             
             _connectionService.CloseConnection();
         }
-        
+
+        public void UpdateTaskResources(TaskResourceInfo taskResourceInfo)
+        {
+            _connectionService.CheckDbConnection();
+            
+            var queryText =  $@"UPDATE taskitems_resource SET percent='{taskResourceInfo.Percent.ToString().Replace(',','.')}' WHERE id='{taskResourceInfo.Id}'";
+            
+            NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
+            command.ExecuteNonQuery();
+            
+            _connectionService.CloseConnection();
+        }
+
         public ProjectsLibraryService()
         {
             _settingsService = TaskManagerServices.Instance.GetInstance<ISettingsService>();

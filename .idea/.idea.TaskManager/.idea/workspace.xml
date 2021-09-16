@@ -10,10 +10,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="# Отладка алгоритмов после перестроения ядра">
+    <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/TaskManager.Sdk/Events/TaskResourceInfoUpdateEvent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttTreeViewItemInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttTreeViewItemInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskResourceInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskResourceInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Events/UpdateMainGanttEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Events/UpdateMainGanttEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/TaskManager.Sdk.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/TaskManager.Sdk.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.UserGanttControl/Views/UserGanttControl.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UserGanttControl/Views/UserGanttControl.xaml" afterDir="false" />
     </list>
@@ -64,6 +71,7 @@
     <setting file="file://$PROJECT_DIR$/TaskManager.UsersLibrary/Views/UsersLibraryControl.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B6A0E661-5EE0-4EA7-AD53-5B38F9316104/e0/0ac237ce/Delegate.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/61A2391A-7F38-4D7D-8573-11CEBB7C1DE6/1F/EventBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E7EC994D-2608-4BC0-8E72-AC8BB3694450/dd/c2727451/GanttDataController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/307ED9B2-81D1-43DB-9AED-13169626ADF4/32/c2eb231e/EffectiveValueEntry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.ToolBar/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
@@ -96,7 +104,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/61A2391A-7F38-4D7D-8573-11CEBB7C1DE6/29/DelegateCommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/6e/42c5f190/UIElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttResourceItemInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Core/Models/PositionsInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Core/Models/SettingsInfo.cs" root0="FORCE_HIGHLIGHTING" />
@@ -180,20 +187,22 @@
       <option value="$PROJECT_DIR$/TaskManager.ProjectsLibrary/ViewModels/TMProjectsLibraryViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttResourceItemInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/ResourceLink.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttTreeViewItemInfo.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" />
       <option value="$APPLICATION_CONFIG_DIR$/consoles/db/fc6c25a3-deae-4372-873e-293e99dd34ad/console.sql" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskUnitInfo.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskResourceInfo.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ProjectsLibraryInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.UserGanttControl/ViewModels/UserGanttControlViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.UserGanttControl/Views/UserGanttControl.xaml" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttTreeViewItemInfo.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskResourceInfo.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/UpdateMainGanttEvent.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/TaskResourceInfoUpdateEvent.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" />
     </changedPaths>
   </component>
@@ -296,7 +305,9 @@
       <workItem from="1631616397660" duration="9766000" />
       <workItem from="1631629078994" duration="189000" />
       <workItem from="1631637874303" duration="4535000" />
-      <workItem from="1631683411982" duration="16511000" />
+      <workItem from="1631683411982" duration="17248000" />
+      <workItem from="1631727170600" duration="6323000" />
+      <workItem from="1631770124242" duration="5539000" />
     </task>
     <task id="LOCAL-00001" summary="Создал структуру проекта">
       <created>1623752556826</created>
@@ -361,7 +372,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631708172519</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="# Добавил алгоритм автоматического рассчета планируемых дат начала и конца проектов, в зависимости от плановых дат выполнения задач внутри данного проекта.">
+      <created>1631715051853</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1631715051853</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -391,7 +409,8 @@
     <MESSAGE value="# Перестроил структуру ядра, надо решить проблему с отображением в GUI" />
     <MESSAGE value="# Решил проблему отображения ресурсов на Gantt'e, свойство перенесено в модель обертки." />
     <MESSAGE value="# Отладка алгоритмов после перестроения ядра" />
-    <option name="LAST_COMMIT_MESSAGE" value="# Отладка алгоритмов после перестроения ядра" />
+    <MESSAGE value="# Добавил алгоритм автоматического рассчета планируемых дат начала и конца проектов, в зависимости от плановых дат выполнения задач внутри данного проекта." />
+    <option name="LAST_COMMIT_MESSAGE" value="# Добавил алгоритм автоматического рассчета планируемых дат начала и конца проектов, в зависимости от плановых дат выполнения задач внутри данного проекта." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -401,6 +420,32 @@
           <line>333</line>
           <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/98F1E9A3-4402-4C92-9A13-82BED9598294/42/a1f42de5/PropertyPathWorker.cs" initialLine="333" />
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs</url>
+          <line>58</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.GanttControl\ViewModels\TaskManagerGanttControlViewModel.cs" initialLine="58" containingFunctionPresentation="method 'UpdateTaskResource'">
+            <startOffsets>
+              <option value="2372" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2373" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
+          <line>806</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="806" containingFunctionPresentation="method 'UpdateTaskResources'">
+            <startOffsets>
+              <option value="35613" />
+            </startOffsets>
+            <endOffsets>
+              <option value="35614" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

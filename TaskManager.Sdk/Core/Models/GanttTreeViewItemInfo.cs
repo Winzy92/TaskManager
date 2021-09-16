@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.Gantt;
+using TaskManager.Sdk.Events;
+using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.Sdk.Core.Models
 {

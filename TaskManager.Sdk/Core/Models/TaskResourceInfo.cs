@@ -1,5 +1,7 @@
 ﻿using System;
 using DevExpress.Mvvm;
+using TaskManager.Sdk.Events;
+using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.Sdk.Core.Models
 {
@@ -19,6 +21,7 @@ namespace TaskManager.Sdk.Core.Models
             {
                 _percent = value;
                 RaisePropertiesChanged(nameof(Percent));
+                TaskManagerServices.Instance.EventAggregator.GetEvent<TaskResourceInfoUpdateEvent>().Publish(this);
             }
         }
     }

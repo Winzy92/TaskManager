@@ -138,6 +138,7 @@
         <Compile Include="Core\Models\TaskResourceInfo.cs" />
         <Compile Include="Core\Models\TaskUnitInfo.cs" />
         <Compile Include="Core\Models\UsersInfo.cs" />
+        <Compile Include="Events\TaskResourceInfoUpdateEvent.cs" />
         <Compile Include="Events\UpdateMainGanttEvent.cs" />
         <Compile Include="Interfaces\IBaseUsersInfo.cs" />
         <Compile Include="Interfaces\IDatabaseConnectionService.cs" />

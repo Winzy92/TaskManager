@@ -42,6 +42,8 @@ namespace TaskManager.Sdk.Interfaces.ProjectsLibrary
         void RemoveResourceLink(IList ResourceLinks, GanttTreeViewItemInfo ganttItemInfo);
         
         void UpdateTaskUnits(GanttItemInfo selectedGanttItem, String prop);
-        
+
+        void UpdateTaskResources(TaskResourceInfo taskResourceInfo);
+
     }
 }
