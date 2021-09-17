@@ -21,7 +21,6 @@ namespace TaskManager.GanttControl.Utils.Behaviors
         protected override void OnAttached()
         {
             AssociatedObject.Loaded += AssociatedObjectOnLoaded;
-           
         }
 
         private void AssociatedObjectOnLoaded(object sender, RoutedEventArgs e)
@@ -63,7 +62,6 @@ namespace TaskManager.GanttControl.Utils.Behaviors
             AssociatedObject.View.ResourceLinksPath = "Id.ResourceIds";
             AssociatedObject.View.AutoExpandAllNodes = false;
             AssociatedObject.View.AutoExpandAllNodes = true;
-            
         }
 
         public MainGanttControlBehavior()

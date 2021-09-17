@@ -15,12 +15,8 @@ namespace TaskManager.Sdk.Interfaces.ProjectsLibrary
         
         void LoadUsersAdditionalGanttItems();
 
-        void LoadRootProjectsLibraryItems();
-
         void LoadTasksResourceItems();
 
-        void LoadChildProjectsLibraryItems();
-        
         void LoadTasksUnits();
         
         void UpdateResourceLinks(GanttTreeViewItemInfo ganttItemInfo);
@@ -29,11 +25,11 @@ namespace TaskManager.Sdk.Interfaces.ProjectsLibrary
         
         void AddGanttObject(String name);
                 
-        void AddGanttChildObject(GanttItemInfo selectedGanttItem, String name);
+        void AddGanttChildObject(GanttTreeViewItemInfo selectedGanttItem, String name);
         
         void UpdateGanttObject(GanttItemInfo ganttItemInfo, String prop);
         
-        void RemoveGanttObject(ObservableCollection<GanttItemInfo> selectedGanttItems);
+        void RemoveGanttObject(ObservableCollection<GanttTreeViewItemInfo> selectedGanttItems);
         
         void CopyGanttObject(ObservableCollection<GanttItemInfo> selectedGanttItems);
         

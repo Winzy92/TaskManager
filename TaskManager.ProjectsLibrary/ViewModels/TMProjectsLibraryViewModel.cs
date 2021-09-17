@@ -28,27 +28,27 @@ namespace TaskManager.ProjectsLibrary.ViewModels
         public DelegateCommand RemoveChild { get; }
         public DelegateCommand CopyChild { get; }
 
-        private GanttItemInfo _selectedRootItem;
+        private GanttTreeViewItemInfo _selectedRootItem;
 
-        public GanttItemInfo SelectedRootItem
+        public GanttTreeViewItemInfo SelectedRootItem
         {
             get => _selectedRootItem;
             set
             {
-                if (SelectedRootItem != null && SelectedRootItem is GanttItemInfo ganttItemInfo)
+                if (SelectedRootItem != null && SelectedRootItem is GanttTreeViewItemInfo ganttItemInfo)
                 {
-                    ganttItemInfo.PropertyChanged -= GanttItemInfoOnPropertyChanged;
+                    ganttItemInfo.Id.PropertyChanged -= GanttItemInfoOnPropertyChanged;
                 }
                 
                 base.SetProperty(ref _selectedRootItem, value);
                 
-                if (SelectedRootItem != null && value is GanttItemInfo ganttItemInfoItem)
+                if (SelectedRootItem != null && value is GanttTreeViewItemInfo ganttItemInfoItem)
                 {
+                    ganttItemInfoItem.Id.PropertyChanged += GanttItemInfoOnPropertyChanged;
                     RefreshChildList(value);
-                    ganttItemInfoItem.PropertyChanged += GanttItemInfoOnPropertyChanged;
                 }
 
-                if (SelectedRootItem.GlobalTask)
+                if (SelectedRootItem.Id.GlobalTask)
                 {
                     ContextMenuItemName = "Изменить тип на локальный";
                 }
@@ -59,74 +59,71 @@ namespace TaskManager.ProjectsLibrary.ViewModels
             }
         }
         
-        private ObservableCollection<GanttItemInfo> _selectedRootItems;
+        private ObservableCollection<GanttTreeViewItemInfo> _selectedRootItems;
 
-        public ObservableCollection<GanttItemInfo> SelectedRootItems
+        public ObservableCollection<GanttTreeViewItemInfo> SelectedRootItems
         {
             get => _selectedRootItems;
             set => base.SetProperty(ref _selectedRootItems, value);
         }
         
-        private GanttItemInfo _selectedChildItem;
+        private GanttTreeViewItemInfo _selectedChildItem;
 
-        public GanttItemInfo SelectedChildItem
+        public GanttTreeViewItemInfo SelectedChildItem
         {
             get => _selectedChildItem;
             set
             {
-                if (SelectedChildItem != null && SelectedChildItem is GanttItemInfo ganttItemInfo)
+                if (SelectedChildItem != null && SelectedChildItem is GanttTreeViewItemInfo ganttItemInfo)
                 {
-                    ganttItemInfo.PropertyChanged -= GanttItemInfoOnPropertyChanged;
+                    ganttItemInfo.Id.PropertyChanged -= GanttItemInfoOnPropertyChanged;
                 }
                 
                 base.SetProperty(ref _selectedChildItem, value);
                 
-                if (SelectedChildItem != null && value is GanttItemInfo ganttItemInfoItem)
+                if (SelectedChildItem != null && value is GanttTreeViewItemInfo ganttItemInfoItem)
                 {
-                    ganttItemInfoItem.PropertyChanged += GanttItemInfoOnPropertyChanged;
+                    ganttItemInfoItem.Id.PropertyChanged += GanttItemInfoOnPropertyChanged;
                 }
             }
         }
         
         private void GanttItemInfoOnPropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
-            if (sender is GanttItemInfo gantt && (Int32)gantt.ParentId == 0)
+            if (sender is GanttItemInfo gantt && gantt.ParentId == null)
             {
-                if (SelectedRootItem is GanttItemInfo ganttItemInfo)
+                if (SelectedRootItem is GanttTreeViewItemInfo ganttItemInfo)
                 {
-                    _projectsLibraryService.UpdateGanttObject(ganttItemInfo, e.PropertyName);
+                    _projectsLibraryService.UpdateGanttObject(ganttItemInfo.Id, e.PropertyName);
                 }
             }
             else
             {
-                if (SelectedChildItem is GanttItemInfo ganttItemInfo)
+                if (SelectedChildItem is GanttTreeViewItemInfo ganttItemInfo)
                 {
-                    _projectsLibraryService.UpdateGanttObject(ganttItemInfo, e.PropertyName);
+                    _projectsLibraryService.UpdateGanttObject(ganttItemInfo.Id, e.PropertyName);
                 }
             }
         }
         
-        private ObservableCollection<GanttItemInfo> _selectedChildrenItems;
+        private ObservableCollection<GanttTreeViewItemInfo> _selectedChildrenItems;
 
-        public ObservableCollection<GanttItemInfo> SelectedChildrenItems
+        public ObservableCollection<GanttTreeViewItemInfo> SelectedChildrenItems
         {
             get => _selectedChildrenItems;
             set => base.SetProperty(ref _selectedChildrenItems, value);
         }
-        
-        public ObservableCollection<GanttItemInfo> Tasks { get; set; }
-        
 
-        private ObservableCollection<GanttItemInfo> _rootGanttItems;
-        public ObservableCollection<GanttItemInfo> RootGanttItems
+        private ObservableCollection<GanttTreeViewItemInfo> _rootGanttItems;
+        public ObservableCollection<GanttTreeViewItemInfo> RootGanttItems
         {
             get => _rootGanttItems;
             set => base.SetProperty(ref _rootGanttItems, value);
         }
 
-        public ObservableCollection<GanttItemInfo> _childGanttItems;
+        public ObservableCollection<GanttTreeViewItemInfo> _childGanttItems;
 
-        public ObservableCollection<GanttItemInfo> ChildGanttItems
+        public ObservableCollection<GanttTreeViewItemInfo> ChildGanttItems
         {
             get => _childGanttItems;
             set => base.SetProperty(ref _childGanttItems, value);
@@ -135,20 +132,16 @@ namespace TaskManager.ProjectsLibrary.ViewModels
         private void AddNewProject()
         {
             _projectsLibraryService.AddGanttObject("Новый проект");
-
-            /*CreateRootCollection(new ObservableCollection<GanttItemInfo>(_settingsService.Settings.GanttItems.ToList()));*/
         }
 
         private void RemoveSelectedProjects()
         {
             _projectsLibraryService.RemoveGanttObject(SelectedRootItems);
-            
-            /*CreateRootCollection(new ObservableCollection<GanttItemInfo>(_settingsService.Settings.GanttItems.ToList()));*/
         }
 
         private void CopySelectedProjects()
         {
-            _projectsLibraryService.CopyGanttObject(SelectedRootItems);
+            //_projectsLibraryService.CopyGanttObject(SelectedRootItems);
             
             /*CreateRootCollection(new ObservableCollection<GanttItemInfo>(_settingsService.Settings.GanttItems.ToList()));*/
         }
@@ -156,8 +149,6 @@ namespace TaskManager.ProjectsLibrary.ViewModels
         private void AddChildrenItem()
         {
             _projectsLibraryService.AddGanttChildObject(SelectedRootItem,"Новый этап");
-            
-            /*CreateRootCollection(new ObservableCollection<GanttItemInfo>(_settingsService.Settings.GanttItems.ToList()));*/
 
             RefreshChildList(SelectedRootItem);
         }
@@ -165,15 +156,13 @@ namespace TaskManager.ProjectsLibrary.ViewModels
         private void RemoveChildItem()
         {
             _projectsLibraryService.RemoveGanttObject(SelectedChildrenItems);
-            
-            /*CreateRootCollection(new ObservableCollection<GanttItemInfo>(_settingsService.Settings.GanttItems.ToList()));*/
-            
+
             RefreshChildList(SelectedRootItem);
         }
 
         private void CopyChildrenItems()
         {
-            _projectsLibraryService.CopyGanttObject(SelectedChildrenItems);
+            //_projectsLibraryService.CopyGanttObject(SelectedChildrenItems);
             
             /*CreateRootCollection(new ObservableCollection<GanttItemInfo>(_settingsService.Settings.GanttItems.ToList()));*/
             
@@ -187,16 +176,16 @@ namespace TaskManager.ProjectsLibrary.ViewModels
 
         private void ChangePropertyGlobalTask(string obj)
         {
-            if (SelectedRootItem.GlobalTask)
+            if (SelectedRootItem.Id.GlobalTask)
             {
-                SelectedRootItem.GlobalTask = false;
+                SelectedRootItem.Id.GlobalTask = false;
             }
             else
             {
-                SelectedRootItem.GlobalTask = true;
+                SelectedRootItem.Id.GlobalTask = true;
             }
             
-            _projectsLibraryService.UpdateGanttObject(SelectedRootItem, "GlobalTask");
+           // _projectsLibraryService.UpdateGanttObject(SelectedRootItem, "GlobalTask");
         }
 
         public bool CanCloseDialog()
@@ -224,15 +213,13 @@ namespace TaskManager.ProjectsLibrary.ViewModels
             
             _projectsLibraryService = TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>();
 
-            /*Tasks = new ObservableCollection<GanttItemInfo>(_settingsService.Settings.GanttItems.ToList());*/
-            
-            SelectedRootItems = new ObservableCollection<GanttItemInfo>();
+            SelectedRootItems = new ObservableCollection<GanttTreeViewItemInfo>();
 
             RootGanttItems = _projectsLibraryService.ProjectsLibrary.RootItemsProjectsLibrary;
             
-            ChildGanttItems = new ObservableCollection<GanttItemInfo>();
+            ChildGanttItems = new ObservableCollection<GanttTreeViewItemInfo>();
 
-            SelectedChildrenItems = new ObservableCollection<GanttItemInfo>();
+            SelectedChildrenItems = new ObservableCollection<GanttTreeViewItemInfo>();
 
             AddTMProject = new DelegateCommand(AddNewProject);
 
@@ -246,51 +233,21 @@ namespace TaskManager.ProjectsLibrary.ViewModels
 
             CopyChild = new DelegateCommand(CopyChildrenItems);
 
-           
             CurrentUser = _usersLibraryService.UsersLibrary.CurrentUser;
 
             if (CurrentUser != null)
             {
-                /*CreateRootCollection(Tasks);*/
-            
                 SelectedRootItem = RootGanttItems.FirstOrDefault();
-
-                RefreshChildList(SelectedRootItem);
 
                 CanModify = _usersLibraryService.UsersLibrary.PositionsInfoItems.
                     FirstOrDefault(t => t.Id == CurrentUser.PositionId).CanModify;
             }
         }
 
-        private void RefreshChildList(GanttItemInfo selectedRootItem)
+        private void RefreshChildList(GanttTreeViewItemInfo selectedRootItem)
         {
-            var collection = new ObservableCollection<GanttItemInfo>(_projectsLibraryService.ProjectsLibrary.ChildItemsProjectsLibrary.Where(t =>
-                t.ParentId is Int32 intParentId && selectedRootItem.Id is Int32 intSelectedItemId &&
-                intParentId == intSelectedItemId));
-            /*foreach (var item in collection)
-            {
-                item.Image = new BitmapImage(new Uri(@"/TaskManager.ProjectsLibrary;component/Multimedia/List.png",
-                    UriKind.Relative));
-            }*/
-
-            ChildGanttItems = collection;
+            ChildGanttItems = new ObservableCollection<GanttTreeViewItemInfo>(_projectsLibraryService.ProjectsLibrary.GanttItems.Where(t =>
+                    t.ParentId != null && t.ParentId.Id is Int32 intParentId && selectedRootItem.Id.Id is Int32 intSelectedItemId && intParentId == intSelectedItemId));
         }
-
-
-        /*public void CreateRootCollection(ObservableCollection<GanttItemInfo> collection)
-        {
-            RootGanttItems = new ObservableCollection<GanttItemInfo>();
-
-            foreach (var element in collection)
-            {
-                if (element.ParentId is Int32 pId && pId == 0)
-                {
-                    element.Image =
-                        new BitmapImage(new Uri(@"/TaskManager.ProjectsLibrary;component/Multimedia/Folder.png",
-                            UriKind.Relative));
-                    RootGanttItems.Add(element);
-                }
-            }
-        }*/
     }
 }

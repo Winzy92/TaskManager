@@ -84,8 +84,6 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksResourceItems();
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksUnits();
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadUsersAdditionalGanttItems();
-                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadRootProjectsLibraryItems();
-                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadChildProjectsLibraryItems();
                     RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 }
                 
@@ -105,8 +103,6 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksResourceItems();
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksUnits();
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadUsersAdditionalGanttItems();
-                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadRootProjectsLibraryItems();
-                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadChildProjectsLibraryItems();
                     RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 }
 

@@ -11,10 +11,8 @@ namespace TaskManager.Sdk.Core.Containers
         
         public ObservableCollection<GanttTreeViewItemInfo> GanttItems { get; set; } = new ObservableCollection<GanttTreeViewItemInfo>();
         
-        public ObservableCollection<GanttItemInfo> RootItemsProjectsLibrary { get; set; } = new ObservableCollection<GanttItemInfo>();
-        
-        public ObservableCollection<GanttItemInfo> ChildItemsProjectsLibrary { get; set; } = new ObservableCollection<GanttItemInfo>();
-        
+        public ObservableCollection<GanttTreeViewItemInfo> RootItemsProjectsLibrary { get; set; } = new ObservableCollection<GanttTreeViewItemInfo>();
+
         public ObservableCollection<TaskResourceInfo> TaskResources { get; set; } = new ObservableCollection<TaskResourceInfo>();
         
         public ObservableCollection<TaskUnitInfo> GanttTasksUnits { get; set; } = new ObservableCollection<TaskUnitInfo>();

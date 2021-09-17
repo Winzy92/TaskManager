@@ -76,18 +76,18 @@
                 <dxg:GridControl  ItemsSource="{Binding RootGanttItems}" SelectionMode="Row" ContextMenu="{StaticResource RootItemsContextMenu}"
                                   CurrentItem="{Binding SelectedRootItem}" SelectedItems="{Binding SelectedRootItems}" ShowLoadingPanel="False"> 
                     <dxg:GridControl.Columns>
-                        <dxg:GridColumn FieldName="Name" Header="Проект" IsSmart="True" Width="0.4*"/>
-                        <dxg:GridColumn FieldName="NumOfContract" Header="Номер договора" IsSmart="True" Width="0.3*"/>
-                        <dxg:GridColumn FieldName="IsActive" Header="Признак активности" IsSmart="True" Width="0.3*"/>
-                        <dxg:GridColumn FieldName="Id" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                        <dxg:GridColumn FieldName="ParentId" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                        <dxg:GridColumn FieldName="StartDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                        <dxg:GridColumn FieldName="FinishDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                        <dxg:GridColumn FieldName="Progress" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                        <dxg:GridColumn FieldName="Tag" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                        <dxg:GridColumn FieldName="BaselineFinishDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                        <dxg:GridColumn FieldName="BaselineStartDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                        <dxg:GridColumn FieldName="PerfUnit" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.Name" Header="Проект" IsSmart="True" Width="0.4*"/>
+                        <dxg:GridColumn FieldName="Id.NumOfContract" Header="Номер договора" IsSmart="True" Width="0.3*"/>
+                        <dxg:GridColumn FieldName="Id.IsActive" Header="Признак активности" IsSmart="True" Width="0.3*"/>
+                        <dxg:GridColumn FieldName="Id.Id" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.ParentId" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.StartDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.FinishDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.Progress" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.Tag" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.BaselineFinishDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.BaselineStartDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                        <dxg:GridColumn FieldName="Id.PerfUnit" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
                     </dxg:GridControl.Columns>
                     <dxg:GridControl.View>
                         <dxg:TreeListView ShowSearchPanelMode="Never" ShowNodeImages="True" AllowEditing="{Binding CanModify}"
@@ -101,17 +101,17 @@
           <dxg:GridControl  ItemsSource="{Binding ChildGanttItems}" SelectionMode="Row" ContextMenu="{StaticResource ChildItemsContextMenu}"
                             CurrentItem="{Binding SelectedChildItem}" SelectedItems="{Binding SelectedChildrenItems}">
               <dxg:GridControl.Columns> 
-                  <dxg:GridColumn FieldName="Name" Header="Задачи в составе проекта" IsSmart="True" Width="*"/>
-                  <dxg:GridColumn FieldName="NumOfContract" IsSmart="False" ShowInColumnChooser="False" Visible="False"/>
-                  <dxg:GridColumn FieldName="Id" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                  <dxg:GridColumn FieldName="ParentId" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                  <dxg:GridColumn FieldName="StartDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                  <dxg:GridColumn FieldName="FinishDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                  <dxg:GridColumn FieldName="Progress" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                  <dxg:GridColumn FieldName="Tag" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                  <dxg:GridColumn FieldName="BaselineFinishDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                  <dxg:GridColumn FieldName="BaselineStartDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
-                  <dxg:GridColumn FieldName="PerfUnit" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.Name" Header="Задачи в составе проекта" IsSmart="True" Width="*"/>
+                  <dxg:GridColumn FieldName="Id.NumOfContract" IsSmart="False" ShowInColumnChooser="False" Visible="False"/>
+                  <dxg:GridColumn FieldName="Id.Id" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.ParentId" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.StartDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.FinishDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.Progress" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.Tag" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.BaselineFinishDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.BaselineStartDate" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                  <dxg:GridColumn FieldName="Id.PerfUnit" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
               </dxg:GridControl.Columns>
               <dxg:GridControl.View>
                   <dxg:TreeListView ShowSearchPanelMode="Never" ShowNodeImages="True" AllowEditing="{Binding CanModify}"
