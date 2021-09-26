@@ -13,13 +13,11 @@
     <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/ViewModels/TMProjectsLibraryViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/ViewModels/TMProjectsLibraryViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/Views/TMProjectsLibrary.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/Views/TMProjectsLibrary.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ProjectsLibraryInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ProjectsLibraryInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/DataBaseConnectionService/DataBaseConnectionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/DataBaseConnectionService/DataBaseConnectionService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Shell/Dialogs/UserAuthorizationDialog/ViewModels/UserAuthorizationDialogViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Shell/Dialogs/UserAuthorizationDialog/ViewModels/UserAuthorizationDialogViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +51,7 @@
     <setting file="file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/Dialogs/AddSpecialGanttItemDialog/Views/SpecialGanttItemDialog.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/c3/84b90ac3/TraceRoutedEvent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/307ED9B2-81D1-43DB-9AED-13169626ADF4/cf/6f328b1c/ComponentDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B625327-932F-4958-98F9-0B16D91135AE/d4/835658f4/GridViewRowNavigationBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B625327-932F-4958-98F9-0B16D91135AE/f0/0688e05d/GridViewCellNavigation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/899013DA-1FB9-4A1A-9FA8-2CAF0A5FCFF5/cf/1f1a5bf6/MarkupExtension.cs" root0="SKIP_HIGHLIGHTING" />
@@ -175,7 +174,6 @@
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ServiceModule.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/SettingsInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/IDatabaseConnectionService.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/DataBaseConnectionService/DataBaseConnectionService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/UsersLibraryService/UsersLibraryService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Shell/Dialogs/DBConnectionDialog/ViewModels/DBConnectionDialogViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Dialogs/AddSpecialGanttItemDialog/ViewModels/SpecialGanttItemDialogViewModel.cs" />
@@ -194,13 +192,14 @@
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/UpdateMainGanttEvent.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/TaskResourceInfoUpdateEvent.cs" />
       <option value="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ProjectsLibraryInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Shell/Dialogs/UserAuthorizationDialog/ViewModels/UserAuthorizationDialogViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.ProjectsLibrary/Views/TMProjectsLibrary.xaml" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ProjectsLibraryInfo.cs" />
+      <option value="$APPLICATION_CONFIG_DIR$/consoles/db/fc6c25a3-deae-4372-873e-293e99dd34ad/console.sql" />
+      <option value="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/DataBaseConnectionService/DataBaseConnectionService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.ProjectsLibrary/ViewModels/TMProjectsLibraryViewModel.cs" />
-      <option value="$APPLICATION_CONFIG_DIR$/consoles/db/fc6c25a3-deae-4372-873e-293e99dd34ad/console.sql" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" />
     </changedPaths>
   </component>
@@ -213,7 +212,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="postgresql" />
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.37919825" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.33261105" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -306,7 +305,11 @@
       <workItem from="1631683411982" duration="17248000" />
       <workItem from="1631727170600" duration="6323000" />
       <workItem from="1631770124242" duration="19262000" />
-      <workItem from="1631857586487" duration="10480000" />
+      <workItem from="1631857586487" duration="10876000" />
+      <workItem from="1631874033241" duration="8719000" />
+      <workItem from="1632585413779" duration="9473000" />
+      <workItem from="1632636683794" duration="10979000" />
+      <workItem from="1632675886148" duration="6795000" />
     </task>
     <task id="LOCAL-00001" summary="Создал структуру проекта">
       <created>1623752556826</created>
@@ -385,7 +388,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631777590909</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="# Небольшой рефакторинг и дебаг библиотеки проектв.">
+      <created>1631870344282</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1631870344282</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,7 +427,8 @@
     <MESSAGE value="# Отладка алгоритмов после перестроения ядра" />
     <MESSAGE value="# Добавил алгоритм автоматического рассчета планируемых дат начала и конца проектов, в зависимости от плановых дат выполнения задач внутри данного проекта." />
     <MESSAGE value="# Добавил эвент для обновления % ресурса, задействованного в задаче." />
-    <option name="LAST_COMMIT_MESSAGE" value="# Добавил эвент для обновления % ресурса, задействованного в задаче." />
+    <MESSAGE value="# Небольшой рефакторинг и дебаг библиотеки проектв." />
+    <option name="LAST_COMMIT_MESSAGE" value="# Небольшой рефакторинг и дебаг библиотеки проектв." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -427,6 +438,45 @@
           <line>333</line>
           <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/98F1E9A3-4402-4C92-9A13-82BED9598294/42/a1f42de5/PropertyPathWorker.cs" initialLine="333" />
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
+          <line>725</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="724" containingFunctionPresentation="method 'CopyGanttObject'">
+            <startOffsets>
+              <option value="31430" />
+            </startOffsets>
+            <endOffsets>
+              <option value="31431" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.ProjectsLibrary/ViewModels/TMProjectsLibraryViewModel.cs</url>
+          <line>148</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.ProjectsLibrary\ViewModels\TMProjectsLibraryViewModel.cs" initialLine="148" containingFunctionPresentation="method 'AddChildrenItem'">
+            <startOffsets>
+              <option value="5348" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5349" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
+          <line>436</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="436" containingFunctionPresentation="method 'AddGanttChildObject'">
+            <startOffsets>
+              <option value="20076" />
+            </startOffsets>
+            <endOffsets>
+              <option value="20077" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

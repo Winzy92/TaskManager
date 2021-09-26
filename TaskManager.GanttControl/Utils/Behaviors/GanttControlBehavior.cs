@@ -58,8 +58,6 @@ namespace TaskManager.GanttControl.Utils.Behaviors
 
         private void UpdateViewGanttControl()
         {
-            AssociatedObject.View.ResourceLinksPath = "";
-            AssociatedObject.View.ResourceLinksPath = "Id.ResourceIds";
             AssociatedObject.View.AutoExpandAllNodes = false;
             AssociatedObject.View.AutoExpandAllNodes = true;
         }

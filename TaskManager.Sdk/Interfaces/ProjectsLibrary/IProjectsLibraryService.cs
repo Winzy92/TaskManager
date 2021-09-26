@@ -31,7 +31,7 @@ namespace TaskManager.Sdk.Interfaces.ProjectsLibrary
         
         void RemoveGanttObject(ObservableCollection<GanttTreeViewItemInfo> selectedGanttItems);
         
-        void CopyGanttObject(ObservableCollection<GanttItemInfo> selectedGanttItems);
+        void CopyGanttObject(ObservableCollection<GanttTreeViewItemInfo> selectedGanttItems);
         
         void AddResourceLink(IList ResourceLinks, GanttTreeViewItemInfo ganttItemInfo);
         
