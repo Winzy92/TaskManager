@@ -1,4 +1,5 @@
 ﻿using System;
+using DevExpress.Mvvm.Gantt;
 using TaskManager.Sdk.Core.Containers;
 using TaskManager.Sdk.Core.Models;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using TaskManager.Sdk.Interfaces;
@@ -44,5 +45,20 @@ namespace TaskManager.Sdk.Core.Models
             }
         }
         
+        private ObservableCollection<GanttItemInfo> _tasks;
+        public ObservableCollection<GanttItemInfo> Tasks
+        {
+            get => _tasks;
+            set
+            {
+                _tasks = value;
+                RaisePropertiesChanged(nameof(Tasks));
+            }
+        }
+
+        public UsersInfo()
+        {
+            Tasks = new ObservableCollection<GanttItemInfo>();
+        }
     }
 }

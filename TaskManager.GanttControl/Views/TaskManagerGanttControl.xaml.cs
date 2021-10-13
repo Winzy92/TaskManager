@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using DevExpress.Xpf.Gantt;
 
 namespace TaskManager.GanttControl.Views
 {

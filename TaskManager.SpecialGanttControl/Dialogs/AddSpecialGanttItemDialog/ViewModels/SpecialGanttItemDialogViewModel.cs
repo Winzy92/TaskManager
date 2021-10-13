@@ -18,9 +18,9 @@ namespace TaskManager.SpecialGanttControl.Dialogs.AddSpecialGanttItemDialog.View
 
         public ObservableCollection<GanttTreeViewItemInfo> LibraryTasks { get; set; }
 
-        private ObservableCollection<GanttItemInfo> _selectedItems;
+        private ObservableCollection<GanttTreeViewItemInfo> _selectedItems;
         
-        public ObservableCollection<GanttItemInfo> SelectedItems 
+        public ObservableCollection<GanttTreeViewItemInfo> SelectedItems 
         {
             get => _selectedItems;
             set
@@ -67,9 +67,9 @@ namespace TaskManager.SpecialGanttControl.Dialogs.AddSpecialGanttItemDialog.View
         {
             _projectsLibraryService = TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>();
 
-            LibraryTasks = new ObservableCollection<GanttTreeViewItemInfo>(_projectsLibraryService.ProjectsLibrary.GanttItems);
+            LibraryTasks = new ObservableCollection<GanttTreeViewItemInfo>(_projectsLibraryService.ProjectsLibrary.AllGanttItems);
             
-            SelectedItems = new ObservableCollection<GanttItemInfo>();
+            SelectedItems = new ObservableCollection<GanttTreeViewItemInfo>();
 
             CommandOk = new DelegateCommand(SendSelectedItemsCollection);
         }

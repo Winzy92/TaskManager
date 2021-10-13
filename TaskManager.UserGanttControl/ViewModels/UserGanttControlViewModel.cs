@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using DevExpress.Mvvm.Gantt;
 using TaskManager.Sdk.Core.Models;
 using TaskManager.Sdk.Interfaces;
 using TaskManager.Sdk.Interfaces.ProjectsLibrary;

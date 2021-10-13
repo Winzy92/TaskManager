@@ -33,8 +33,8 @@
         <dxt:TreeListControl Margin="5" Grid.Row="0" ItemsSource="{Binding LibraryTasks}"
                              SelectedItems="{Binding SelectedItems}" SelectionMode="Row">
             <dxt:TreeListControl.Columns>
-                <dxt:TreeListColumn FieldName="Name" Width="0.8*"/>
-                <dxt:TreeListColumn FieldName="NumOfContract"/>
+                <dxt:TreeListColumn FieldName="Id.Name" Width="0.8*" Header="Проект"/>
+                <dxt:TreeListColumn FieldName="Id.NumOfContract" Header="Номер договора"/>
             </dxt:TreeListControl.Columns>
             <dxt:TreeListControl.View>
                 <dxt:TreeListView AutoExpandAllNodes="True" ShowHorizontalLines="True" ShowIndicator="False" AllowEditing="False"

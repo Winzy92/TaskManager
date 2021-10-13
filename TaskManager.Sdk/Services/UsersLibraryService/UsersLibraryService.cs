@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DevExpress.Mvvm.Gantt;
 using Npgsql;
 using Prism.Mvvm;
 using TaskManager.Sdk.Core.Containers;
@@ -150,7 +151,7 @@ namespace TaskManager.Sdk.Services.UsersLibraryService
         {
             _connectionService.CheckDbConnection();
             
-            if (selectedItem is GanttResourceItemInfo ganttResourceItemInfo)
+            if (selectedItem is GanttResource ganttResourceItemInfo)
             {
                 var queryText = $"DELETE FROM ganttresource_items WHERE id='{ganttResourceItemInfo.Id}'";
                 NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);

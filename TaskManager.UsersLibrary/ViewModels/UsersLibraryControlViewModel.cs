@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media.Imaging;
+using DevExpress.Mvvm.Gantt;
 using DevExpress.Xpf.Core.Native;
 using Prism.Services.Dialogs;
 using TaskManager.Sdk.Core.Models;
@@ -227,7 +228,7 @@ namespace TaskManager.UsersLibrary.ViewModels
                     UsersInfo user = new UsersInfo
                     {
                         Name = "Новый сотрудник",
-                        GanttSourceItemId = ganttsource.Id,
+                        GanttSourceItemId = (Int32)ganttsource.Id,
                         PositionId = 1,
                         Password = ""
                     };
@@ -319,7 +320,7 @@ namespace TaskManager.UsersLibrary.ViewModels
 
                 TreeListItems.Add(elem);
                 
-                var collection = UsersInfos.Where(t => t.GanttSourceItemId == item.Id);
+                var collection = UsersInfos.Where(t => t.GanttSourceItemId == (Int32)item.Id);
 
                 if (collection != null && collection.Count() != 0)
                 {

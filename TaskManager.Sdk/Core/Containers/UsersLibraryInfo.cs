@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using DevExpress.Mvvm.Gantt;
 using TaskManager.Sdk.Core.Models;
 
 namespace TaskManager.Sdk.Core.Containers

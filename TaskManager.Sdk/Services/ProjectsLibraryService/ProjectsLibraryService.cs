@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media.Imaging;
-using DevExpress.Mvvm.Native;
 using Npgsql;
 using TaskManager.Sdk.Core.Containers;
 using TaskManager.Sdk.Core.Models;
@@ -39,7 +37,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                             ON tasks.parentid = projects.id
                             LEFT JOIN tasks_units tasksunits
                             ON tasks.id = tasksunits.ganttitemid
-                            where projects.isarchive = false";
+                            where projects.isarchive = false order by tasktable_items_id";
 
             var command = new NpgsqlCommand(queryText, _connectionService.Connection);
             var data = command.ExecuteReader();
@@ -80,45 +78,54 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     IsArchive = rootganttItemInfo.IsArchive
                 };
 
-                var elem = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => t.Id.Equals(childganttItemInfo.Id));
-                Int32? check = (data["unitid"] == System.DBNull.Value)
-                    ? (Int32?) null
-                    : Convert.ToInt32(data["unitid"]);
+                if (childganttItemInfo.Id != null)
+                {
+                    var elem = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => (Int32)t.Id.Id == (Int32)childganttItemInfo.Id);
+                    Int32? check = (data["unitid"] == System.DBNull.Value)
+                        ? (Int32?) null
+                        : Convert.ToInt32(data["unitid"]);
 
-                if (elem != null && check != null)
-                {
-                    elem.Id.UsersInfos.Add(_usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
-                    elem.Id.ListUsers.Add(_usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
-                }
-                else
-                {
-                    if (check != null)
+                    var user = _usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check);
+                
+                    if (elem != null && check != null)
                     {
-                        childganttItemInfo.UsersInfos.Add(
-                            _usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
-                        childganttItemInfo.ListUsers.Add(
-                            _usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
-                        childganttItemInfo.StartDate = (data["startdate"] == System.DBNull.Value)
-                            ? (DateTime?) null
-                            : Convert.ToDateTime(data["startdate"]);
-                        childganttItemInfo.FinishDate = (data["finishdate"] == System.DBNull.Value)
-                            ? (DateTime?) null
-                            : Convert.ToDateTime(data["finishdate"]);
-                        childganttItemInfo.Progress = Convert.ToDouble(data["progress"]);
-                        childganttItemInfo.IsAdditional = Convert.ToBoolean(data["isadditional"]);
+                        elem.Id.UsersInfos.Add(_usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
+                        elem.Id.ListUsers.Add(_usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
+                        user.Tasks.Add(childganttItemInfo);
                     }
-                };
-
+                    else
+                    {
+                        if (check != null)
+                        {
+                            childganttItemInfo.UsersInfos.Add(
+                                _usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
+                            childganttItemInfo.ListUsers.Add(
+                                _usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
+                            childganttItemInfo.StartDate = (data["startdate"] == System.DBNull.Value)
+                                ? (DateTime?) null
+                                : Convert.ToDateTime(data["startdate"]);
+                            childganttItemInfo.FinishDate = (data["finishdate"] == System.DBNull.Value)
+                                ? (DateTime?) null
+                                : Convert.ToDateTime(data["finishdate"]);
+                            childganttItemInfo.Progress = Convert.ToDouble(data["progress"]);
+                            childganttItemInfo.IsAdditional = Convert.ToBoolean(data["isadditional"]);
+                            user.Tasks.Add(childganttItemInfo);
+                        }
+                    };
+                }
+                
+                //Родительский объект в обертке
                 var treeItem1 = new GanttTreeViewItemInfo(rootganttItemInfo);
                 treeItem1.Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
                     UriKind.Relative));
 
+                //Дочерний объект в обертке
                 var treeItem2 = new GanttTreeViewItemInfo(childganttItemInfo);
                 treeItem2.Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/List.png",
                     UriKind.Relative));
 
                 var element = ProjectsLibrary.AllGanttItems.FirstOrDefault(t =>
-                    (Int32) t.Id.Id == (Int32) rootganttItemInfo.Id);
+                    (Int32) t.Id.Id == (Int32) rootganttItemInfo.Id && t.ParentId == null);
 
                 if (element == null)
                 {
@@ -135,11 +142,8 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     {
                         treeItem1.Id.BaselineFinishDate = treeItem2.Id.BaselineFinishDate;
                     }
-
-
-                    if (ProjectsLibrary.AllGanttItems.FirstOrDefault(t =>
-                        (Int32) t.Id.Id == (Int32) treeItem1.Id.Id) == null)
-                        ProjectsLibrary.AllGanttItems.Add(treeItem1);
+                    
+                    ProjectsLibrary.AllGanttItems.Add(treeItem1);
                 }
                 else
                 {
@@ -170,127 +174,40 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     ProjectsLibrary.RootItemsProjectsLibrary.Add(treeItem1);
             }
             
+            //Заполняем актуальную коллекцию для общего Гантта
             var collection = ProjectsLibrary.AllGanttItems.Where(t => t.Id.IsActive == true);
             foreach (var item in collection)
             {
                 ProjectsLibrary.GanttItems.Add(item);
             }
-            
+
             _connectionService.CloseConnection();
         }
 
         public void LoadUsersAdditionalGanttItems()
         {
-            _connectionService.CheckDbConnection();
-
-            var queryText = $@"SELECT tasks.id as tasktable_items_id, tasks.parentid, tasks.name as tasktable_items_name, tasks.tag, tasks.baselinestartdate, tasks.baselinefinishdate,
-                            projects.id as project_id, projects.name as project_name,
-                            tasksunits.id as tasksunits_id, tasksunits.ganttitemid, tasksunits.unitid, tasksunits.sourceid, tasksunits.startdate, 
-                            tasksunits.finishdate, tasksunits.progress, tasksunits.isadditional,
-                            globaltask, isactive, isarchive, numberofcontract FROM projects
-                            LEFT JOIN tasktable_items tasks
-                            ON tasks.parentid = projects.id
-                            LEFT JOIN tasks_units tasksunits
-                            ON tasks.id = tasksunits.ganttitemid 
-                            where projects.isactive = true 
-                            and projects.isarchive = false
-                            and tasksunits.unitid = '{_usersLibraryService.UsersLibrary.CurrentUser.Id}';";
-
-            var command = new NpgsqlCommand(queryText, _connectionService.Connection);
-            var data = command.ExecuteReader();
-
-            while (data.Read())
+            foreach (var item in _usersLibraryService.UsersLibrary.CurrentUser.Tasks)
             {
-                //Родитель
-                var rootganttItemInfo = new GanttItemInfo()
-                {
-                    Id = Convert.ToInt32(data["project_id"]),
-                    ParentId = null,
-                    Name = Convert.ToString(data["project_name"]),
-                    GlobalTask = Convert.ToBoolean(data["globaltask"]),
-                    IsActive = Convert.ToBoolean(data["isactive"]),
-                    IsArchive = Convert.ToBoolean(data["isarchive"]),
-                    NumOfContract = (data["numberofcontract"] == System.DBNull.Value) ? null : Convert.ToString(data["numberofcontract"])
-                };
+                var rootitem = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => (Int32)t.Id.Id == (Int32)item.ParentId);
+                var childitem = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => (Int32)t.Id.Id == (Int32)item.Id);
                 
-                //Дочерний элемент
-                var childganttItemInfo = new GanttItemInfo()
+                if (item.IsAdditional)
                 {
-                    Id = Convert.ToInt32(data["tasktable_items_id"]),
-                    ParentId = rootganttItemInfo,
-                    Name = Convert.ToString(data["tasktable_items_name"]),
-                    Tag = (data["tag"] == System.DBNull.Value) ? null : Convert.ToString(data["tag"]),
-                    BaselineFinishDate = (data["baselinefinishdate"] == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data["baselinefinishdate"]),
-                    BaselineStartDate = (data["baselinestartdate"] == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data["baselinestartdate"]),
-                    StartDate = (data["startdate"] == System.DBNull.Value) ? (DateTime?) null : Convert.ToDateTime(data["startdate"]),
-                    FinishDate = (data["finishdate"] == System.DBNull.Value) ? (DateTime?) null : Convert.ToDateTime(data["finishdate"]),
-                    Progress = Convert.ToDouble(data["progress"]),
-                    GlobalTask = rootganttItemInfo.GlobalTask,
-                    IsActive = rootganttItemInfo.IsActive,
-                    IsArchive = rootganttItemInfo.IsArchive,
-                    IsAdditional = Convert.ToBoolean(data["isadditional"])
-                };
-
-                var treeItem1 = new GanttTreeViewItemInfo(rootganttItemInfo);
-                treeItem1.Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
-                    UriKind.Relative));
-                
-                var treeItem2 = new GanttTreeViewItemInfo(childganttItemInfo);
-                treeItem2.Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/List.png",
-                    UriKind.Relative));
-
-                if (childganttItemInfo.IsAdditional)
-                {
-                    var root = ProjectsLibrary.CurrentUserAdditionalGanttItems.FirstOrDefault(t =>
-                        (Int32) t.Id.Id == (Int32) rootganttItemInfo.Id);
-                    
-                    if (root == null)
+                    if (!ProjectsLibrary.CurrentUserAdditionalGanttItems.Any(t=>(Int32)t.Id.Id == (Int32)rootitem.Id.Id))
                     {
-                        ProjectsLibrary.CurrentUserAdditionalGanttItems.Add(treeItem1);
+                        ProjectsLibrary.CurrentUserAdditionalGanttItems.Add(rootitem);
                     }
-
-                    if (ProjectsLibrary.CurrentUserAdditionalGanttItems.FirstOrDefault(t =>
-                        (Int32) t.Id.Id == (Int32) childganttItemInfo.Id) == null)
-                    {
-                        if (root == null)
-                        {
-                            treeItem2.ParentId = rootganttItemInfo;
-                        }
-                        else
-                        {
-                            treeItem2.ParentId = root.Id;
-                        }
-                    }
-                    
-                    ProjectsLibrary.CurrentUserAdditionalGanttItems.Add(treeItem2);
+                    ProjectsLibrary.CurrentUserAdditionalGanttItems.Add(childitem);
                 }
                 else
                 {
-                    var root = ProjectsLibrary.CurrentUserGanttItems.FirstOrDefault(t =>
-                        (Int32) t.Id.Id == (Int32) rootganttItemInfo.Id);
-                    
-                    if (root == null)
+                    if (!ProjectsLibrary.CurrentUserGanttItems.Any(t=>(Int32)t.Id.Id == (Int32)rootitem.Id.Id))
                     {
-                        ProjectsLibrary.CurrentUserGanttItems.Add(treeItem1);
-                    }
-
-                    if (ProjectsLibrary.CurrentUserGanttItems.FirstOrDefault(t =>
-                        (Int32) t.Id.Id == (Int32) childganttItemInfo.Id) == null)
-                    {
-                        if (root == null)
-                        {
-                            treeItem2.ParentId = rootganttItemInfo;
-                        }
-                        else
-                        {
-                            treeItem2.ParentId = root.Id;
-                        }
-                    }
-                    
-                    ProjectsLibrary.CurrentUserGanttItems.Add(treeItem2);
+                        ProjectsLibrary.CurrentUserGanttItems.Add(rootitem);
+                    } 
+                    ProjectsLibrary.CurrentUserGanttItems.Add(childitem);
                 }
             }
-            _connectionService.CloseConnection();
         }
 
         public void LoadTasksResourceItems()
@@ -308,8 +225,8 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 {
                     Id = data.GetInt32(0),
                     TaskId = data.GetInt32(1),
-                    GanttSourceId = data.GetInt32(2),
-                    Percent = data.GetDouble(3)
+                    ResourceId = data.GetInt32(2),
+                    AllocationPercentage = data.GetDouble(3)
                 };
                 
                 ProjectsLibrary.TaskResources.Add(taskResourceInfo);
@@ -329,7 +246,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     if (element.Id.Id is Int32 parentId && parentId == item.TaskId)
                     {
                         element.ResourceIds.Add(item);
-                        var collection = _usersLibraryService.UsersLibrary.Users.Where(t => t.GanttSourceItemId == item.GanttSourceId);
+                        var collection = _usersLibraryService.UsersLibrary.Users.Where(t => t.GanttSourceItemId == (Int32)item.ResourceId);
                         if (collection != null)
                         {
                             foreach (var elem in collection)
@@ -380,13 +297,13 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             {
                 foreach (var element in ganttItemInfo.ResourceIds)
                 {
-                    var collection = _usersLibraryService.UsersLibrary.Users.Where(t => t.GanttSourceItemId == element.GanttSourceId);
+                    var collection = _usersLibraryService.UsersLibrary.Users.Where(t => t.GanttSourceItemId == (Int32)element.ResourceId);
 
                     foreach (var elem in collection)
                     {
                         if (ganttItemInfo.Id.ResourceUsers.FirstOrDefault(t=>t.Id == elem.Id) == null)
                         {
-                            ganttItemInfo.Id.ResourceUsers.Add(elem);
+                            ganttItemInfo.Id.ResourceUsers.Add(elem); 
                         }
                     }
                 }
@@ -422,6 +339,11 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             
             NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
             var data = command.ExecuteScalar(); 
+            
+            if (data is Int32 inData)
+            {
+                obj.Id = inData;
+            }
 
             var rootitem = new GanttTreeViewItemInfo(obj);
             rootitem.Image = new BitmapImage(new Uri(@"/TaskManager.Sdk;component/Multimedia/Folder.png",
@@ -444,7 +366,12 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             var queryText =
                 $@"INSERT INTO tasktable_items(name, parentid) VALUES('{obj.Name}', '{obj.ParentId}') RETURNING id";
             NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
-            command.ExecuteScalar();
+            var data = command.ExecuteScalar();
+            
+            if (data is Int32 inData)
+            {
+                obj.Id = inData;
+            }
             
             var childitem = new GanttTreeViewItemInfo(obj);
             childitem.ParentId = selectedGanttItem.Id;
@@ -452,7 +379,12 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 UriKind.Relative));
 
             ProjectsLibrary.AllGanttItems.Add(childitem);
-            
+
+            if (selectedGanttItem.Id.IsActive)
+            {
+                ProjectsLibrary.GanttItems.Add(childitem);
+            }
+
             _connectionService.CloseConnection();
         }
 
@@ -460,44 +392,47 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
         {
             _connectionService.CheckDbConnection();
 
-            if (ganttItemInfo.ParentId == null)
+            if (prop != "IsAdditional")
             {
-                var queryText =  $@"UPDATE projects SET ";
-
-                switch (prop)
+                if (ganttItemInfo.ParentId == null)
                 {
-                    case "Name":
-                        queryText += $"name='{ganttItemInfo.Name}'";
-                        break;
-                    
-                    case "GlobalTask":
-                        queryText += $"globaltask='{ganttItemInfo.GlobalTask}'";
-                        UpdateChildGanttObject(ganttItemInfo, "GlobalTask");
-                        break;
-                    
-                    case "IsActive":
-                        queryText += $"isactive='{ganttItemInfo.IsActive}'";
-                        UpdateActualTasksCollection(ganttItemInfo, "IsActive");
-                        break;
-                    
-                    case "IsArchive":
-                        queryText += $"isarchive='{ganttItemInfo.IsArchive}'";
-                        UpdateChildGanttObject(ganttItemInfo, "IsArchive");
-                        break;
-                    
-                    case "NumOfContract":
-                        queryText += $"numberofcontract='{ganttItemInfo.NumOfContract}'";
-                        break;
-                }
-                
-                queryText += $" WHERE id='{ganttItemInfo.Id}';";
-                NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
-                command.ExecuteNonQuery();
+                    var queryText =  $@"UPDATE projects SET ";
 
-            }
-            else
-            {
-                UpdateChildGanttObject(ganttItemInfo, prop);
+                    switch (prop)
+                    {
+                        case "Name":
+                            queryText += $"name='{ganttItemInfo.Name}'";
+                            break;
+                    
+                        case "GlobalTask":
+                            queryText += $"globaltask='{ganttItemInfo.GlobalTask}'";
+                            UpdateChildGanttObject(ganttItemInfo, "GlobalTask");
+                            break;
+                    
+                        case "IsActive":
+                            queryText += $"isactive='{ganttItemInfo.IsActive}'";
+                            UpdateActualTasksCollection(ganttItemInfo, "IsActive");
+                            break;
+                    
+                        case "IsArchive":
+                            queryText += $"isarchive='{ganttItemInfo.IsArchive}'";
+                            UpdateChildGanttObject(ganttItemInfo, "IsArchive");
+                            break;
+                    
+                        case "NumOfContract":
+                            queryText += $"numberofcontract='{ganttItemInfo.NumOfContract}'";
+                            break;
+                    }
+                
+                    queryText += $" WHERE id='{ganttItemInfo.Id}';";
+                    NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
+                    command.ExecuteNonQuery();
+
+                }
+                else
+                {
+                    UpdateChildGanttObject(ganttItemInfo, prop);
+                }
             }
             
             _connectionService.CloseConnection();
@@ -567,13 +502,13 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
 
         public void FindAndAddItems(GanttItemInfo selectedGanttItem)
         {
-            var obj = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => (Int32)t.Id.Id == (Int32)selectedGanttItem.Id);
+            var obj = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => (Int32)t.Id.Id == (Int32)selectedGanttItem.Id && t.ParentId == null);
 
             if (obj != null)
             {
                 var collection = ProjectsLibrary.AllGanttItems.Where(t => t.ParentId != null && (Int32) t.ParentId.Id == (Int32) obj.Id.Id);
                 
-                if(ProjectsLibrary.GanttItems.FirstOrDefault(t=>(Int32)t.Id.Id == (Int32)obj.Id.Id) == null)
+                if(ProjectsLibrary.GanttItems.FirstOrDefault(t=>(Int32)t.Id.Id == (Int32)obj.Id.Id && t.ParentId == null) == null)
                     ProjectsLibrary.GanttItems.Add(obj);
                 
                 foreach (var element in collection)
@@ -685,15 +620,36 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
 
             if (selectedGanttItems != null)
             {
-                foreach (var num in selectedGanttItems)
+                foreach (var num in selectedGanttItems.ToList())
                 {
                     if (num.ParentId == null)
                     {
+                        var collection = ProjectsLibrary.AllGanttItems.Where(t => t.ParentId != null && (Int32)t.ParentId.Id == (Int32)num.Id.Id);
+
+                        if (collection != null)
+                        {
+                            foreach (var item in collection.ToList())
+                            {
+                                var queryText = $"DELETE FROM tasktable_items WHERE id='{item.Id.Id}'";
+                                NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
+                                command.ExecuteNonQuery();
+                            
+                                ProjectsLibrary.AllGanttItems.Remove(num);
+                                ProjectsLibrary.GanttItems.Remove(num);
+                            }
+                        }
+                        
                         try
                         {
                             var queryText = $"DELETE FROM projects WHERE id='{num.Id.Id}'";
                             NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
                             command.ExecuteNonQuery();
+                            
+                            ProjectsLibrary.RootItemsProjectsLibrary.Remove(num);
+                            ProjectsLibrary.AllGanttItems.Remove(num);
+                            ProjectsLibrary.GanttItems.Remove(num);
+                            
+                            TaskManagerServices.Instance.EventAggregator.GetEvent<UpdateMainGanttEvent>().Publish();
                         }
                         catch (Exception e)
                         {
@@ -707,6 +663,9 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                             var queryText = $"DELETE FROM tasktable_items WHERE id='{num.Id.Id}'";
                             NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
                             command.ExecuteNonQuery();
+                            
+                            ProjectsLibrary.AllGanttItems.Remove(num);
+                            ProjectsLibrary.GanttItems.Remove(num);
                         }
                         catch (Exception e)
                         {
@@ -732,27 +691,32 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 {
                     if (element.ParentId == null)
                     {
-                        GanttTreeViewItemInfo  obj = new GanttTreeViewItemInfo(element.Id);
-                        obj.Id.Name = $"{obj.Id.Name}"+"_копия";
-                        obj.ParentId = null;
-                        obj.Image = element.Image;
-
                         var queryText =
-                            $"INSERT INTO projects(name, numofcontract) VALUES('{obj.Id.Name}', '{obj.Id.NumOfContract}') RETURNING id";
-            
+                            $"INSERT INTO projects(name, numberofcontract) VALUES('{element.Id.Name+"_копия"}', '{element.Id.NumOfContract}') RETURNING id";
                         NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
                         var data = command.ExecuteScalar();
 
+                        GanttItemInfo newobj = new GanttItemInfo()
+                        {
+                            ParentId = null,
+                            Name = element.Id.Name + "_копия"
+                        };
+                        
                         if (data is Int32 inData)
                         {
-                            obj.Id.Id = inData;
+                            newobj.Id = inData;
                         }
-            
+                        
+                        GanttTreeViewItemInfo  obj = new GanttTreeViewItemInfo(newobj);
+                        obj.ParentId = null;
+                        obj.Image = element.Image;
+                            
                         ProjectsLibrary.AllGanttItems.Add(obj);
                         ProjectsLibrary.RootItemsProjectsLibrary.Add(obj);
 
                         var collection =
-                            ProjectsLibrary.AllGanttItems.Where(t => (Int32) t.ParentId.Id == (Int32) element.Id.Id);
+                            ProjectsLibrary.AllGanttItems.Where(t => t.ParentId != null && (Int32) t.ParentId.Id == (Int32) element.Id.Id).ToList();
+                        
                         foreach (var item in collection)
                         {
                             var datarowqueryText =
@@ -760,13 +724,23 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                             
                             NpgsqlCommand addcommand = new NpgsqlCommand(datarowqueryText, _connectionService.Connection);
                             var datarow = addcommand.ExecuteScalar();
+                            
+                            GanttItemInfo newchildItem = new GanttItemInfo()
+                            {
+                                ParentId = obj.Id.Id,
+                                Name = item.Id.Name
+                            };
 
                             if (datarow is Int32 inDatarow)
                             {
-                                item.Id.Id = inDatarow;
+                                newchildItem.Id = inDatarow;
                             }
                             
-                            ProjectsLibrary.AllGanttItems.Add(item);
+                            GanttTreeViewItemInfo newchild = new GanttTreeViewItemInfo(newchildItem);
+                            newchild.ParentId = obj.Id;
+                            newchild.Image = item.Image;
+                            
+                            ProjectsLibrary.AllGanttItems.Add(newchild);
                         }
                     }
                     else
@@ -793,7 +767,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             }
         }
 
-        public void AddResourceLink(IList ResourceLinks, GanttTreeViewItemInfo ganttItemInfo)
+        public void AddResourceLink(IList ResourceLinks)
         {
             _connectionService.CheckDbConnection();
             
@@ -801,16 +775,21 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             {
                 if (element is TaskResourceInfo taskResourceInfo)
                 {
-                    if (taskResourceInfo.TaskId == null || taskResourceInfo.GanttSourceId == null)
+                    if (taskResourceInfo.TaskId == null || taskResourceInfo.ResourceId == null)
                     {
                         Console.WriteLine("Не удалось добавить связь между задачей и ресурсом исполнителей");
                     }
                     else
                     {
                         var queryText =
-                            $@"INSERT INTO taskitems_resource(taskid, ganttsourceid, percent) VALUES('{taskResourceInfo.TaskId}', '{taskResourceInfo.GanttSourceId}', '{taskResourceInfo.Percent.ToString().Replace(',','.')}') RETURNING id";
+                            $@"INSERT INTO taskitems_resource(taskid, ganttsourceid, percent) VALUES('{taskResourceInfo.TaskId}', '{taskResourceInfo.ResourceId}', '{taskResourceInfo.AllocationPercentage.ToString().Replace(',','.')}') RETURNING id";
                         NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
-                        command.ExecuteScalar();
+                        var datarow = command.ExecuteScalar();
+                        
+                        if (datarow is Int32 inDatarow)
+                        {
+                            taskResourceInfo.Id = inDatarow;
+                        }
 
                         ProjectsLibrary.TaskResources.Add(taskResourceInfo);
                     }
@@ -835,7 +814,24 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                         command.ExecuteNonQuery();
                     
                         ProjectsLibrary.TaskResources.Remove(taskResourceInfo);
-                        ganttItemInfo.ResourceIds.Remove(taskResourceInfo);
+                        //ganttItemInfo.ResourceIds.Remove(taskResourceInfo);
+
+                        var collection = ganttItemInfo.Id.ListUsers.Where(t =>
+                            t is UsersInfo usersInfo && usersInfo.GanttSourceItemId == (Int32)taskResourceInfo.ResourceId).ToList();
+                        
+                        foreach (var elem in collection)
+                        {
+                            ganttItemInfo.Id.ListUsers.Remove(elem);
+                        }
+
+                        var resourceuserscollection = ganttItemInfo.Id.ResourceUsers.Where(t =>
+                            t.GanttSourceItemId == (Int32) taskResourceInfo.ResourceId).ToList();
+                        
+                        foreach (var elem in resourceuserscollection)
+                        {
+                            ganttItemInfo.Id.ResourceUsers.Remove(elem);
+                        }
+
                     }
                 }
             }
@@ -872,7 +868,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                             }
                                  
                             var queryText =
-                                $@"INSERT INTO tasks_units(ganttitemid, unitid, sourceid) VALUES('{taskUnitInfo.GanttItemId}', '{taskUnitInfo.UnitId}', '{taskUnitInfo.SourceId}') RETURNING id";
+                                $@"INSERT INTO tasks_units(ganttitemid, unitid, sourceid, isadditional) VALUES('{taskUnitInfo.GanttItemId}', '{taskUnitInfo.UnitId}', '{taskUnitInfo.SourceId}', '{selectedGanttItem.IsAdditional}') RETURNING id";
                             NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
                             command.ExecuteNonQuery();
 
@@ -920,7 +916,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
         {
             _connectionService.CheckDbConnection();
             
-            var queryText =  $@"UPDATE taskitems_resource SET percent='{taskResourceInfo.Percent.ToString().Replace(',','.')}' WHERE id='{taskResourceInfo.Id}'";
+            var queryText =  $@"UPDATE taskitems_resource SET percent='{taskResourceInfo.AllocationPercentage.ToString().Replace(',','.')}' WHERE id='{taskResourceInfo.Id}'";
             
             NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
             command.ExecuteNonQuery();
