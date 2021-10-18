@@ -68,7 +68,7 @@ namespace TaskManager.SpecialGanttControl.ViewModels
         {
             if (SelectedSpecialItems != null)
             {
-                foreach (var item in SelectedSpecialItems)
+                foreach (var item in SelectedSpecialItems.ToList())
                 {
                     //Проверяем на корневой тип
                     if (item.ParentId == null)
@@ -91,9 +91,9 @@ namespace TaskManager.SpecialGanttControl.ViewModels
                     }
                     else
                     {
-                        var elements = SpecialUserTasks.Where(t => (Int32) t.ParentId.Id == (Int32) item.ParentId.Id).ToList();
+                        var elements = SpecialUserTasks.Where(t => t.ParentId != null && (Int32)t.ParentId.Id == (Int32)item.ParentId.Id);
                         item.Id.ResourceUsers.Remove(_usersLibraryService.UsersLibrary.CurrentUser);
-                        item.Id.ListUsers.Add(_usersLibraryService.UsersLibrary.CurrentUser);
+                        item.Id.ListUsers.Remove(_usersLibraryService.UsersLibrary.CurrentUser);
                         _usersLibraryService.UsersLibrary.CurrentUser.Tasks.Remove(item.Id);
                         _projectsLibraryService.UpdateGanttObject(item.Id, "ListUsers");
                         SpecialUserTasks.Remove(item);

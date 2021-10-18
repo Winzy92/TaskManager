@@ -12,24 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ProjectsLibraryInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ProjectsLibraryInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/UsersLibraryInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/UsersLibraryInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttResourceItemInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttResourceItemInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskResourceInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskResourceInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/UsersInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/UsersInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/UsersLibrary/IUsersLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/UsersLibrary/IUsersLibraryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/UsersLibraryService/UsersLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/UsersLibraryService/UsersLibraryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Dialogs/AddSpecialGanttItemDialog/ViewModels/SpecialGanttItemDialogViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Dialogs/AddSpecialGanttItemDialog/ViewModels/SpecialGanttItemDialogViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Dialogs/AddSpecialGanttItemDialog/Views/SpecialGanttItemDialog.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Dialogs/AddSpecialGanttItemDialog/Views/SpecialGanttItemDialog.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.UserGanttControl/ViewModels/UserGanttControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UserGanttControl/ViewModels/UserGanttControlViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.UsersLibrary/ViewModels/UsersLibraryControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UsersLibrary/ViewModels/UsersLibraryControlViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +40,7 @@
     <setting file="file://$PROJECT_DIR$/TaskManager.UsersLibrary/ViewModels/UsersLibraryControlViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.UsersLibrary/Views/UsersLibraryControl.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/98FD4308-9963-4C90-8040-683E9A8834D9/26/RegionViewRegistry.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FD824CFB-5500-4855-B9E6-D51B008C90E4/4f/49dd7063/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.ProjectsLibrary/Views/TMProjectsLibrary.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.UserGanttControl/ViewModels/UserGanttControlViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -189,7 +174,6 @@
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/ResourceLink.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskUnitInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.UserGanttControl/Views/UserGanttControl.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/UpdateMainGanttEvent.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/TaskResourceInfoUpdateEvent.cs" />
@@ -217,6 +201,7 @@
       <option value="$PROJECT_DIR$/TaskManager.GanttControl/ViewModels/TaskManagerGanttControlViewModel.cs" />
       <option value="$APPLICATION_CONFIG_DIR$/consoles/db/fc6c25a3-deae-4372-873e-293e99dd34ad/console.sql" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" />
     </changedPaths>
   </component>
@@ -229,7 +214,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="postgresql" />
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.42145178" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.42133176" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -337,7 +322,9 @@
       <workItem from="1633584749807" duration="22296000" />
       <workItem from="1633691590394" duration="9645000" />
       <workItem from="1633942704528" duration="6001000" />
-      <workItem from="1634139964522" duration="7133000" />
+      <workItem from="1634139964522" duration="7669000" />
+      <workItem from="1634235880581" duration="4067000" />
+      <workItem from="1634549434607" duration="1589000" />
     </task>
     <task id="LOCAL-00001" summary="Создал структуру проекта">
       <created>1623752556826</created>
@@ -430,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632683777304</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="#отлажена работа библиотеки проектов, обновление свойств объектов основной диаграммы Гантта, отлажена механизм добавления специальных задач">
+      <created>1634147627455</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1634147627455</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,7 +458,8 @@
     <MESSAGE value="# Добавил эвент для обновления % ресурса, задействованного в задаче." />
     <MESSAGE value="# Небольшой рефакторинг и дебаг библиотеки проектв." />
     <MESSAGE value="# Исправлена и опимизирована библиотека проектов" />
-    <option name="LAST_COMMIT_MESSAGE" value="# Исправлена и опимизирована библиотека проектов" />
+    <MESSAGE value="#отлажена работа библиотеки проектов, обновление свойств объектов основной диаграммы Гантта, отлажена механизм добавления специальных задач" />
+    <option name="LAST_COMMIT_MESSAGE" value="#отлажена работа библиотеки проектов, обновление свойств объектов основной диаграммы Гантта, отлажена механизм добавления специальных задач" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -802,13 +797,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs</url>
-          <line>139</line>
+          <line>138</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.SpecialGanttControl\ViewModels\SpecialUsersGanttControlViewModel.cs" initialLine="88" containingFunctionPresentation="method 'AddItemSpecialUserTasksCollection'">
             <startOffsets>
-              <option value="6041" />
+              <option value="5940" />
             </startOffsets>
             <endOffsets>
-              <option value="6042" />
+              <option value="5941" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="90" />
@@ -828,13 +823,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs</url>
-          <line>157</line>
+          <line>156</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.SpecialGanttControl\ViewModels\SpecialUsersGanttControlViewModel.cs" initialLine="107" containingFunctionPresentation="method 'AddItemSpecialUserTasksCollection'">
             <startOffsets>
-              <option value="6854" />
+              <option value="6753" />
             </startOffsets>
             <endOffsets>
-              <option value="6882" />
+              <option value="6781" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="96" />
@@ -867,16 +862,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs</url>
-          <line>160</line>
+          <line>159</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.SpecialGanttControl\ViewModels\SpecialUsersGanttControlViewModel.cs" initialLine="159" containingFunctionPresentation="method 'AddItemSpecialUserTasksCollection'">
             <startOffsets>
-              <option value="6976" />
+              <option value="6875" />
             </startOffsets>
             <endOffsets>
-              <option value="6977" />
+              <option value="6876" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="99" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs</url>
+          <line>92</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.SpecialGanttControl\ViewModels\SpecialUsersGanttControlViewModel.cs" initialLine="92" containingFunctionPresentation="method 'RemoveSpecialItem'">
+            <startOffsets>
+              <option value="3633" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3634" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs</url>
+          <line>99</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.SpecialGanttControl\ViewModels\SpecialUsersGanttControlViewModel.cs" initialLine="99" containingFunctionPresentation="method 'RemoveSpecialItem'">
+            <startOffsets>
+              <option value="4233" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4259" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="101" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

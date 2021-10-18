@@ -27,7 +27,8 @@
         <converters:ProgressConverter x:Key="ProgressConverter" />
     </UserControl.Resources>
     
-    <dxgn:GanttControl ItemsSource="{Binding SpecialUserTasks}" ContextMenu="{StaticResource SpecialMenu}" CurrentItem="{Binding SelectedItem}">
+    <dxgn:GanttControl ItemsSource="{Binding SpecialUserTasks}" ContextMenu="{StaticResource SpecialMenu}" 
+                       SelectedItems="{Binding SelectedSpecialItems}" CurrentItem="{Binding SelectedItem}">
         <dxgn:GanttControl.Columns>
             <dxgn:GanttColumn Width="Auto" FieldName="Id.Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
             <dxgn:GanttColumn FieldName="Id.StartDate" Header="Фактическая дата начала" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" />
