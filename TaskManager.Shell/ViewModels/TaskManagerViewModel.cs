@@ -1,13 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
-using CommonServiceLocator;
 using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Regions;
 using Prism.Services.Dialogs;
 using TaskManager.Sdk.Core.Models;
-using TaskManager.Sdk.Interfaces;
 using TaskManager.Sdk.Interfaces.ProjectsLibrary;
+using TaskManager.Sdk.Interfaces.UsersLibrary;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.Shell.ViewModels
@@ -15,6 +13,10 @@ namespace TaskManager.Shell.ViewModels
     public class TaskManagerViewModel : BindableBase
     {
         public String UserTasks { get; set; }
+        
+        private readonly IProjectsLibraryService _projectsLibraryService;
+        
+        private readonly IUsersLibraryService _usersLibraryService;
 
         public String SpecialUserTasks { get; set; }
 
@@ -60,8 +62,7 @@ namespace TaskManager.Shell.ViewModels
             UserTasks = "Задачи пользователя";
             SpecialUserTasks = "Внеплановые задачи пользователя";
         }
-        
-        
+
         private void CommandStartUp()
         {
             _dialogService.ShowDialog("DBConnectDialog", new DialogParameters (),  result => { });

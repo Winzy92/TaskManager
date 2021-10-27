@@ -19,5 +19,11 @@ namespace TaskManager.Sdk.Core.Containers
         public ObservableCollection<TaskResourceInfo> TaskResources { get; set; } = new ObservableCollection<TaskResourceInfo>();
         
         public ObservableCollection<TaskUnitInfo> GanttTasksUnits { get; set; } = new ObservableCollection<TaskUnitInfo>();
+        
+        public ObservableCollection<StripLineInfo> StripLines { get; set; } = new ObservableCollection<StripLineInfo>();
+        
+        public ObservableCollection<CheckPointInfo> CheckPoints { get; set; } = new ObservableCollection<CheckPointInfo>();
+
+        public StripLineInfo CurrentStripLine { get; set; }
     }
 }

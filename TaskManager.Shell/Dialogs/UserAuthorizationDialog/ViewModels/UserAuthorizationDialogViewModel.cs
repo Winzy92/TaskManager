@@ -84,6 +84,8 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksResourceItems();
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksUnits();
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadUsersAdditionalGanttItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadCheckPointItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().CreateStriplinesCollection();
                     RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 }
                 
@@ -91,6 +93,7 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
                 {
                     _usersLibraryService.UsersLibrary.CurrentUser = SelectedUser;
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadUsersAdditionalGanttItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadCheckPointItems();
                     RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 }
 
@@ -103,6 +106,8 @@ namespace TaskManager.Shell.Dialogs.UserAuthorizationDialog.ViewModels
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksResourceItems();
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadTasksUnits();
                     TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadUsersAdditionalGanttItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().LoadCheckPointItems();
+                    TaskManagerServices.Instance.GetInstance<IProjectsLibraryService>().CreateStriplinesCollection();
                     RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 }
 

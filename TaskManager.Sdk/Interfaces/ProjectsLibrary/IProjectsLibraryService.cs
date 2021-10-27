@@ -41,5 +41,11 @@ namespace TaskManager.Sdk.Interfaces.ProjectsLibrary
 
         void UpdateTaskResources(TaskResourceInfo taskResourceInfo);
 
+        void CreateStriplinesCollection();
+        
+        void LoadCheckPointItems();
+
+        void UpdateCheckPointItems(CheckPointInfo checkPoint, Int32 updatekey);
+
     }
 }

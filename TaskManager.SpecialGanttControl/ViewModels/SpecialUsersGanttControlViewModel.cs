@@ -21,6 +21,8 @@ namespace TaskManager.SpecialGanttControl.ViewModels
         
         private readonly IDialogService _dialogService;
         
+        public DelegateCommand CreateCheckPoint { get; }
+        
         public DelegateCommand RemoveSpecialGanttItem { get; }
         
         public DelegateCommand OpenAddSpecialGanttItemDialog { get; }
@@ -133,8 +135,49 @@ namespace TaskManager.SpecialGanttControl.ViewModels
                         AddItemSpecialUserTasksCollection(SelectedItems);
                     }
                 }));
+            
+            CreateCheckPoint = new DelegateCommand(AddTasksToCheckPoint);
         }
         
+        private void AddTasksToCheckPoint()
+        {
+            CreateCheckPointItem(_projectsLibraryService.ProjectsLibrary.CurrentUserGanttItems);
+            CreateCheckPointItem(_projectsLibraryService.ProjectsLibrary.CurrentUserAdditionalGanttItems);
+        }
+
+        private void CreateCheckPointItem(ObservableCollection<GanttTreeViewItemInfo> Tasks)
+        {
+            foreach (var item in Tasks)
+            {
+                var task = _projectsLibraryService.ProjectsLibrary.GanttTasksUnits.FirstOrDefault(t =>
+                    t.GanttItemId == (Int32) item.Id.Id &&
+                    t.UnitId == _usersLibraryService.UsersLibrary.CurrentUser.Id);
+
+                if (task != null)
+                {
+                    var checkpoint = new CheckPointInfo()
+                    {
+                        TaskUnitId = task.Id,
+                        CheckPointYear = DateTime.Now.Year,
+                        CheckPointMonth = DateTime.Now.Month,
+                        Progress = item.Id.Progress,
+                        StartDate = item.Id.StartDate,
+                        FinishDate = item.Id.FinishDate
+                    };
+
+                    var check = _projectsLibraryService.ProjectsLibrary.CheckPoints.FirstOrDefault(t => t.TaskUnitId == checkpoint.TaskUnitId &&
+                        t.CheckPointYear == checkpoint.CheckPointYear && t.CheckPointMonth == checkpoint.CheckPointMonth);
+                    
+                    if(check != null)
+                        _projectsLibraryService.UpdateCheckPointItems(checkpoint, 0);
+                    else
+                    {
+                        _projectsLibraryService.UpdateCheckPointItems(checkpoint, 1);
+                    }
+                }
+            }
+        }
+
         private void AddItemSpecialUserTasksCollection(ObservableCollection<GanttTreeViewItemInfo> selectedItems)
         {
             foreach (var item in selectedItems)

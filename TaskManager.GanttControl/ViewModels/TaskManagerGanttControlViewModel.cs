@@ -17,8 +17,10 @@ namespace TaskManager.GanttControl.ViewModels
         
         private readonly IProjectsLibraryService _projectsLibraryService;
         public ObservableCollection<GanttTreeViewItemInfo> Tasks { get; set; }
-        
+
         public Boolean CanModify { get; set; }
+        
+        public ObservableCollection<StripLineInfo> StripLines { get; set; }
 
         public UsersInfo CurrentUser { get; set; }
 
@@ -92,7 +94,8 @@ namespace TaskManager.GanttControl.ViewModels
             GanttResourceItems = _usersLibraryService.UsersLibrary.GanttResourceItems;
             TaskResources = _projectsLibraryService.ProjectsLibrary.TaskResources;
             CurrentUser = _usersLibraryService.UsersLibrary.CurrentUser;
-
+            StripLines = _projectsLibraryService.ProjectsLibrary.StripLines;
+            
             if (CurrentUser != null)
             {
                 CanModify = _usersLibraryService.UsersLibrary.PositionsInfoItems.

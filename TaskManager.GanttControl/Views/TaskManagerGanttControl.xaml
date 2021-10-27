@@ -17,6 +17,7 @@
     <UserControl.Resources>
         <converters:ProgressConverter x:Key="ProgressConverter" />
         <converters:InversCanModifyProperty x:Key="InversCanModify" />
+        <converters:CollectionToString x:Key="CollectionToString" />
         
         <DataTemplate x:Key="ColumnHeaderTemplate">
             <dxe:TextEdit Text="{Binding .}" TextWrapping="WrapWithOverflow" ShowBorder="False" HorizontalAlignment="Center"/>
@@ -28,6 +29,33 @@
         <i:Interaction.Behaviors>
             <behaviors:MainGanttControlBehavior />
         </i:Interaction.Behaviors>
+        
+        <dxgn:GanttControl.Resources>
+            <DataTemplate x:Key="StripLineToolTipTemplate">
+                <ContentControl>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Отчитались:" Grid.Column="0" />
+                        <TextBlock TextWrapping="Wrap" Text="{Binding StripLine.DataContext.UsersWithCheckPoint, Converter={StaticResource CollectionToString}}" Grid.Column="1" />
+                    </Grid>
+                </ContentControl>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="StripLineTemplate">
+                <ContentControl>
+                    <dxgn:StripLine ToolTipTemplate="{StaticResource StripLineToolTipTemplate}"
+                                    StartDate="{Binding DateTime}" 
+                                    Duration ="{Binding StripLineDuration}"
+                                    Background="#3FF5BD53" 
+                                    BorderBrush="#FFF5BD53" 
+                                    BorderThickness="1,0"/>
+                </ContentControl>
+            </DataTemplate>
+        </dxgn:GanttControl.Resources>
         
         <dxgn:GanttControl.Columns>
             <dxgn:GanttColumn Width="Auto" FieldName="Id.Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
@@ -71,7 +99,8 @@
                             ShowBaseline="True" KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference" ScheduleMode="Forward"
                             ResourcesSource="{Binding GanttResourceItems}" ShowIndicator="False" ResourceLinksPath="ResourceIds" ShowNodeImages="True"
                             ImageFieldName="Image" NodeImageSize="13,15" BaselineStartDateMapping="Id.BaselineStartDate" BaselineFinishDateMapping="Id.BaselineFinishDate"
-                            ProgressMapping="Id.Progress" StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate" AllowSchedulingOnEditing="True">
+                            ProgressMapping="Id.Progress" StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate" AllowSchedulingOnEditing="True" StripLineShowToolTipDelay="100"
+                            StripLinesSource="{Binding StripLines}" StripLineTemplate="{StaticResource StripLineTemplate}" Zoom="01:00:00">
                 <dxgn:GanttView.ResourceMappings>
                     <dxgn:GanttResourceMappings  Name="Name" Key="Id"/>
                 </dxgn:GanttView.ResourceMappings>
@@ -81,6 +110,7 @@
                                                     AllocationPercentage="AllocationPercentage"/>
                 </dxgn:GanttView.ResourceLinkMappings>
             </dxgn:GanttView>
+            
         </dxgn:GanttControl.View>
     </dxgn:GanttControl>
 </UserControl>

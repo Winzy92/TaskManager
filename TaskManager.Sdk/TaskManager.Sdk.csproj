@@ -39,6 +39,9 @@
         <Reference Include="DevExpress.Mvvm.v20.1, Version=20.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
           <HintPath>C:\Program Files (x86)\DevExpress 20.1\Components\Bin\Framework\DevExpress.Mvvm.v20.1.dll</HintPath>
         </Reference>
+        <Reference Include="DevExpress.Xpf.Gantt.v20.1, Version=20.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+          <HintPath>C:\Program Files (x86)\DevExpress 20.1\Components\Bin\Framework\DevExpress.Xpf.Gantt.v20.1.dll</HintPath>
+        </Reference>
         <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
           <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
           <Private>True</Private>
@@ -129,15 +132,18 @@
         <Compile Include="Core\Containers\ProjectsLibraryInfo.cs" />
         <Compile Include="Core\Containers\UsersLibraryInfo.cs" />
         <Compile Include="Core\Models\BindBase.cs" />
+        <Compile Include="Core\Models\CheckPointInfo.cs" />
         <Compile Include="Core\Models\DbConnectionInfo.cs" />
         <Compile Include="Core\Models\GanttItemInfo.cs" />
         <Compile Include="Core\Models\GanttResourceItemInfo.cs" />
         <Compile Include="Core\Models\GanttTreeViewItemInfo.cs" />
         <Compile Include="Core\Models\PositionsInfo.cs" />
         <Compile Include="Core\Models\SettingsInfo.cs" />
+        <Compile Include="Core\Models\StripLineInfo.cs" />
         <Compile Include="Core\Models\TaskResourceInfo.cs" />
         <Compile Include="Core\Models\TaskUnitInfo.cs" />
         <Compile Include="Core\Models\UsersInfo.cs" />
+        <Compile Include="Events\PringtCurrentGanttItems.cs" />
         <Compile Include="Events\TaskResourceInfoUpdateEvent.cs" />
         <Compile Include="Events\UpdateMainGanttEvent.cs" />
         <Compile Include="Interfaces\IBaseUsersInfo.cs" />

@@ -55,6 +55,17 @@ namespace TaskManager.Sdk.Core.Models
                 RaisePropertiesChanged(nameof(Tasks));
             }
         }
+        
+        private ObservableCollection<StripLineInfo> _stripLines;
+        public ObservableCollection<StripLineInfo> StripLines
+        {
+            get => _stripLines;
+            set
+            {
+                _stripLines = value;
+                RaisePropertiesChanged(nameof(StripLines));
+            }
+        }
 
         public UsersInfo()
         {

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
              xmlns:prism="http://prismlibrary.com/"
@@ -26,29 +27,48 @@
         </ContextMenu>
         <converters:ProgressConverter x:Key="ProgressConverter" />
     </UserControl.Resources>
-    
-    <dxgn:GanttControl ItemsSource="{Binding SpecialUserTasks}" ContextMenu="{StaticResource SpecialMenu}" 
-                       SelectedItems="{Binding SelectedSpecialItems}" CurrentItem="{Binding SelectedItem}">
-        <dxgn:GanttControl.Columns>
-            <dxgn:GanttColumn Width="Auto" FieldName="Id.Name" Header="Проект" AllowEditing="False" HorizontalHeaderContentAlignment="Center" />
-            <dxgn:GanttColumn FieldName="Id.StartDate" Header="Фактическая дата начала" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" />
-            <dxgn:GanttColumn FieldName="Id.FinishDate" Header="Фактическая дата окончания" HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" />
-            <dxgn:GanttColumn BindTo="Duration" HorizontalHeaderContentAlignment="Center" AllowEditing="True" />
-            <dxgn:GanttColumn FieldName="Id.Progress" Header="Прогресс" HorizontalHeaderContentAlignment="Center">
-                <dxgn:GanttColumn.CellTemplate>
-                    <DataTemplate>
-                        <dxe:TextEdit EditValue="{Binding RowData.Row.Id.Progress, Converter={StaticResource ProgressConverter}}"
-                                      ShowBorder="False" Mask="\d+\%" MaskType="RegEx" MaskUseAsDisplayFormat="True" >
-                        </dxe:TextEdit>
-                    </DataTemplate>
-                </dxgn:GanttColumn.CellTemplate>
-            </dxgn:GanttColumn>
-        </dxgn:GanttControl.Columns>
-        <dxgn:GanttControl.View>
-            <dxgn:GanttView  AutoExpandAllNodes="True" ShowNodeImages="True" ImageFieldName="Image" NodeImageSize="13,15" ShowIndicator="False"
-                             KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference" ScheduleMode="Forward" ScrollMode="Content"
-                             StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate" ProgressMapping="Id.Progress">
-            </dxgn:GanttView>
-        </dxgn:GanttControl.View>
-    </dxgn:GanttControl>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <dxgn:GanttControl ItemsSource="{Binding SpecialUserTasks}" ContextMenu="{StaticResource SpecialMenu}"
+                           SelectedItems="{Binding SelectedSpecialItems}" CurrentItem="{Binding SelectedItem}">
+            <dxgn:GanttControl.Columns>
+                <dxgn:GanttColumn Width="Auto" FieldName="Id.Name" Header="Проект" AllowEditing="False"
+                                  HorizontalHeaderContentAlignment="Center" />
+                <dxgn:GanttColumn FieldName="Id.StartDate" Header="Фактическая дата начала"
+                                  HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" />
+                <dxgn:GanttColumn FieldName="Id.FinishDate" Header="Фактическая дата окончания"
+                                  HorizontalHeaderContentAlignment="Center" ShowInColumnChooser="True" />
+                <dxgn:GanttColumn BindTo="Duration" HorizontalHeaderContentAlignment="Center" AllowEditing="True" />
+                <dxgn:GanttColumn FieldName="Id.Progress" Header="Прогресс" HorizontalHeaderContentAlignment="Center">
+                    <dxgn:GanttColumn.CellTemplate>
+                        <DataTemplate>
+                            <dxe:TextEdit
+                                EditValue="{Binding RowData.Row.Id.Progress, Converter={StaticResource ProgressConverter}}"
+                                ShowBorder="False" Mask="\d+\%" MaskType="RegEx" MaskUseAsDisplayFormat="True">
+                            </dxe:TextEdit>
+                        </DataTemplate>
+                    </dxgn:GanttColumn.CellTemplate>
+                </dxgn:GanttColumn>
+            </dxgn:GanttControl.Columns>
+            <dxgn:GanttControl.View>
+                <dxgn:GanttView AutoExpandAllNodes="True" ShowNodeImages="True" ImageFieldName="Image"
+                                NodeImageSize="13,15" ShowIndicator="False"
+                                KeyFieldName="Id" ParentFieldName="ParentId" TreeDerivationMode="Selfreference"
+                                ScheduleMode="Forward" ScrollMode="Content"
+                                StartDateMapping="Id.StartDate" FinishDateMapping="Id.FinishDate"
+                                ProgressMapping="Id.Progress">
+                </dxgn:GanttView>
+            </dxgn:GanttControl.View>
+        </dxgn:GanttControl>
+
+        <StackPanel Grid.Row="1" Margin="5,5,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <dx:SimpleButton HorizontalAlignment="Right" Margin="5" IsDefault="True" Content="Создать отчетную метку"
+                             Command="{Binding CreateCheckPoint}" />
+        </StackPanel>
+    </Grid>
 </UserControl>

@@ -46,26 +46,15 @@
                     </DataTemplate>
                 </dx:DXTabItem.GlyphTemplate>
                 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
+                <dxdo:LayoutGroup Orientation="Vertical">
+                    <dxdo:LayoutPanel Caption="{Binding UserTasks}" ShowCloseButton="False" ShowExpandButton="False" ShowHideButton="False">
+                        <ContentControl prism:RegionManager.RegionName="UserGanttControl"/> 
+                    </dxdo:LayoutPanel>
                     
-                    <dxdo:LayoutGroup Orientation="Vertical">
-                        <dxdo:LayoutPanel Caption="{Binding UserTasks}" ShowCloseButton="False" ShowExpandButton="False" ShowHideButton="False">
-                            <ContentControl prism:RegionManager.RegionName="UserGanttControl"/> 
-                        </dxdo:LayoutPanel>
-                    
-                        <dxdo:LayoutPanel Caption="{Binding SpecialUserTasks}" ShowCloseButton="False" ShowExpandButton="False" ShowHideButton="False">
-                            <ContentControl prism:RegionManager.RegionName="SpecialUsersGanttControl"/>
-                        </dxdo:LayoutPanel>
-                    </dxdo:LayoutGroup>
-                    
-                    <StackPanel Grid.Row="1" Margin="5,5,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <dx:SimpleButton HorizontalAlignment="Right" Margin="5" IsDefault="True" Content="Слияние задач" Command="{Binding MigrateCommand}" />
-                    </StackPanel>
-                </Grid>
+                    <dxdo:LayoutPanel Caption="{Binding SpecialUserTasks}" ShowCloseButton="False" ShowExpandButton="False" ShowHideButton="False">
+                        <ContentControl prism:RegionManager.RegionName="SpecialUsersGanttControl"/>
+                    </dxdo:LayoutPanel>
+                </dxdo:LayoutGroup>
             </dx:DXTabItem>     
         </dx:DXTabControl>
        

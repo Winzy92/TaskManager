@@ -30,13 +30,15 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
 
             var queryText = @"SELECT tasks.id as tasktable_items_id, tasks.parentid, tasks.name as tasktable_items_name, tasks.tag, tasks.baselinestartdate, tasks.baselinefinishdate,
                             projects.id as project_id, projects.name as project_name,
-                            tasksunits.id as tasksunits_id, tasksunits.ganttitemid, tasksunits.unitid, tasksunits.sourceid, tasksunits.startdate, 
-                            tasksunits.finishdate, tasksunits.progress, tasksunits.isadditional,
+                            tasksunits.id as tasksunits_id, tasksunits.ganttitemid, tasksunits.unitid, tasksunits.sourceid, checkpoints.startdate, 
+                            checkpoints.finishdate, tasksunits.isadditional, checkpoints.progress,
                             globaltask, isactive, isarchive, numberofcontract FROM projects
                             LEFT JOIN tasktable_items tasks
                             ON tasks.parentid = projects.id
                             LEFT JOIN tasks_units tasksunits
                             ON tasks.id = tasksunits.ganttitemid
+                            LEFT JOIN checkpoint_items checkpoints
+                            ON tasksunits.id = checkpoints.task_unit_id
                             where projects.isarchive = false order by tasktable_items_id";
 
             var command = new NpgsqlCommand(queryText, _connectionService.Connection);
@@ -53,7 +55,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     GlobalTask = Convert.ToBoolean(data["globaltask"]),
                     IsActive = Convert.ToBoolean(data["isactive"]),
                     IsArchive = Convert.ToBoolean(data["isarchive"]),
-                    NumOfContract = (data["numberofcontract"] == System.DBNull.Value)
+                    NumOfContract = (data["numberofcontract"] == DBNull.Value)
                         ? null
                         : Convert.ToString(data["numberofcontract"])
                 };
@@ -61,16 +63,16 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 //Дочерний элемент
                 var childganttItemInfo = new GanttItemInfo()
                 {
-                    Id = (data["tasktable_items_id"] == System.DBNull.Value)
+                    Id = (data["tasktable_items_id"] == DBNull.Value)
                         ? (Int32?) null
                         : Convert.ToInt32(data["tasktable_items_id"]),
                     ParentId = rootganttItemInfo.Id,
                     Name = Convert.ToString(data["tasktable_items_name"]),
-                    Tag = (data["tag"] == System.DBNull.Value) ? null : Convert.ToString(data["tag"]),
-                    BaselineFinishDate = (data["baselinefinishdate"] == System.DBNull.Value)
+                    Tag = (data["tag"] == DBNull.Value) ? null : Convert.ToString(data["tag"]),
+                    BaselineFinishDate = (data["baselinefinishdate"] == DBNull.Value)
                         ? (DateTime?) null
                         : Convert.ToDateTime(data["baselinefinishdate"]),
-                    BaselineStartDate = (data["baselinestartdate"] == System.DBNull.Value)
+                    BaselineStartDate = (data["baselinestartdate"] == DBNull.Value)
                         ? (DateTime?) null
                         : Convert.ToDateTime(data["baselinestartdate"]),
                     GlobalTask = rootganttItemInfo.GlobalTask,
@@ -81,7 +83,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 if (childganttItemInfo.Id != null)
                 {
                     var elem = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => (Int32)t.Id.Id == (Int32)childganttItemInfo.Id);
-                    Int32? check = (data["unitid"] == System.DBNull.Value)
+                    Int32? check = (data["unitid"] == DBNull.Value)
                         ? (Int32?) null
                         : Convert.ToInt32(data["unitid"]);
 
@@ -89,9 +91,33 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                 
                     if (elem != null && check != null)
                     {
-                        elem.Id.UsersInfos.Add(_usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
-                        elem.Id.ListUsers.Add(_usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
-                        user.Tasks.Add(childganttItemInfo);
+                        if (!elem.Id.UsersInfos.Any(t => t.Id == check))
+                        {
+                            elem.Id.UsersInfos.Add(_usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
+                            elem.Id.ListUsers.Add(_usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
+                            user.Tasks.Add(childganttItemInfo);
+                            elem.Id.Progress = elem.Id.Progress + ((data["progress"] == DBNull.Value)
+                                ? 0 : Convert.ToDouble(data["progress"]));
+                            if (data["startdate"] != DBNull.Value)
+                            {
+                                if(Convert.ToDateTime(data["startdate"]) <= elem.Id.StartDate) 
+                                    elem.Id.StartDate = Convert.ToDateTime(data["startdate"]);
+                            }
+
+                            if (elem.Id.Progress == 100)
+                            {
+                                if (data["finishdate"] != DBNull.Value)
+                                {
+                                    if(Convert.ToDateTime(data["finishdate"]) >= elem.Id.FinishDate) 
+                                        elem.Id.FinishDate = Convert.ToDateTime(data["finishdate"]);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            elem.Id.Progress = (data["progress"] == DBNull.Value) ? 0 : Convert.ToDouble(data["progress"]);
+                        }
+
                     }
                     else
                     {
@@ -101,13 +127,13 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                                 _usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
                             childganttItemInfo.ListUsers.Add(
                                 _usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == check));
-                            childganttItemInfo.StartDate = (data["startdate"] == System.DBNull.Value)
+                            childganttItemInfo.StartDate = (data["startdate"] == DBNull.Value)
                                 ? (DateTime?) null
                                 : Convert.ToDateTime(data["startdate"]);
-                            childganttItemInfo.FinishDate = (data["finishdate"] == System.DBNull.Value)
+                            childganttItemInfo.FinishDate = (data["finishdate"] == DBNull.Value)
                                 ? (DateTime?) null
                                 : Convert.ToDateTime(data["finishdate"]);
-                            childganttItemInfo.Progress = Convert.ToDouble(data["progress"]);
+                            childganttItemInfo.Progress = (data["progress"] == DBNull.Value) ? 0 : Convert.ToDouble(data["progress"]);
                             childganttItemInfo.IsAdditional = Convert.ToBoolean(data["isadditional"]);
                             user.Tasks.Add(childganttItemInfo);
                         }
@@ -175,7 +201,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             }
             
             //Заполняем актуальную коллекцию для общего Гантта
-            var collection = ProjectsLibrary.AllGanttItems.Where(t => t.Id.IsActive == true);
+            var collection = ProjectsLibrary.AllGanttItems.Where(t => t.Id.IsActive);
             foreach (var item in collection)
             {
                 ProjectsLibrary.GanttItems.Add(item);
@@ -190,24 +216,99 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             {
                 var rootitem = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => (Int32)t.Id.Id == (Int32)item.ParentId);
                 var childitem = ProjectsLibrary.AllGanttItems.FirstOrDefault(t => (Int32)t.Id.Id == (Int32)item.Id);
-                
-                if (item.IsAdditional)
+
+                if (IsInRange(childitem.Id.BaselineStartDate, childitem.Id.BaselineFinishDate))
                 {
-                    if (!ProjectsLibrary.CurrentUserAdditionalGanttItems.Any(t=>(Int32)t.Id.Id == (Int32)rootitem.Id.Id))
+                    if (item.IsAdditional)
                     {
-                        ProjectsLibrary.CurrentUserAdditionalGanttItems.Add(rootitem);
+                        if (!ProjectsLibrary.CurrentUserAdditionalGanttItems.Any(t=>(Int32)t.Id.Id == (Int32)rootitem.Id.Id))
+                        {
+                            ProjectsLibrary.CurrentUserAdditionalGanttItems.Add(rootitem);
+                        }
+                        ProjectsLibrary.CurrentUserAdditionalGanttItems.Add(childitem);
                     }
-                    ProjectsLibrary.CurrentUserAdditionalGanttItems.Add(childitem);
+                    else
+                    {
+                        if (!ProjectsLibrary.CurrentUserGanttItems.Any(t=>(Int32)t.Id.Id == (Int32)rootitem.Id.Id))
+                        {
+                            ProjectsLibrary.CurrentUserGanttItems.Add(rootitem);
+                        } 
+                        ProjectsLibrary.CurrentUserGanttItems.Add(childitem);
+                    }
+                }
+            }
+        }
+        
+        public bool IsInRange(DateTime? basestartDate, DateTime? baseendDate)
+        {
+            var currentMonth = DateTime.Now.Month;
+            if (basestartDate != null && baseendDate != null)
+            {
+                return basestartDate.Value.Month == currentMonth || baseendDate.Value.Month == currentMonth;
+            }
+
+            return false;
+        }
+
+        public void LoadCheckPointItems()
+        {
+            _connectionService.CheckDbConnection();
+            
+            var queryText = "SELECT * FROM checkpoint_items;";
+
+            var command = new NpgsqlCommand(queryText, _connectionService.Connection);
+            var data = command.ExecuteReader();
+            
+            while (data.Read())
+            {
+                var checkPoint = new CheckPointInfo()
+                {
+                    Id = data.GetInt32(0),
+                    TaskUnitId = data.GetInt32(1),
+                    CheckPointYear = data.GetInt32(2),
+                    CheckPointMonth = data.GetInt32(3),
+                    Progress = data.GetDouble(4),
+                    StartDate = (data[5] == DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data.GetDateTime(5)),
+                    FinishDate = (data[6] == DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data.GetDateTime(6))
+                };
+                
+                ProjectsLibrary.CheckPoints.Add(checkPoint);
+            }
+
+            _connectionService.CloseConnection();
+        }
+
+        //В методе указан ключ, если 0 - то обновить свойства, если 1 - то добавить объект в таблицу
+        public void UpdateCheckPointItems(CheckPointInfo checkPoint, Int32 updatekey)
+        {
+            _connectionService.CheckDbConnection();
+
+            if (checkPoint != null)
+            {
+                if (updatekey == 0)
+                {
+                    var queryText =  $@"UPDATE checkpoint_items SET progress='{checkPoint.Progress}', startdate ='{checkPoint.StartDate}', finishdate='{checkPoint.FinishDate}' WHERE id='{checkPoint.Id}'";
+                    NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
+                    command.ExecuteNonQuery();
                 }
                 else
                 {
-                    if (!ProjectsLibrary.CurrentUserGanttItems.Any(t=>(Int32)t.Id.Id == (Int32)rootitem.Id.Id))
+                    var queryText =
+                        $"INSERT INTO checkpoint_items(task_unit_id, checkpoint_year, checkpoint_month, progress, startdate, finishdate) VALUES('{checkPoint.TaskUnitId}', '{checkPoint.CheckPointYear}', '{checkPoint.CheckPointMonth}', '{checkPoint.Progress}', '{checkPoint.StartDate}', '{checkPoint.FinishDate}') RETURNING id";
+            
+                    NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
+                    var data = command.ExecuteScalar(); 
+            
+                    if (data is Int32 inData)
                     {
-                        ProjectsLibrary.CurrentUserGanttItems.Add(rootitem);
-                    } 
-                    ProjectsLibrary.CurrentUserGanttItems.Add(childitem);
+                        checkPoint.Id = inData;
+                    }
+
+                    ProjectsLibrary.CheckPoints.Add(checkPoint);
                 }
             }
+
+            _connectionService.CloseConnection();
         }
 
         public void LoadTasksResourceItems()
@@ -279,10 +380,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     GanttItemId = data.GetInt32(1),
                     UnitId = data.GetInt32(2),
                     SourceId = data.GetInt32(3),
-                    StartDate = (data[4] == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data.GetDateTime(4)),
-                    FinishDate = (data[5] == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(data.GetDateTime(5)),
-                    Progress = data.GetDouble(6),
-                    IsAdditional = data.GetBoolean(7)
+                    IsAdditional = data.GetBoolean(4)
                 };
                 
                 ProjectsLibrary.GanttTasksUnits.Add(taskUnitInfo);
@@ -527,21 +625,21 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
 
             switch (prop)
             {
-                case "StartDate":
+                /*case "StartDate":
                     UpdateTaskUnits(ganttItemInfo, "StartDate");
                     break;
                 
                 case "FinishDate":
                     UpdateTaskUnits(ganttItemInfo, "FinishDate");
-                    break;
+                    break;*/
                 
                 case "Name":
                     queryText += $"name='{ganttItemInfo.Name}'";
                     break;
                 
-                case "Progress":
+                /*case "Progress":
                     UpdateTaskUnits(ganttItemInfo, "Progress");
-                    break;
+                    break;*/
                 
                 case "Tag":
                     queryText += $"tag='{ganttItemInfo.Tag}'";
@@ -560,7 +658,27 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                                 rootitem.Id.BaselineFinishDate = ganttItemInfo.BaselineFinishDate;
                         }
                     }
+                    
+                    if (ganttItemInfo.BaselineStartDate != null && ganttItemInfo.BaselineFinishDate != null)
+                    {
+                        if (IsInRange(element.Id.BaselineStartDate, element.Id.BaselineFinishDate) &&
+                            ganttItemInfo.ResourceUsers.Any(t => t.Id == _usersLibraryService.UsersLibrary.CurrentUser.Id))
+                        {
+                            if (!ProjectsLibrary.CurrentUserGanttItems.Any(t=>(Int32)t.Id.Id == (Int32)element.Id.Id))
+                            {
+                                if (ProjectsLibrary.CurrentUserGanttItems.FirstOrDefault(t=>(Int32)t.Id.Id == (Int32)element.ParentId.Id) == null)
+                                {
+                                    var rootitem = ProjectsLibrary.RootItemsProjectsLibrary.FirstOrDefault(t =>
+                                        (Int32)t.Id.Id == (Int32)element.ParentId.Id);
 
+                                    ProjectsLibrary.CurrentUserGanttItems.Add(rootitem);
+                                }
+
+                                ProjectsLibrary.CurrentUserGanttItems.Add(element);
+                            }
+                        }
+                    }
+                    
                     break;
                 
                 case "BaselineStartDate":
@@ -579,15 +697,6 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     break;
 
                 case "GlobalTask":
-                    /*var collection = ProjectsLibrary.GanttItems.Where(t =>
-                            (Int32) t.ParentId == (Int32) ganttItemInfo.Id);
-                    if (collection != null)
-                    {
-                        foreach (var item in collection)
-                        {
-                            ProjectsLibrary.GanttItems.Remove(item);
-                        }
-                    }*/
                     LoadGanttObjects();
                     break;
                 
@@ -604,11 +713,12 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                      break;
             }
 
-            if (prop != "ListUsers")
+            if (prop != "ListUsers" && prop != "StartDate" && prop != "FinishDate" && prop != "Progress")
             {
                 queryText += $" WHERE id='{ganttItemInfo.Id}';";
                 NpgsqlCommand command = new NpgsqlCommand(queryText, _connectionService.Connection);
                 command.ExecuteNonQuery();
+                
             }
             
             _connectionService.CloseConnection();
@@ -767,6 +877,43 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
             }
         }
 
+        public void CreateStriplinesCollection()
+        {
+            var currentYer = DateTime.Now.Year;
+            
+            for (int i = 1; i <= 12; i++)
+            {
+                StripLineInfo newItem = new StripLineInfo()
+                {
+                    Id = Convert.ToInt32(currentYer+"0"+i),
+                    DateTime = new DateTime (currentYer, i,
+                        DateTime.DaysInMonth(currentYer, i)),
+                    StripLineDuration = TimeSpan.Parse("23:55:0"),
+                };
+
+                var collection = ProjectsLibrary.CheckPoints.Where(t =>
+                    t.CheckPointYear == currentYer && t.CheckPointMonth == Convert.ToInt32("0" + i));
+                if (collection != null)
+                {
+                    foreach (var item in collection)
+                    {
+                        var element = ProjectsLibrary.GanttTasksUnits.FirstOrDefault(t => t.Id == item.TaskUnitId);
+                        newItem.TaskUnits.Add(element);
+                        var user = _usersLibraryService.UsersLibrary.Users.FirstOrDefault(t => t.Id == element.UnitId);
+                        if (!newItem.UsersWithCheckPoint.Any(t=>t.Equals(user.Name)))
+                        {
+                            newItem.UsersWithCheckPoint.Add(user.Name);
+                        }
+                    }
+                }
+
+                ProjectsLibrary.StripLines.Add(newItem);
+            }
+
+            ProjectsLibrary.CurrentStripLine =
+                ProjectsLibrary.StripLines.FirstOrDefault(t => t.Id == Convert.ToInt32(currentYer+"0"+DateTime.Now.Month));
+        }
+
         public void AddResourceLink(IList ResourceLinks)
         {
             _connectionService.CheckDbConnection();
@@ -887,18 +1034,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
 
                 switch (prop)
                 {
-                    case "StartDate":
-                        queryText += $"startdate='{selectedGanttItem.StartDate}'";
-                        break;
 
-                    case "FinishDate":
-                        queryText += $"finishdate='{selectedGanttItem.FinishDate}'";
-                        break;
-                    
-                    case "Progress":
-                        queryText += $"progress='{selectedGanttItem.Progress.ToString("n2").Replace(',', '.')}'";
-                        break;
-                    
                     case "IsAdditional":
                         queryText += $"isadditional='{selectedGanttItem.IsAdditional}'";
                         break;

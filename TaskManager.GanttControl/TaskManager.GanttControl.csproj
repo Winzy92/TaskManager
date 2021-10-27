@@ -81,6 +81,7 @@
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Utils\Behaviors\GanttControlBehavior.cs" />
+        <Compile Include="Utils\Converters\CollectionToString.cs" />
         <Compile Include="Utils\Converters\InversCanModifyProperty.cs" />
         <Compile Include="Utils\Converters\ProgressConverter.cs" />
         <Compile Include="ViewModels\TaskManagerGanttControlViewModel.cs" />
