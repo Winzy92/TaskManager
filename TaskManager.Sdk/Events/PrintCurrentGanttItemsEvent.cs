@@ -2,7 +2,7 @@
 
 namespace TaskManager.Sdk.Events
 {
-    public class PringtCurrentGanttItems : PubSubEvent
+    public class PrintCurrentGanttItemsEvent : PubSubEvent
     {
         
     }

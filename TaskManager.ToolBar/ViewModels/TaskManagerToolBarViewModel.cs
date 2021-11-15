@@ -1,6 +1,8 @@
 ﻿using System;
 using Prism.Commands;
 using Prism.Services.Dialogs;
+using TaskManager.Sdk.Events;
+using TaskManager.Sdk.Interfaces;
 using TaskManager.Sdk.Services.TaskManagerService;
 
 namespace TaskManager.ToolBar.ViewModels
@@ -11,6 +13,8 @@ namespace TaskManager.ToolBar.ViewModels
         public DelegateCommand OpenLibrary { get; }
         public DelegateCommand OpenUsersLibrary { get; }
         public DelegateCommand OpenChangeActiveUserDialog { get; }
+        
+        public DelegateCommand OpenPrintCurrentGanttItemsDialog { get; }
         
         public TaskManagerToolBarViewModel()
         {
@@ -27,6 +31,11 @@ namespace TaskManager.ToolBar.ViewModels
             
             OpenChangeActiveUserDialog = new DelegateCommand(() => 
                 _dialogService.ShowDialog("UserAuthorizationDialog", keyvalue,  result => { }));
+            
+            OpenPrintCurrentGanttItemsDialog = new DelegateCommand(() => 
+                TaskManagerServices.Instance.EventAggregator.GetEvent<PrintCurrentGanttItemsEvent>().Publish());
+            
+            
 
         }
     }

@@ -32,15 +32,23 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+          <HintPath>..\packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0">
           <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="DevExpress.Mvvm.v20.1, Version=20.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-          <HintPath>C:\Program Files (x86)\DevExpress 20.1\Components\Bin\Framework\DevExpress.Mvvm.v20.1.dll</HintPath>
+        <Reference Include="DevExpress.Mvvm.v21.1, Version=21.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+          
         </Reference>
-        <Reference Include="DevExpress.Xpf.Gantt.v20.1, Version=20.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-          <HintPath>C:\Program Files (x86)\DevExpress 20.1\Components\Bin\Framework\DevExpress.Xpf.Gantt.v20.1.dll</HintPath>
+        <Reference Include="DevExpress.Xpf.Gantt.v21.1, Version=21.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+          
+        </Reference>
+        <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.2.10, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+          <HintPath>..\packages\SharpZipLib.1.3.2\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+          <Private>True</Private>
         </Reference>
         <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
           <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -57,6 +65,22 @@
         </Reference>
         <Reference Include="Npgsql, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7">
           <HintPath>..\packages\Npgsql.6.0.0-preview4\lib\netstandard2.0\Npgsql.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="NPOI, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1">
+          <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="NPOI.OOXML, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1">
+          <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OOXML.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="NPOI.OpenXml4Net, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1">
+          <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="NPOI.OpenXmlFormats, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1">
+          <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="PresentationCore" />
@@ -130,6 +154,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Core\Containers\ProjectsLibraryInfo.cs" />
+        <Compile Include="Core\Containers\ReportInfo.cs" />
         <Compile Include="Core\Containers\UsersLibraryInfo.cs" />
         <Compile Include="Core\Models\BindBase.cs" />
         <Compile Include="Core\Models\CheckPointInfo.cs" />
@@ -143,17 +168,20 @@
         <Compile Include="Core\Models\TaskResourceInfo.cs" />
         <Compile Include="Core\Models\TaskUnitInfo.cs" />
         <Compile Include="Core\Models\UsersInfo.cs" />
-        <Compile Include="Events\PringtCurrentGanttItems.cs" />
+        <Compile Include="Events\PrintCurrentGanttItemsEvent.cs" />
+        <Compile Include="Events\PrintMonthGanttItemsEvent.cs" />
         <Compile Include="Events\TaskResourceInfoUpdateEvent.cs" />
         <Compile Include="Events\UpdateMainGanttEvent.cs" />
         <Compile Include="Interfaces\IBaseUsersInfo.cs" />
         <Compile Include="Interfaces\IDatabaseConnectionService.cs" />
+        <Compile Include="Interfaces\IReportService.cs" />
         <Compile Include="Interfaces\ISettingsService.cs" />
         <Compile Include="Interfaces\ITaskManagerInstance.cs" />
         <Compile Include="Interfaces\ProjectsLibrary\IProjectsLibraryService.cs" />
         <Compile Include="Interfaces\UsersLibrary\IUsersLibraryService.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Services\DataBaseConnectionService\DataBaseConnectionService.cs" />
+        <Compile Include="Services\ExcelReportService\ReportService.cs" />
         <Compile Include="Services\ProjectsLibraryService\ProjectsLibraryService.cs" />
         <Compile Include="Services\ServiceModule.cs" />
         <Compile Include="Services\SettingsService\SettingsService.cs" />

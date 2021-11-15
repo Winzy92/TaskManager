@@ -33,6 +33,13 @@
                                    BarItemDisplayMode="ContentAndGlyph"
                                    ToolTip="Изменить пользователя" />
             </dxb:Bar>
+            <dxb:Bar AllowCustomizationMenu="False" AllowQuickCustomization="False" ShowDragWidget="False">
+                <dxb:BarButtonItem Content="Печать текущей диаграммы" Margin="5,5,5,5"
+                                   Glyph="../Multimedia/changeuser_32x32.png"
+                                   Command="{Binding OpenPrintCurrentGanttItemsDialog}"
+                                   BarItemDisplayMode="ContentAndGlyph"
+                                   ToolTip="Печать текущей диаграммы" />
+            </dxb:Bar>
         </dxb:BarManager.Bars>
     </dxb:BarManager>
 </UserControl>

@@ -241,7 +241,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
         
         public bool IsInRange(DateTime? basestartDate, DateTime? baseendDate)
         {
-            var currentMonth = DateTime.Now.Month;
+            var currentMonth = DateTime.Now.Month-1;
             if (basestartDate != null && baseendDate != null)
             {
                 return basestartDate.Value.Month == currentMonth || baseendDate.Value.Month == currentMonth;
@@ -1038,6 +1038,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                     case "IsAdditional":
                         queryText += $"isadditional='{selectedGanttItem.IsAdditional}'";
                         break;
+                    
                 }
                 
                 queryText += $" WHERE ganttitemid='{selectedGanttItem.Id}' AND unitid='{_usersLibraryService.UsersLibrary.CurrentUser.Id}';";

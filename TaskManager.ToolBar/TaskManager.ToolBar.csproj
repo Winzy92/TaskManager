@@ -36,8 +36,11 @@
           <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="DevExpress.Xpf.Core.v20.1, Version=20.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-          <HintPath>C:\Program Files (x86)\DevExpress 20.1\Components\Bin\Framework\DevExpress.Xpf.Core.v20.1.dll</HintPath>
+        <Reference Include="DevExpress.Mvvm.v21.1, Version=21.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+          
+        </Reference>
+        <Reference Include="DevExpress.Xpf.Core.v21.1, Version=21.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+          
         </Reference>
         <Reference Include="mscorlib" />
         <Reference Include="PresentationCore" />
