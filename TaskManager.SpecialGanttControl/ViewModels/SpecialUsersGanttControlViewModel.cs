@@ -174,6 +174,13 @@ namespace TaskManager.SpecialGanttControl.ViewModels
                     {
                         _projectsLibraryService.UpdateCheckPointItems(checkpoint, 1);
                     }
+
+                    //Заполнение локальных свйоств для отображение в отчете
+                    item.Id.TaskDateTime = item.Id.StartDate.Value.ToString("dd.MM.yyyy") +
+                                     item.Id.FinishDate.Value.ToString("dd.MM.yyyy");
+                    item.Id.TaskDuration = (item.Id.FinishDate -
+                                            item.Id.StartDate).Value.Days;
+
                 }
             }
         }

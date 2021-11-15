@@ -10,30 +10,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ReportInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TaskManager.Sdk/Events/PrintMonthGanttItemsEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/IReportService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" afterDir="false" />
+    <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="# Добавил экспорт отчета в эксель, требуется оптимизация и комплексное тестирование.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/TaskManager.GanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/TaskManager.GanttControl.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/TaskManager.ProjectsLibrary.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/TaskManager.ProjectsLibrary.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Events/PringtCurrentGanttItems.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Events/PrintCurrentGanttItemsEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ServiceModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ServiceModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/TaskManager.Sdk.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/TaskManager.Sdk.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Shell/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Shell/App.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Shell/TaskManager.Shell.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Shell/TaskManager.Shell.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/TaskManager.SpecialGanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/TaskManager.SpecialGanttControl.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.ToolBar/TaskManager.ToolBar.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ToolBar/TaskManager.ToolBar.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.ToolBar/ViewModels/TaskManagerToolBarViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ToolBar/ViewModels/TaskManagerToolBarViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.UserGanttControl/TaskManager.UserGanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UserGanttControl/TaskManager.UserGanttControl.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.UsersLibrary/TaskManager.UsersLibrary.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UsersLibrary/TaskManager.UsersLibrary.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +173,6 @@
     <changedPaths>
       <option value="$PROJECT_DIR$/TaskManager.GanttControl/Utils/ResourceLinksSelector.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/ResourceLink.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.UserGanttControl/Views/UserGanttControl.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/UpdateMainGanttEvent.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/TaskResourceInfoUpdateEvent.cs" />
@@ -214,7 +195,6 @@
       <option value="$APPLICATION_CONFIG_DIR$/consoles/db/fc6c25a3-deae-4372-873e-293e99dd34ad/console.sql" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/TaskUnitInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/ProjectsLibrary/IProjectsLibraryService.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Shell/Views/TaskManager.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.Shell/ViewModels/TaskManagerViewModel.cs" />
@@ -237,8 +217,10 @@
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ServiceModule.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/IReportService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.UserGanttControl/ViewModels/UserGanttControlViewModel.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" />
     </changedPaths>
   </component>
@@ -375,7 +357,7 @@
       <workItem from="1635508379843" duration="3295000" />
       <workItem from="1635667408008" duration="14453000" />
       <workItem from="1636694858943" duration="19462000" />
-      <workItem from="1636955257974" duration="16401000" />
+      <workItem from="1636955257974" duration="21501000" />
     </task>
     <task id="LOCAL-00001" summary="Создал структуру проекта">
       <created>1623752556826</created>
@@ -489,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635323681956</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="# Добавил экспорт отчета в эксель, требуется оптимизация и комплексное тестирование.">
+      <created>1636974972416</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1636974972594</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -526,7 +515,8 @@
     <MESSAGE value="#отлажена работа библиотеки проектов, обновление свойств объектов основной диаграммы Гантта, отлажена механизм добавления специальных задач" />
     <MESSAGE value="# Закончен дебаг внеплановых задач" />
     <MESSAGE value="Добавил диапазоны отчетов, и контроль отчитавшихся." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил диапазоны отчетов, и контроль отчитавшихся." />
+    <MESSAGE value="# Добавил экспорт отчета в эксель, требуется оптимизация и комплексное тестирование." />
+    <option name="LAST_COMMIT_MESSAGE" value="# Добавил экспорт отчета в эксель, требуется оптимизация и комплексное тестирование." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -539,13 +529,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>794</line>
+          <line>805</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="724" containingFunctionPresentation="method 'CopyGanttObject'">
             <startOffsets>
-              <option value="34462" />
+              <option value="35129" />
             </startOffsets>
             <endOffsets>
-              <option value="34463" />
+              <option value="35130" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="26" />
@@ -578,13 +568,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>727</line>
+          <line>738</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="692" containingFunctionPresentation="method 'RemoveGanttObject'">
             <startOffsets>
-              <option value="31422" />
+              <option value="32089" />
             </startOffsets>
             <endOffsets>
-              <option value="31423" />
+              <option value="32090" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="31" />
@@ -617,13 +607,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>752</line>
+          <line>763</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="722" containingFunctionPresentation="method 'RemoveGanttObject'">
             <startOffsets>
-              <option value="32597" />
+              <option value="33264" />
             </startOffsets>
             <endOffsets>
-              <option value="32598" />
+              <option value="33265" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="36" />
@@ -643,26 +633,26 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>539</line>
+          <line>550</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="521" containingFunctionPresentation="method 'UpdateActualTasksCollection'">
             <startOffsets>
-              <option value="23510" />
+              <option value="24177" />
             </startOffsets>
             <endOffsets>
-              <option value="23511" />
+              <option value="24178" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>601</line>
+          <line>612</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="583" containingFunctionPresentation="method 'FindAndAddItems'">
             <startOffsets>
-              <option value="25757" />
+              <option value="26424" />
             </startOffsets>
             <endOffsets>
-              <option value="25758" />
+              <option value="26425" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="40" />
@@ -682,130 +672,130 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>428</line>
+          <line>439</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="413" containingFunctionPresentation="method 'AddGanttObject'">
             <startOffsets>
-              <option value="19260" />
+              <option value="19927" />
             </startOffsets>
             <endOffsets>
-              <option value="19261" />
+              <option value="19928" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>580</line>
+          <line>591</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="559" containingFunctionPresentation="method 'FindAndRemoveItem'">
             <startOffsets>
-              <option value="24900" />
+              <option value="25567" />
             </startOffsets>
             <endOffsets>
-              <option value="24901" />
+              <option value="25568" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>1052</line>
+          <line>1063</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="970" containingFunctionPresentation="method 'UpdateTaskResources'">
             <startOffsets>
-              <option value="46112" />
+              <option value="46779" />
             </startOffsets>
             <endOffsets>
-              <option value="46113" />
+              <option value="46780" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>989</line>
+          <line>1000</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="897" containingFunctionPresentation="method 'UpdateTaskUnits'">
             <startOffsets>
-              <option value="43440" />
+              <option value="44107" />
             </startOffsets>
             <endOffsets>
-              <option value="43441" />
+              <option value="44108" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>415</line>
+          <line>426</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="397" containingFunctionPresentation="method 'RemoveAllUnits'">
             <startOffsets>
-              <option value="18808" />
+              <option value="19475" />
             </startOffsets>
             <endOffsets>
-              <option value="18809" />
+              <option value="19476" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>948</line>
+          <line>959</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="873" containingFunctionPresentation="method 'RemoveResourceLink'">
             <startOffsets>
-              <option value="41641" />
+              <option value="42308" />
             </startOffsets>
             <endOffsets>
-              <option value="41642" />
+              <option value="42309" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>965</line>
+          <line>976</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="895" containingFunctionPresentation="method 'RemoveResourceLink'">
             <startOffsets>
-              <option value="42415" />
+              <option value="43082" />
             </startOffsets>
             <endOffsets>
-              <option value="42602" />
+              <option value="43269" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>973</line>
+          <line>984</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="903" containingFunctionPresentation="method 'RemoveResourceLink'">
             <startOffsets>
-              <option value="42831" />
+              <option value="43498" />
             </startOffsets>
             <endOffsets>
-              <option value="43000" />
+              <option value="43667" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs</url>
-          <line>181</line>
+          <line>188</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.SpecialGanttControl\ViewModels\SpecialUsersGanttControlViewModel.cs" initialLine="88" containingFunctionPresentation="method 'AddItemSpecialUserTasksCollection'">
             <startOffsets>
-              <option value="7864" />
+              <option value="8260" />
             </startOffsets>
             <endOffsets>
-              <option value="7865" />
+              <option value="8261" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs</url>
-          <line>199</line>
+          <line>206</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.SpecialGanttControl\ViewModels\SpecialUsersGanttControlViewModel.cs" initialLine="107" containingFunctionPresentation="method 'AddItemSpecialUserTasksCollection'">
             <startOffsets>
-              <option value="8677" />
+              <option value="9073" />
             </startOffsets>
             <endOffsets>
-              <option value="8705" />
+              <option value="9101" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="96" />
@@ -838,13 +828,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs</url>
-          <line>202</line>
+          <line>209</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.SpecialGanttControl\ViewModels\SpecialUsersGanttControlViewModel.cs" initialLine="159" containingFunctionPresentation="method 'AddItemSpecialUserTasksCollection'">
             <startOffsets>
-              <option value="8799" />
+              <option value="9195" />
             </startOffsets>
             <endOffsets>
-              <option value="8800" />
+              <option value="9196" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="99" />
@@ -877,13 +867,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>282</line>
+          <line>293</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="244" containingFunctionPresentation="method 'UpdateCheckPointItems'">
             <startOffsets>
-              <option value="13735" />
+              <option value="14402" />
             </startOffsets>
             <endOffsets>
-              <option value="13736" />
+              <option value="14403" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="106" />
@@ -916,26 +906,26 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>662</line>
+          <line>673</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="662" containingFunctionPresentation="method 'UpdateChildGanttObject'">
             <startOffsets>
-              <option value="28483" />
+              <option value="29150" />
             </startOffsets>
             <endOffsets>
-              <option value="28484" />
+              <option value="29151" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs</url>
-          <line>58</line>
+          <line>57</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ExcelReportService\ReportService.cs" initialLine="26" containingFunctionPresentation="method 'CreateMonthReport'">
             <startOffsets>
-              <option value="1699" />
+              <option value="1634" />
             </startOffsets>
             <endOffsets>
-              <option value="1700" />
+              <option value="1635" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="125" />
@@ -966,11 +956,38 @@
           </properties>
           <option name="timeStamp" value="137" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs</url>
+          <line>225</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ExcelReportService\ReportService.cs" initialLine="225" containingFunctionPresentation="method 'WriteChildItemsInFile'">
+            <startOffsets>
+              <option value="9277" />
+            </startOffsets>
+            <endOffsets>
+              <option value="9278" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="145" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
+          <line>143</line>
+          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="143" containingFunctionPresentation="method 'LoadGanttObjects'">
+            <startOffsets>
+              <option value="7610" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7692" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo />
+        <PinnedItemInfo parentTag="Type#TaskManager.Sdk.Core.Models.GanttItemInfo" memberName="DateTime" />
         <PinnedItemInfo parentTag="Type#DevExpress.Xpf.Grid.TreeList.TreeListCellValueEventArgs" memberName="Cell" />
         <PinnedItemInfo parentTag="Type#System.Data.DataTable" memberName="Columns" />
         <PinnedItemInfo parentTag="Type#System.Data.DataRow" memberName="ItemArray" />

@@ -22,6 +22,28 @@ namespace TaskManager.Sdk.Core.Models
             }
         }
         
+        private String _taskDateTime;
+        public String TaskDateTime
+        {
+            get => _taskDateTime;
+            set
+            {
+                _taskDateTime = value;
+                RaisePropertiesChanged(nameof(TaskDateTime));
+            }
+        }
+        
+        private Int32 _taskDuration;
+        public Int32 TaskDuration
+        {
+            get => _taskDuration;
+            set
+            {
+                _taskDuration = value;
+                RaisePropertiesChanged(nameof(TaskDuration));
+            }
+        }
+
         private ObservableCollection<UsersInfo> _usersInfos;
         public ObservableCollection<UsersInfo> UsersInfos
         {

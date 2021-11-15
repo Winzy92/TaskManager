@@ -19,7 +19,6 @@ namespace TaskManager.Sdk.Services.ExcelReportService
     {
         public Dictionary<Int32, String> StringValues;
         
-        public Dictionary<Int32, String> AdditionalStringValues;
         
         public ReportInfo Report { get; set; } = new ReportInfo();
 
@@ -58,8 +57,7 @@ namespace TaskManager.Sdk.Services.ExcelReportService
         public void CreateMonthReport(UsersInfo CurrentUser)
         {
             StringValues.Clear();
-            AdditionalStringValues.Clear();
-            
+
             using (var streem = new FileStream(ReportPath, FileMode.Open, FileAccess.Read))
             {
                 wb = new XSSFWorkbook(streem);
@@ -122,7 +120,6 @@ namespace TaskManager.Sdk.Services.ExcelReportService
                                     if (_projectsLibraryService.ProjectsLibrary.CurrentUserAdditionalGanttItems
                                         .Count() != 0)
                                     {
-                                        AdditionalStringValues.Add(cell.ColumnIndex, "Name");
                                         var additionalelement = UserAdditionalRootCollection.FirstOrDefault();
                                         
                                         if (additionalelement != null)
@@ -146,27 +143,24 @@ namespace TaskManager.Sdk.Services.ExcelReportService
                                     break;
                                 
                                 case "AdditionalTask.NumOfContract":
-                                    AdditionalStringValues.Add(cell.ColumnIndex, "NumOfContract");
                                     cell.SetCellValue(UserAdditionalRootCollection[_rootItemIndex].Id.NumOfContract);
                                     break;
 
                                 case "Task.DateTime":
-                                    StringValues.Add(cell.ColumnIndex, "DateTime");
+                                    StringValues.Add(cell.ColumnIndex, "TaskDateTime");
                                     cell.SetCellValue("");
                                     break;
 
                                 case "AdditionalTask.DateTime":
-                                    AdditionalStringValues.Add(cell.ColumnIndex, "DateTime");
                                     cell.SetCellValue("");
                                     break;
                                 
-                                case "Task.Duration":
-                                    StringValues.Add(cell.ColumnIndex, "Duration");
+                                case "Task.TaskDuration":
+                                    StringValues.Add(cell.ColumnIndex, "TaskDuration");
                                     cell.SetCellValue("");
                                     break;
                                 
-                                case "AdditionalTask.Duration":
-                                    AdditionalStringValues.Add(cell.ColumnIndex, "Duration");
+                                case "AdditionalTask.TaskDuration":
                                     cell.SetCellValue("");
                                     break;
 
@@ -177,7 +171,6 @@ namespace TaskManager.Sdk.Services.ExcelReportService
                                     break;
                                 
                                 case "AdditionalTask.Progress":
-                                    AdditionalStringValues.Add(cell.ColumnIndex, "Progress");
                                     _timeToWriteAdditionalChildrens = true;
                                     cell.SetCellValue("");
                                     break;
@@ -235,42 +228,23 @@ namespace TaskManager.Sdk.Services.ExcelReportService
 
                         if (cell.CellType == CellType.String)
                         {
-                            string prop = "";
-
-                            switch (item)
+                            if (StringValues[item] != "NumOfContract")
                             {
-                                case 1:
-                                    prop = countChildItems[_childItemIndex].Id.GetType()
-                                        .GetProperty(StringValues[item])
-                                        ?.GetValue(countChildItems[_childItemIndex].Id).ToString();
+                                var prop = countChildItems[_childItemIndex].Id.GetType()
+                                    .GetProperty(StringValues[item])
+                                    ?.GetValue(countChildItems[_childItemIndex].Id).ToString();
+                                
+                                if(StringValues[item] == "Progress") 
+                                    cell.SetCellValue(Convert.ToString(Convert.ToInt32(prop)*100)+"%");
+                                else
+                                {
                                     cell.SetCellValue(prop);
-                                    break;
-
-                                case 2:
-                                    prop = "";
-                                    cell.SetCellValue(prop);
-                                    break;
-
-                                case 3:
-                                    prop = countChildItems[_childItemIndex].Id.StartDate.Value.ToString("dd.MM.yyyy") +
-                                           "-" +
-                                           countChildItems[_childItemIndex].Id.FinishDate.Value.ToString("dd.MM.yyyy");
-                                    cell.SetCellValue(prop);
-                                    break;
-
-                                case 4:
-                                    var duration = (countChildItems[_childItemIndex].Id.FinishDate -
-                                                    countChildItems[_childItemIndex].Id.StartDate).Value.Days;
-                                    cell.SetCellValue(duration);
-                                    break;
-
-                                case 5:
-                                    var res = countChildItems[_childItemIndex].Id.GetType()
-                                        .GetProperty(StringValues[item])
-                                        ?.GetValue(countChildItems[_childItemIndex].Id);
-
-                                    cell.SetCellValue(Convert.ToString(Convert.ToInt32(res) * 100) + "%");
-                                    break;
+                                }
+                                
+                            }
+                            else
+                            {
+                                cell.SetCellValue("");
                             }
                         }
                     }
@@ -301,7 +275,6 @@ namespace TaskManager.Sdk.Services.ExcelReportService
                 _projectsLibraryService.ProjectsLibrary.CurrentUserGanttItems.Where(t => t.ParentId == null).ToList();
             UserAdditionalRootCollection = _projectsLibraryService.ProjectsLibrary.CurrentUserAdditionalGanttItems.Where(t => t.ParentId == null).ToList();
             StringValues = new Dictionary<int, string>();
-            AdditionalStringValues = new Dictionary<int, string>();
         }
     }
 }

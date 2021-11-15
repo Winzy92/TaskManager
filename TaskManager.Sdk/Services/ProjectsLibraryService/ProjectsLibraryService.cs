@@ -77,7 +77,7 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                         : Convert.ToDateTime(data["baselinestartdate"]),
                     GlobalTask = rootganttItemInfo.GlobalTask,
                     IsActive = rootganttItemInfo.IsActive,
-                    IsArchive = rootganttItemInfo.IsArchive
+                    IsArchive = rootganttItemInfo.IsArchive,
                 };
 
                 if (childganttItemInfo.Id != null)
@@ -139,6 +139,17 @@ namespace TaskManager.Sdk.Services.ProjectsLibraryService
                         }
                     };
                 }
+                
+                //Заполнение локальных свойств для полей отчета
+                if (childganttItemInfo.FinishDate != null && childganttItemInfo.StartDate != null)
+                {
+                    childganttItemInfo.TaskDateTime = childganttItemInfo.StartDate.Value.ToString("dd.MM.yyyy") +  "-" +
+                                                      childganttItemInfo.FinishDate.Value.ToString("dd.MM.yyyy");
+                    
+                    childganttItemInfo.TaskDuration = (childganttItemInfo.FinishDate -
+                                                       childganttItemInfo.StartDate).Value.Days;
+                }
+                
                 
                 //Родительский объект в обертке
                 var treeItem1 = new GanttTreeViewItemInfo(rootganttItemInfo);
