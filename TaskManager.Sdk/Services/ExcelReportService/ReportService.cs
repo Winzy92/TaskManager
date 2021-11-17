@@ -18,8 +18,7 @@ namespace TaskManager.Sdk.Services.ExcelReportService
     public class ReportService : IReportService
     {
         public Dictionary<Int32, String> StringValues;
-        
-        
+
         public ReportInfo Report { get; set; } = new ReportInfo();
 
         private Int32 _rowNums;
@@ -180,7 +179,6 @@ namespace TaskManager.Sdk.Services.ExcelReportService
                             {
                                 WriteChildItemsInFile();
                             }
-                            
                         }
                     }
                     

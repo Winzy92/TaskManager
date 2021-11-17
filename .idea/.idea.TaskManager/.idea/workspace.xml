@@ -10,12 +10,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="# Добавил экспорт отчета в эксель, требуется оптимизация и комплексное тестирование.">
+    <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/TaskManager.GanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/TaskManager.GanttControl.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/TaskManager.ProjectsLibrary.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/TaskManager.ProjectsLibrary.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/TaskManager.Sdk.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/TaskManager.Sdk.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.Shell/TaskManager.Shell.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Shell/TaskManager.Shell.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/TaskManager.SpecialGanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/TaskManager.SpecialGanttControl.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.ToolBar/TaskManager.ToolBar.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ToolBar/TaskManager.ToolBar.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.UserGanttControl/TaskManager.UserGanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UserGanttControl/TaskManager.UserGanttControl.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskManager.UsersLibrary/TaskManager.UsersLibrary.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UsersLibrary/TaskManager.UsersLibrary.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,16 +48,13 @@
     <setting file="file://$PROJECT_DIR$/TaskManager.UsersLibrary/ViewModels/UsersLibraryControlViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.UsersLibrary/Views/UsersLibraryControl.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/98FD4308-9963-4C90-8040-683E9A8834D9/26/RegionViewRegistry.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FD824CFB-5500-4855-B9E6-D51B008C90E4/4f/49dd7063/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.ProjectsLibrary/Views/TMProjectsLibrary.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.UserGanttControl/ViewModels/UserGanttControlViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/Views/SpecialUsersGanttControl.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/Dialogs/AddSpecialGanttItemDialog/Views/SpecialGanttItemDialog.xaml.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/c3/84b90ac3/TraceRoutedEvent.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/c3/84b90ac3/TraceRoutedEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/307ED9B2-81D1-43DB-9AED-13169626ADF4/cf/6f328b1c/ComponentDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FD824CFB-5500-4855-B9E6-D51B008C90E4/f5/47035086/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B625327-932F-4958-98F9-0B16D91135AE/d4/835658f4/GridViewRowNavigationBase.cs" root0="SKIP_HIGHLIGHTING" />
@@ -61,19 +64,15 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B625327-932F-4958-98F9-0B16D91135AE/1e/5ccf5cb4/GridViewInplaceEditorOwner.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/484636BF-7DD0-4A3B-987A-48A9A0E4F089/4f/227be437/InplaceEditorOwnerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B625327-932F-4958-98F9-0B16D91135AE/1e/d1c5f896/DataControlBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/c9/05635712/MouseButtonEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/35/2179f1e2/RoutedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/a5/15001782/RouteItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CD3C55EA-D444-4518-A84E-F4ED6D690B38/7c/d6a97609/BindingListAdapterBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/a7/d61d55f5/EventRoute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.UsersLibrary/Views/UsersLibraryControl.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B6A0E661-5EE0-4EA7-AD53-5B38F9316104/e0/0ac237ce/Delegate.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/61A2391A-7F38-4D7D-8573-11CEBB7C1DE6/1F/EventBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E7EC994D-2608-4BC0-8E72-AC8BB3694450/dd/c2727451/GanttDataController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/98F1E9A3-4402-4C92-9A13-82BED9598294/7d/3b4f7325/BindingExpressionBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/307ED9B2-81D1-43DB-9AED-13169626ADF4/32/c2eb231e/EffectiveValueEntry.cs" root0="SKIP_HIGHLIGHTING" />
@@ -83,10 +82,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B625327-932F-4958-98F9-0B16D91135AE/15/59ff51b5/InfiniteGridSizeException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/29A6C194-5F57-4474-95FC-AD42118554C7/95/d571a6e2/Stack`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/484636BF-7DD0-4A3B-987A-48A9A0E4F089/1c/8f60bbd8/BooleanToVisibilityConverterExtension.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/98F1E9A3-4402-4C92-9A13-82BED9598294/01/6ca55a14/Style.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B6A0E661-5EE0-4EA7-AD53-5B38F9316104/92/0397b487/RuntimeMethodInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.UserGanttControl/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" root0="FORCE_HIGHLIGHTING" />
@@ -99,11 +95,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AE8E61DF-A823-4CCC-B1F8-795E293C246C/ff/af2be91f/BindableBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/484636BF-7DD0-4A3B-987A-48A9A0E4F089/5d/582f922c/Locker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.ProjectsLibrary/ViewModels/TMProjectsLibraryViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/98F1E9A3-4402-4C92-9A13-82BED9598294/d1/7746b42d/PropertyPathWorker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/484636BF-7DD0-4A3B-987A-48A9A0E4F089/94/c1fd7f22/InplaceEditorBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.ProjectsLibrary/Views/TMProjectsLibrary.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.SpecialGanttControl/packages.config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B625327-932F-4958-98F9-0B16D91135AE/92/07063962/CellEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B625327-932F-4958-98F9-0B16D91135AE/23/bd7158a9/DataViewBase.cs" root0="SKIP_HIGHLIGHTING" />
@@ -111,7 +105,7 @@
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Core/Models/DbConnectionInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/61A2391A-7F38-4D7D-8573-11CEBB7C1DE6/29/DelegateCommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82C99ED2-E582-4054-AAD8-D9D4D6755403/6e/42c5f190/UIElement.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/307ED9B2-81D1-43DB-9AED-13169626ADF4/65/65d30a08/ExceptionWrapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/307ED9B2-81D1-43DB-9AED-13169626ADF4/65/65d30a08/ExceptionWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttResourceItemInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Core/Models/PositionsInfo.cs" root0="FORCE_HIGHLIGHTING" />
@@ -137,7 +131,6 @@
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Services/SettingsService/SettingsService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Services/TaskManagerService/TaskManagerInstance.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Sdk/Services/TaskManagerService/TaskManagerServices.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E7EC994D-2608-4BC0-8E72-AC8BB3694450/29/88ccbab2/IResourceLinksSelector.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Shell/App.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TaskManager.Shell/Dialogs/DBConnectionDialog/ViewModels/DBConnectionDialogViewModel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -210,7 +203,6 @@
       <option value="$PROJECT_DIR$/TaskManager.Shell/App.xaml.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/PrintCurrentGanttItemsEvent.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Events/PrintMonthGanttItemsEvent.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.GanttControl/Views/TaskManagerGanttControl.xaml" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Containers/ReportInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.ToolBar/ViewModels/TaskManagerToolBarViewModel.cs" />
@@ -218,10 +210,11 @@
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Interfaces/IReportService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs" />
       <option value="$PROJECT_DIR$/TaskManager.UserGanttControl/ViewModels/UserGanttControlViewModel.cs" />
-      <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Core/Models/GanttItemInfo.cs" />
       <option value="$PROJECT_DIR$/TaskManager.SpecialGanttControl/ViewModels/SpecialUsersGanttControlViewModel.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs" />
       <option value="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" />
+      <option value="$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tyXfZM2SPBRRmH6bMEYXxXGgxI" />
@@ -357,7 +350,8 @@
       <workItem from="1635508379843" duration="3295000" />
       <workItem from="1635667408008" duration="14453000" />
       <workItem from="1636694858943" duration="19462000" />
-      <workItem from="1636955257974" duration="21501000" />
+      <workItem from="1636955257974" duration="26845000" />
+      <workItem from="1637088273716" duration="6347000" />
     </task>
     <task id="LOCAL-00001" summary="Создал структуру проекта">
       <created>1623752556826</created>
@@ -478,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636974972594</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="# Перенес в модельную часть локальные свойства, которые необходимо отобразить в месячных отчетах, доступ к свойствам через рефлексию.">
+      <created>1636979356999</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1636979356999</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,7 +517,8 @@
     <MESSAGE value="# Закончен дебаг внеплановых задач" />
     <MESSAGE value="Добавил диапазоны отчетов, и контроль отчитавшихся." />
     <MESSAGE value="# Добавил экспорт отчета в эксель, требуется оптимизация и комплексное тестирование." />
-    <option name="LAST_COMMIT_MESSAGE" value="# Добавил экспорт отчета в эксель, требуется оптимизация и комплексное тестирование." />
+    <MESSAGE value="# Перенес в модельную часть локальные свойства, которые необходимо отобразить в месячных отчетах, доступ к свойствам через рефлексию." />
+    <option name="LAST_COMMIT_MESSAGE" value="# Перенес в модельную часть локальные свойства, которые необходимо отобразить в месячных отчетах, доступ к свойствам через рефлексию." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -532,10 +534,10 @@
           <line>805</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="724" containingFunctionPresentation="method 'CopyGanttObject'">
             <startOffsets>
-              <option value="35129" />
+              <option value="35136" />
             </startOffsets>
             <endOffsets>
-              <option value="35130" />
+              <option value="35137" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="26" />
@@ -571,10 +573,10 @@
           <line>738</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="692" containingFunctionPresentation="method 'RemoveGanttObject'">
             <startOffsets>
-              <option value="32089" />
+              <option value="32096" />
             </startOffsets>
             <endOffsets>
-              <option value="32090" />
+              <option value="32097" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="31" />
@@ -610,10 +612,10 @@
           <line>763</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="722" containingFunctionPresentation="method 'RemoveGanttObject'">
             <startOffsets>
-              <option value="33264" />
+              <option value="33271" />
             </startOffsets>
             <endOffsets>
-              <option value="33265" />
+              <option value="33272" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="36" />
@@ -636,10 +638,10 @@
           <line>550</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="521" containingFunctionPresentation="method 'UpdateActualTasksCollection'">
             <startOffsets>
-              <option value="24177" />
+              <option value="24184" />
             </startOffsets>
             <endOffsets>
-              <option value="24178" />
+              <option value="24185" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="39" />
@@ -649,10 +651,10 @@
           <line>612</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="583" containingFunctionPresentation="method 'FindAndAddItems'">
             <startOffsets>
-              <option value="26424" />
+              <option value="26431" />
             </startOffsets>
             <endOffsets>
-              <option value="26425" />
+              <option value="26432" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="40" />
@@ -675,10 +677,10 @@
           <line>439</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="413" containingFunctionPresentation="method 'AddGanttObject'">
             <startOffsets>
-              <option value="19927" />
+              <option value="19934" />
             </startOffsets>
             <endOffsets>
-              <option value="19928" />
+              <option value="19935" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="42" />
@@ -688,10 +690,10 @@
           <line>591</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="559" containingFunctionPresentation="method 'FindAndRemoveItem'">
             <startOffsets>
-              <option value="25567" />
+              <option value="25574" />
             </startOffsets>
             <endOffsets>
-              <option value="25568" />
+              <option value="25575" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="51" />
@@ -701,10 +703,10 @@
           <line>1063</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="970" containingFunctionPresentation="method 'UpdateTaskResources'">
             <startOffsets>
-              <option value="46779" />
+              <option value="46786" />
             </startOffsets>
             <endOffsets>
-              <option value="46780" />
+              <option value="46787" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="65" />
@@ -714,10 +716,10 @@
           <line>1000</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="897" containingFunctionPresentation="method 'UpdateTaskUnits'">
             <startOffsets>
-              <option value="44107" />
+              <option value="44114" />
             </startOffsets>
             <endOffsets>
-              <option value="44108" />
+              <option value="44115" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="68" />
@@ -727,10 +729,10 @@
           <line>426</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="397" containingFunctionPresentation="method 'RemoveAllUnits'">
             <startOffsets>
-              <option value="19475" />
+              <option value="19482" />
             </startOffsets>
             <endOffsets>
-              <option value="19476" />
+              <option value="19483" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="69" />
@@ -740,10 +742,10 @@
           <line>959</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="873" containingFunctionPresentation="method 'RemoveResourceLink'">
             <startOffsets>
-              <option value="42308" />
+              <option value="42315" />
             </startOffsets>
             <endOffsets>
-              <option value="42309" />
+              <option value="42316" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="70" />
@@ -753,10 +755,10 @@
           <line>976</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="895" containingFunctionPresentation="method 'RemoveResourceLink'">
             <startOffsets>
-              <option value="43082" />
+              <option value="43089" />
             </startOffsets>
             <endOffsets>
-              <option value="43269" />
+              <option value="43276" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="88" />
@@ -766,10 +768,10 @@
           <line>984</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="903" containingFunctionPresentation="method 'RemoveResourceLink'">
             <startOffsets>
-              <option value="43498" />
+              <option value="43505" />
             </startOffsets>
             <endOffsets>
-              <option value="43667" />
+              <option value="43674" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="89" />
@@ -870,10 +872,10 @@
           <line>293</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="244" containingFunctionPresentation="method 'UpdateCheckPointItems'">
             <startOffsets>
-              <option value="14402" />
+              <option value="14409" />
             </startOffsets>
             <endOffsets>
-              <option value="14403" />
+              <option value="14410" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="106" />
@@ -909,26 +911,13 @@
           <line>673</line>
           <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="662" containingFunctionPresentation="method 'UpdateChildGanttObject'">
             <startOffsets>
-              <option value="29150" />
+              <option value="29157" />
             </startOffsets>
             <endOffsets>
-              <option value="29151" />
+              <option value="29158" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="117" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs</url>
-          <line>57</line>
-          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ExcelReportService\ReportService.cs" initialLine="26" containingFunctionPresentation="method 'CreateMonthReport'">
-            <startOffsets>
-              <option value="1634" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1635" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="125" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/TaskManager.GanttControl/Utils/Behaviors/GanttControlBehavior.cs</url>
@@ -955,32 +944,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs</url>
-          <line>225</line>
-          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ExcelReportService\ReportService.cs" initialLine="225" containingFunctionPresentation="method 'WriteChildItemsInFile'">
-            <startOffsets>
-              <option value="9277" />
-            </startOffsets>
-            <endOffsets>
-              <option value="9278" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="145" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/TaskManager.Sdk/Services/ProjectsLibraryService/ProjectsLibraryService.cs</url>
-          <line>143</line>
-          <properties documentPath="G:\CodeSolutions\TestGanttControl\TaskManager\TaskManager\TaskManager.Sdk\Services\ProjectsLibraryService\ProjectsLibraryService.cs" initialLine="143" containingFunctionPresentation="method 'LoadGanttObjects'">
-            <startOffsets>
-              <option value="7610" />
-            </startOffsets>
-            <endOffsets>
-              <option value="7692" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="146" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
