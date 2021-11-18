@@ -94,9 +94,6 @@
       <Page Include="Views\SpecialUsersGanttControl.xaml" />
     </ItemGroup>
     <ItemGroup>
-      <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
       <ProjectReference Include="..\TaskManager.GanttControl\TaskManager.GanttControl.csproj">
         <Project>{39c7d8a6-db36-47bc-b030-03cd193cea3c}</Project>
         <Name>TaskManager.GanttControl</Name>

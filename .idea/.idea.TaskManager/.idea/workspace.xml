@@ -12,16 +12,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d3b2a334-c683-4b7e-93c8-16f9a3ebff78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TaskManager/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.GanttControl/TaskManager.GanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.GanttControl/TaskManager.GanttControl.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/TaskManager.ProjectsLibrary.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ProjectsLibrary/TaskManager.ProjectsLibrary.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/Services/ExcelReportService/ReportService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Sdk/TaskManager.Sdk.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Sdk/TaskManager.Sdk.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.Shell/TaskManager.Shell.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.Shell/TaskManager.Shell.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/TaskManager.SpecialGanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.SpecialGanttControl/TaskManager.SpecialGanttControl.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.ToolBar/TaskManager.ToolBar.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ToolBar/TaskManager.ToolBar.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.ToolBar/Views/TaskManagerToolBar.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.UserGanttControl/TaskManager.UserGanttControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UserGanttControl/TaskManager.UserGanttControl.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskManager.UsersLibrary/TaskManager.UsersLibrary.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TaskManager.UsersLibrary/TaskManager.UsersLibrary.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +225,7 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="RuleSet&#10;Resx" />
     <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="RiderNuGetOptionsPageId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -351,7 +341,8 @@
       <workItem from="1635667408008" duration="14453000" />
       <workItem from="1636694858943" duration="19462000" />
       <workItem from="1636955257974" duration="26845000" />
-      <workItem from="1637088273716" duration="6347000" />
+      <workItem from="1637088273716" duration="7096000" />
+      <workItem from="1637222854446" duration="550000" />
     </task>
     <task id="LOCAL-00001" summary="Создал структуру проекта">
       <created>1623752556826</created>
@@ -479,7 +470,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636979356999</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Изменил настройки проектов.">
+      <created>1637180657956</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1637180657956</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,7 +516,8 @@
     <MESSAGE value="Добавил диапазоны отчетов, и контроль отчитавшихся." />
     <MESSAGE value="# Добавил экспорт отчета в эксель, требуется оптимизация и комплексное тестирование." />
     <MESSAGE value="# Перенес в модельную часть локальные свойства, которые необходимо отобразить в месячных отчетах, доступ к свойствам через рефлексию." />
-    <option name="LAST_COMMIT_MESSAGE" value="# Перенес в модельную часть локальные свойства, которые необходимо отобразить в месячных отчетах, доступ к свойствам через рефлексию." />
+    <MESSAGE value="Изменил настройки проектов." />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменил настройки проектов." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

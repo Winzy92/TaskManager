@@ -120,9 +120,6 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
-      <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
       <Resource Include="Multimedia\add-user16х16.png" />
       <Resource Include="Multimedia\settings16x16.png" />
       <Resource Include="Multimedia\user16х16.png" />

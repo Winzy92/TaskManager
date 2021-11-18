@@ -115,9 +115,6 @@
       <Page Include="Views\TMProjectsLibrary.xaml" />
     </ItemGroup>
     <ItemGroup>
-      <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
       <ProjectReference Include="..\TaskManager.Sdk\TaskManager.Sdk.csproj">
         <Project>{631e9ee3-eefe-4fcd-a314-6e13ce9374e4}</Project>
         <Name>TaskManager.Sdk</Name>

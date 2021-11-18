@@ -181,7 +181,6 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />
-        <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
       <Page Include="Dialogs\DBConnectionDialog\Views\DBConnectionDialog.xaml" />

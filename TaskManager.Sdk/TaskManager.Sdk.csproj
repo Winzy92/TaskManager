@@ -190,9 +190,6 @@
         <Compile Include="Services\UsersLibraryService\UsersLibraryService.cs" />
     </ItemGroup>
     <ItemGroup>
-      <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
       <Folder Include="Core\Events" />
     </ItemGroup>
     <ItemGroup>
